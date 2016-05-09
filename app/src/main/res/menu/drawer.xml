@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@drawable/ic_nav_main"
+            android:title="@string/nav_main" />
+        <item
+            android:id="@+id/nav_meal1"
+            android:icon="@drawable/ic_nav_meal1"
+            android:title="@string/nav_meal1" />
+        <item
+            android:id="@+id/nav_meal2"
+            android:icon="@drawable/ic_nav_meal2"
+            android:title="@string/nav_meal2" />
+        <item
+            android:id="@+id/nav_meal3"
+            android:icon="@drawable/ic_nav_meal3"
+            android:title="@string/nav_meal3" />
+        <item
+            android:id="@+id/nav_meal4"
+            android:icon="@drawable/ic_nav_meal4"
+            android:title="@string/nav_meal4" />
+        <item
+            android:id="@+id/nav_meal5"
+            android:icon="@drawable/ic_nav_meal5"
+            android:title="@string/nav_meal5" />
+    </group>
+
+</menu>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">국민밥</string>
+
+    <string name="nav_main">국민밥</string>
+    <string name="nav_meal1">한울식당(법학관B1)</string>
+    <string name="nav_meal2">학생식당(복지관1F)</string>
+    <string name="nav_meal3">교직원식당(복지관1F)</string>
+    <string name="nav_meal4">청향(법학관5F)</string>
+    <string name="nav_meal5">기숙사식당</string>
+
+    <string name="dorm_section1">아침</string>
+    <string name="dorm_section2">점심</string>
+    <string name="dorm_section3">저녁</string>
+
+    <string name='wd0'>월</string>
+    <string name='wd1'>화</string>
+    <string name='wd2'>수</string>
+    <string name='wd3'>목</string>
+    <string name='wd4'>금</string>
+    <string name='wd5'>토</string>
+    <string name='wd6'>일</string>
+
+    <string name="msg_inupdate">업데이트 중입니다...</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+</resources>
