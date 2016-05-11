@@ -1,10 +1,12 @@
-package net.sproutlab.kmufood;
+package net.sproutlab.kmufood.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,32 +21,37 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import net.sproutlab.kmufood.datamod.dormFood0;
-import net.sproutlab.kmufood.parsemod.dormFood;
+import net.sproutlab.kmufood.R;
+import net.sproutlab.kmufood.datamod.staffFooddata;
+import net.sproutlab.kmufood.parsemod.staffFoodparser;
 
-public class DormFoodActivity extends AppCompatActivity
+import java.util.Calendar;
+
+public class StaffFoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private TabLayout tabLayout;
 
-    dormFood0 mDatamod;
-    dormFood mParsemod;
-    public static String[][] MealMenu = new String[7][3];
+    staffFooddata mDatamod;
+    staffFoodparser mParsemod;
+    public static String[][] MealMenu = new String[5][4];
 
     ProgressDialog mProgressView;
 
-    ScrollView scrollv;
+    CoordinatorLayout mCLayout;
+    int curindex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dormfood);
+        setContentView(R.layout.activity_stafffood);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +62,7 @@ public class DormFoodActivity extends AppCompatActivity
             }
         });
 */
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -63,26 +71,40 @@ public class DormFoodActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().findItem(R.id.nav_meal3).setChecked(true);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager = (ViewPager) findViewById(R.id.tabpager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        //mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        //tabLayout.setupWithViewPager(mViewPager);
 
-        mProgressView = new ProgressDialog(DormFoodActivity.this);
+        mCLayout = (CoordinatorLayout) findViewById(R.id.appbar_view);
+
+        mProgressView = new ProgressDialog(StaffFoodActivity.this);
         mProgressView.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressView.setMessage(getString(R.string.msg_inupdate));
 
-        mDatamod = new dormFood0(this);
-        mParsemod = new dormFood(this, mHandler);
+        mProgressView.show();
+
+        Calendar c = Calendar.getInstance();
+        curindex = c.get(Calendar.DAY_OF_WEEK);
+        if(curindex == 1 || curindex == 7) curindex = 0;
+        else curindex -= 2;
+
+        mDatamod = new staffFooddata(this);
+        mParsemod = new staffFoodparser(this, mHandler);
         if(mDatamod.checkTS()){
             mParsemod.execute("");
-            mProgressView.show();
         } else{
             MealMenu = mDatamod.getMenu();
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+            tabLayout.setupWithViewPager(mViewPager);
+            mProgressView.dismiss();
+            Snackbar.make(mCLayout, getString(R.string.msg_gotcurrent), Snackbar.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(curindex);
         }
     }
 
@@ -91,11 +113,17 @@ public class DormFoodActivity extends AppCompatActivity
             switch(msg.what) {
                 case -1:
                     mProgressView.dismiss();
+                    Snackbar.make(mCLayout, getString(R.string.msg_failed), Snackbar.LENGTH_LONG).show();
                     break;
                 case 1:
                     MealMenu = mDatamod.getMenu();
+                    mViewPager.setAdapter(mSectionsPagerAdapter);
+                    tabLayout.setupWithViewPager(mViewPager);
                     mProgressView.dismiss();
+                    Snackbar.make(mCLayout, getString(R.string.msg_gotnew), Snackbar.LENGTH_SHORT).show();
+                    mViewPager.setCurrentItem(curindex);
                     break;
+
             }
         }
     };
@@ -129,6 +157,7 @@ public class DormFoodActivity extends AppCompatActivity
         return true;
     }
 
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -157,10 +186,13 @@ public class DormFoodActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_dormfood, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_stafffood, container, false);
             ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
             ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
             ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
+            ((TextView) rootView.findViewById(R.id.content_section4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(250);
+
             return rootView;
         }
     }
@@ -184,8 +216,7 @@ public class DormFoodActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 7;
+            return 5;
         }
 
         @Override
@@ -201,10 +232,6 @@ public class DormFoodActivity extends AppCompatActivity
                     return getString(R.string.wd3);
                 case 4:
                     return getString(R.string.wd4);
-                case 5:
-                    return getString(R.string.wd5);
-                case 6:
-                    return getString(R.string.wd6);
             }
             return null;
         }

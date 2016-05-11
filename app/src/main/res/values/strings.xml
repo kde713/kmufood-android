@@ -12,6 +12,11 @@
     <string name="dorm_section2">점심</string>
     <string name="dorm_section3">저녁</string>
 
+    <string name="staff_section1">점심1</string>
+    <string name="staff_section2">점심2</string>
+    <string name="staff_section3">주문식</string>
+    <string name="staff_section4">저녁</string>
+
     <string name='wd0'>월</string>
     <string name='wd1'>화</string>
     <string name='wd2'>수</string>
@@ -20,7 +25,10 @@
     <string name='wd5'>토</string>
     <string name='wd6'>일</string>
 
-    <string name="msg_inupdate">업데이트 중입니다...</string>
+    <string name="msg_inupdate">불러오는 중입니다...</string>
+    <string name="msg_gotcurrent">최신 정보가 저장되어있습니다. 저장된 정보를 불러왔습니다.</string>
+    <string name="msg_gotnew">최신 정보를 업데이트했습니다.</string>
+    <string name="msg_failed">정보를 로드하는데 실패했습니다. 개발팀에 문의해주세요.</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

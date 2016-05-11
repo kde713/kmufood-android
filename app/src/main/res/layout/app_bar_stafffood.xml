@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DormFoodActivity">
+    tools:context=".activity.StaffFoodActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/appbar_view"

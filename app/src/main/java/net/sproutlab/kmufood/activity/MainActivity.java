@@ -1,18 +1,16 @@
-package net.sproutlab.kmufood;
+package net.sproutlab.kmufood.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+
+import net.sproutlab.kmufood.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +39,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().findItem(R.id.nav_main).setChecked(true);
     }
 
     @Override
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity
         } else if(id == R.id.nav_meal2){
 
         } else if(id == R.id.nav_meal3){
+            startActivity(new Intent(this, StaffFoodActivity.class));
 
         } else if(id == R.id.nav_meal4){
 
