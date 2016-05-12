@@ -21,6 +21,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.LawFoodActivity"
+            android:label="@string/nav_meal1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.StuFoodActivity"
             android:label="@string/nav_meal2"
             android:theme="@style/AppTheme.NoActionBar" />

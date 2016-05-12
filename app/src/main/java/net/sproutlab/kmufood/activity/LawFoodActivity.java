@@ -25,21 +25,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.datamod.staffFooddata;
-import net.sproutlab.kmufood.parsemod.staffFoodparser;
+import net.sproutlab.kmufood.datamod.lawFooddata;
+import net.sproutlab.kmufood.parsemod.lawFoodparser;
 
 import java.util.Calendar;
 
-public class StaffFoodActivity extends AppCompatActivity
+public class LawFoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
 
-    staffFooddata mDatamod;
-    staffFoodparser mParsemod;
-    public static String[][] MealMenu = new String[5][4];
+    lawFooddata mDatamod;
+    lawFoodparser mParsemod;
+    public static String[][] MealMenu = new String[5][7];
 
     ProgressDialog mProgressView;
 
@@ -49,7 +49,7 @@ public class StaffFoodActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stafffood);
+        setContentView(R.layout.activity_lawfood);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -72,7 +72,7 @@ public class StaffFoodActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().findItem(R.id.nav_meal3).setChecked(true);
+        navigationView.getMenu().findItem(R.id.nav_meal1).setChecked(true);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -84,7 +84,7 @@ public class StaffFoodActivity extends AppCompatActivity
 
         mCLayout = (CoordinatorLayout) findViewById(R.id.appbar_view);
 
-        mProgressView = new ProgressDialog(StaffFoodActivity.this);
+        mProgressView = new ProgressDialog(LawFoodActivity.this);
         mProgressView.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressView.setMessage(getString(R.string.msg_inupdate));
 
@@ -92,11 +92,11 @@ public class StaffFoodActivity extends AppCompatActivity
 
         Calendar c = Calendar.getInstance();
         curindex = c.get(Calendar.DAY_OF_WEEK);
-        if(curindex == 1 || curindex == 7) curindex = 0;
+        if(curindex == 1 || curindex == 7) curindex = 6;
         else curindex -= 2;
 
-        mDatamod = new staffFooddata(this);
-        mParsemod = new staffFoodparser(this, mHandler);
+        mDatamod = new lawFooddata(this);
+        mParsemod = new lawFoodparser(this, mHandler);
         if(mDatamod.checkTS()){
             mParsemod.execute("");
         } else{
@@ -151,10 +151,10 @@ public class StaffFoodActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.nav_meal1){
-            startActivity((new Intent(this, LawFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
-        } else if(id == R.id.nav_meal2){
+        if(id == R.id.nav_meal2){
             startActivity((new Intent(this, StuFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+        } else if(id == R.id.nav_meal3){
+            startActivity((new Intent(this, StaffFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         } else if(id == R.id.nav_meal4){
             startActivity((new Intent(this, ChungFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         } else if(id == R.id.nav_meal5){
@@ -195,11 +195,14 @@ public class StaffFoodActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_stafffood, container, false);
-            ((TextView) rootView.findViewById(R.id.content_section1_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
-            ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            View rootView = inflater.inflate(R.layout.fragment_lawfood, container, false);
+            ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
+            ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
+            ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
+            ((TextView) rootView.findViewById(R.id.content_section4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            ((TextView) rootView.findViewById(R.id.content_section5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
+            ((TextView) rootView.findViewById(R.id.content_section6)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
+            ((TextView) rootView.findViewById(R.id.content_section7)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(250);
 
             return rootView;

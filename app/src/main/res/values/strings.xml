@@ -33,6 +33,14 @@
     <string name='stu_section8'>저녁</string>
     <string name="stu_section9">즉석메뉴</string>
 
+    <string name="law_section1">바로바로1</string>
+    <string name="law_section2">바로바로2</string>
+    <string name="law_section3">면이랑</string>
+    <string name="law_section4">밥이랑1</string>
+    <string name="law_section5">밥이랑2</string>
+    <string name="law_section6">석화랑</string>
+    <string name="law_section7">석화랑(아침)</string>
+
     <string name='wd0'>월</string>
     <string name='wd1'>화</string>
     <string name='wd2'>수</string>

@@ -63,15 +63,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if(id == R.id.nav_meal1){
-
+            startActivity((new Intent(this, LawFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         } else if(id == R.id.nav_meal2){
-            startActivity(new Intent(this, StuFoodActivity.class));
+            startActivity((new Intent(this, StuFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         } else if(id == R.id.nav_meal3){
-            startActivity(new Intent(this, StaffFoodActivity.class));
+            startActivity((new Intent(this, StaffFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         } else if(id == R.id.nav_meal4){
-            startActivity(new Intent(this, ChungFoodActivity.class));
+            startActivity((new Intent(this, ChungFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         } else if(id == R.id.nav_meal5){
-            startActivity(new Intent(this, DormFoodActivity.class));
+            startActivity((new Intent(this, DormFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
