@@ -186,6 +186,7 @@ public class DormFoodActivity extends AppCompatActivity
             View rootView = inflater.inflate(R.layout.fragment_dormfood, container, false);
             ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
             ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
+            ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
             ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(250);
 

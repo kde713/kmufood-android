@@ -19,8 +19,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startActivity(new Intent(this, SplashActivity.class));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 */
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -39,7 +44,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().findItem(R.id.nav_main).setChecked(true);
     }
 
     @Override
@@ -64,9 +68,8 @@ public class MainActivity extends AppCompatActivity
 
         } else if(id == R.id.nav_meal3){
             startActivity(new Intent(this, StaffFoodActivity.class));
-
         } else if(id == R.id.nav_meal4){
-
+            startActivity(new Intent(this, ChungFoodActivity.class));
         } else if(id == R.id.nav_meal5){
             startActivity(new Intent(this, DormFoodActivity.class));
         }

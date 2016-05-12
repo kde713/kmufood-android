@@ -24,21 +24,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.datamod.staffFooddata;
-import net.sproutlab.kmufood.parsemod.staffFoodparser;
+import net.sproutlab.kmufood.datamod.chungFooddata;
+import net.sproutlab.kmufood.parsemod.chungFoodparser;
 
 import java.util.Calendar;
 
-public class StaffFoodActivity extends AppCompatActivity
+public class ChungFoodActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
 
-    staffFooddata mDatamod;
-    staffFoodparser mParsemod;
-    public static String[][] MealMenu = new String[5][4];
+    chungFooddata mDatamod;
+    chungFoodparser mParsemod;
+    public static String[][] MealMenu = new String[6][8];
 
     ProgressDialog mProgressView;
 
@@ -48,7 +48,7 @@ public class StaffFoodActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stafffood);
+        setContentView(R.layout.activity_chungfood);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -83,7 +83,7 @@ public class StaffFoodActivity extends AppCompatActivity
 
         mCLayout = (CoordinatorLayout) findViewById(R.id.appbar_view);
 
-        mProgressView = new ProgressDialog(StaffFoodActivity.this);
+        mProgressView = new ProgressDialog(ChungFoodActivity.this);
         mProgressView.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressView.setMessage(getString(R.string.msg_inupdate));
 
@@ -91,11 +91,11 @@ public class StaffFoodActivity extends AppCompatActivity
 
         Calendar c = Calendar.getInstance();
         curindex = c.get(Calendar.DAY_OF_WEEK);
-        if(curindex == 1 || curindex == 7) curindex = 0;
+        if(curindex == 1) curindex = 0;
         else curindex -= 2;
 
-        mDatamod = new staffFooddata(this);
-        mParsemod = new staffFoodparser(this, mHandler);
+        mDatamod = new chungFooddata(this);
+        mParsemod = new chungFoodparser(this, mHandler);
         if(mDatamod.checkTS()){
             mParsemod.execute("");
         } else{
@@ -186,11 +186,15 @@ public class StaffFoodActivity extends AppCompatActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_stafffood, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_chungfood, container, false);
             ((TextView) rootView.findViewById(R.id.content_section1_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
             ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            ((TextView) rootView.findViewById(R.id.content_section1_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
+            ((TextView) rootView.findViewById(R.id.content_section1_4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            ((TextView) rootView.findViewById(R.id.content_section1_5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
+            ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
+            ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
+            ((TextView) rootView.findViewById(R.id.content_section2_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(250);
 
             return rootView;
@@ -216,7 +220,7 @@ public class StaffFoodActivity extends AppCompatActivity
 
         @Override
         public int getCount() {
-            return 5;
+            return 6;
         }
 
         @Override
@@ -232,6 +236,8 @@ public class StaffFoodActivity extends AppCompatActivity
                     return getString(R.string.wd3);
                 case 4:
                     return getString(R.string.wd4);
+                case 5:
+                    return getString(R.string.wd5);
             }
             return null;
         }

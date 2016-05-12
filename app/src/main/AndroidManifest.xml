@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.sproutlab.kmufood">
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,12 +20,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.StaffFoodActivity"
+        <activity
+            android:name=".activity.StaffFoodActivity"
             android:label="@string/nav_meal3"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".activity.DormFoodActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.ChungFoodActivity"
+            android:label="@string/nav_meal4"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.DormFoodActivity"
             android:label="@string/nav_meal5"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
