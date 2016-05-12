@@ -23,6 +23,16 @@
     <string name="chung_section1">주간메뉴</string>
     <string name="chung_section2">고정메뉴</string>
 
+    <string name='stu_section1'>아침</string>
+    <string name='stu_section2'>위프</string>
+    <string name='stu_section3'>한아름</string>
+    <string name='stu_section4'>뽀글뽀글</string>
+    <string name='stu_section5'>뽀까뽀까</string>
+    <string name='stu_section6'>누들누들</string>
+    <string name='stu_section7'>카페테리아</string>
+    <string name='stu_section8'>저녁</string>
+    <string name="stu_section9">즉석메뉴</string>
+
     <string name='wd0'>월</string>
     <string name='wd1'>화</string>
     <string name='wd2'>수</string>

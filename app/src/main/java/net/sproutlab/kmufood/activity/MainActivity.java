@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         if(id == R.id.nav_meal1){
 
         } else if(id == R.id.nav_meal2){
-
+            startActivity(new Intent(this, StuFoodActivity.class));
         } else if(id == R.id.nav_meal3){
             startActivity(new Intent(this, StaffFoodActivity.class));
         } else if(id == R.id.nav_meal4){
