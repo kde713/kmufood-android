@@ -13,6 +13,7 @@ import java.util.Date;
 /**
  * Created by kde713 on 2016. 5. 1..
  */
+
 public class stuFooddata {
 
     private final String PREF_NAME = "net.sproutlab.kmufood";
@@ -32,7 +33,7 @@ public class stuFooddata {
         SharedPreferences.Editor mPrefEditor = mPref.edit();
         for(int i=0; i<11; i++){
             for(int j=0; j<7; j++){
-                mPrefEditor.putString("stu-"+Rule1[j]+"-"+Rule0[i],parsedData[i][j].replace(" ", "\n"));
+                mPrefEditor.putString("stu-"+Rule1[j]+"-"+Rule0[i],parsedData[i][j].replace("[ ","[").replace(" ]","]").replace(" ", "\n"));
                 Log.d("stuFood-Data", "Data for key "+"stu-"+Rule1[j]+"-"+Rule0[i]+" is "+parsedData[i][j]);
             }
         }

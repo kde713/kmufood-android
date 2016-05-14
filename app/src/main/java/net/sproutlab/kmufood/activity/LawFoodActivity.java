@@ -33,7 +33,8 @@ public class LawFoodActivity extends AppCompatActivity
     private TabLayout tabLayout;
 
     lawFooddata mDatamod;
-    public static String[][] MealMenu = new String[5][7];
+    public static String[][] MealMenu = new String[5][8];
+    public static String[][] MealPrice = new String[5][2];
 
     CoordinatorLayout mCLayout;
     int curindex;
@@ -83,6 +84,7 @@ public class LawFoodActivity extends AppCompatActivity
 
         mDatamod = new lawFooddata(this);
         MealMenu = mDatamod.getMenu();
+        MealPrice = mDatamod.getPrice();
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(curindex);
@@ -154,13 +156,18 @@ public class LawFoodActivity extends AppCompatActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_lawfood, container, false);
-            ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
-            ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            ((TextView) rootView.findViewById(R.id.content_section4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
-            ((TextView) rootView.findViewById(R.id.content_section5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
-            ((TextView) rootView.findViewById(R.id.content_section6)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
-            ((TextView) rootView.findViewById(R.id.content_section7)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
+            ((TextView) rootView.findViewById(R.id.content_section1_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
+            ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
+            ((TextView) rootView.findViewById(R.id.content_section1_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
+            ((TextView) rootView.findViewById(R.id.content_section1_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
+
+
+            ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
+            ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            ((TextView) rootView.findViewById(R.id.content_section4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
+            ((TextView) rootView.findViewById(R.id.content_section5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
+            ((TextView) rootView.findViewById(R.id.content_section6)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
+            ((TextView) rootView.findViewById(R.id.content_section7)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;
