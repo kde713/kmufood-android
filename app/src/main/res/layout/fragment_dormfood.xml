@@ -44,15 +44,18 @@
                     android:layout_height="2dp"
                     android:background="@color/colorDivider"
                     android:layout_margin="4dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></LinearLayout>
 
                 <TextView
                     android:id="@+id/content_section1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￦3300"
+                    android:textColor="@color/colorDivider"/>
 
             </LinearLayout>
 
@@ -92,20 +95,40 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/colorSubDivider"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"/>
-
                 <TextView
-                    android:id="@+id/content_section2_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"/>
+                    android:text="￦2800"
+                    android:textColor="@color/colorDivider"/>
+
+                <LinearLayout android:id="@+id/view_section2_sub2"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorSubDivider"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"/>
+
+                    <TextView
+                        android:id="@+id/content_section2_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="￦5500"
+                        android:textColor="@color/colorDivider"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -144,6 +167,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￦3300"
+                    android:textColor="@color/colorDivider"/>
 
             </LinearLayout>
 

@@ -30,6 +30,10 @@ public class SplashActivity extends AppCompatActivity {
         Timestampdata mTSAdapter = new Timestampdata(getApplicationContext());
         mParser = new IntegratedParser(this, mHandler);
 
+        // This is Test Code
+        mParser.execute("");
+
+        /*
         if(mTSAdapter.checkTS()){
             Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
             mParser.execute("");
@@ -37,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
             Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
             mSplashHandler.sendEmptyMessageDelayed(2000, 0);
         }
+        */
     }
 
     private Handler mHandler = new Handler() {

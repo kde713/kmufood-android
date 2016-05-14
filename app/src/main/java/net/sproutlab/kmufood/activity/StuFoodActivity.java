@@ -143,17 +143,39 @@ public class StuFoodActivity extends AppCompatActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_stufood, container, false);
-            ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
-            ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            ((TextView) rootView.findViewById(R.id.content_section4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
-            ((TextView) rootView.findViewById(R.id.content_section5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
-            ((TextView) rootView.findViewById(R.id.content_section6)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
-            ((TextView) rootView.findViewById(R.id.content_section7)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
-            ((TextView) rootView.findViewById(R.id.content_section8_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
-            ((TextView) rootView.findViewById(R.id.content_section8_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][8]);
-            ((TextView) rootView.findViewById(R.id.content_section8_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][9]);
-            ((TextView) rootView.findViewById(R.id.content_section9)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][10]);
+            int sect = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
+            
+            if(MealMenu[sect][0] == "") rootView.findViewById(R.id.card_section1).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[sect][0]);
+            
+            if(MealMenu[sect][1] == "") rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[sect][1]);
+            
+            if(MealMenu[sect][2] == "") rootView.findViewById(R.id.card_section3).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[sect][2]);
+
+            if(MealMenu[sect][3] == "") rootView.findViewById(R.id.card_section4).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section4)).setText(MealMenu[sect][3]);
+
+            if(MealMenu[sect][4] == "") rootView.findViewById(R.id.card_section5).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section5)).setText(MealMenu[sect][4]);
+
+            if(MealMenu[sect][5] == "") rootView.findViewById(R.id.card_section6).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section6)).setText(MealMenu[sect][5]);
+
+            if(MealMenu[sect][6] == "") rootView.findViewById(R.id.card_section7).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section7)).setText(MealMenu[sect][6]);
+
+            if(MealMenu[sect][7] == "" && MealMenu[sect][8] == "" && MealMenu[sect][9] == "") rootView.findViewById(R.id.card_section8).setVisibility(View.GONE);
+            else{
+                ((TextView) rootView.findViewById(R.id.content_section8_1)).setText(MealMenu[sect][7]);
+                ((TextView) rootView.findViewById(R.id.content_section8_2)).setText(MealMenu[sect][8]);
+                ((TextView) rootView.findViewById(R.id.content_section8_3)).setText(MealMenu[sect][9]);
+            }
+
+            if(MealMenu[sect][10] == "") rootView.findViewById(R.id.card_section9).setVisibility(View.GONE);
+            else ((TextView) rootView.findViewById(R.id.content_section9)).setText(MealMenu[sect][10]);
+
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;

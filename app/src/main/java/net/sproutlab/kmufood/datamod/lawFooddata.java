@@ -32,7 +32,7 @@ public class lawFooddata {
         SharedPreferences.Editor mPrefEditor = mPref.edit();
         for(int i=0; i<7; i++){
             for(int j=0; j<5; j++){
-                mPrefEditor.putString("law-"+Rule1[j]+"-"+Rule0[i],parsedData[i][j].replace(" ", "\n"));
+                mPrefEditor.putString("law-"+Rule1[j]+"-"+Rule0[i],parsedData[i][j].replace("￦ ", "￦").replace(" ", "\n"));
                 Log.d("lawFood-Data", "Data for key "+"law-"+Rule1[j]+"-"+Rule0[i]+" is "+parsedData[i][j]);
             }
         }

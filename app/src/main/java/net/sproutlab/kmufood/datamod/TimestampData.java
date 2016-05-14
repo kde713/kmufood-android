@@ -62,7 +62,7 @@ public class Timestampdata {
 
         int[] chkvar = {curCal.get(Calendar.WEEK_OF_YEAR) - recCal.get(Calendar.WEEK_OF_YEAR), curCal.get(Calendar.DAY_OF_WEEK)};
 
-        if(chkvar[0] > 1 || (chkvar[0] == 1 && chkvar[1] != 1 && chkvar[1] != 7)) return true;
+        if(chkvar[0] > 1 || (chkvar[0] == 1 && chkvar[1] != 1)) return true;
         else return false;
     }
 }

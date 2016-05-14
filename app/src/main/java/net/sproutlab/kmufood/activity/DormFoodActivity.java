@@ -132,6 +132,7 @@ public class DormFoodActivity extends AppCompatActivity
             ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
             ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
             ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
+            if(getArguments().getInt(ARG_SECTION_NUMBER) >= 6) rootView.findViewById(R.id.view_section2_sub2).setVisibility(View.GONE);
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;

@@ -53,7 +53,7 @@ public class ChungFoodActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().findItem(R.id.nav_meal3).setChecked(true);
+        navigationView.getMenu().findItem(R.id.nav_meal4).setChecked(true);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.tabpager);
