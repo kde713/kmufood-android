@@ -1,13 +1,9 @@
 package net.sproutlab.kmufood.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,7 +22,6 @@ import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.datamod.chungFooddata;
-import net.sproutlab.kmufood.parsemod.chungFoodparser;
 
 import java.util.Calendar;
 
@@ -38,10 +33,7 @@ public class ChungFoodActivity extends AppCompatActivity
     private TabLayout tabLayout;
 
     chungFooddata mDatamod;
-    chungFoodparser mParsemod;
     public static String[][] MealMenu = new String[6][8];
-
-    ProgressDialog mProgressView;
 
     CoordinatorLayout mCLayout;
     int curindex;
@@ -52,17 +44,6 @@ public class ChungFoodActivity extends AppCompatActivity
         setContentView(R.layout.activity_chungfood);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -75,20 +56,10 @@ public class ChungFoodActivity extends AppCompatActivity
         navigationView.getMenu().findItem(R.id.nav_meal3).setChecked(true);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         mViewPager = (ViewPager) findViewById(R.id.tabpager);
-        //mViewPager.setAdapter(mSectionsPagerAdapter);
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        //tabLayout.setupWithViewPager(mViewPager);
 
         mCLayout = (CoordinatorLayout) findViewById(R.id.appbar_view);
-
-        mProgressView = new ProgressDialog(ChungFoodActivity.this);
-        mProgressView.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgressView.setMessage(getString(R.string.msg_inupdate));
-
-        mProgressView.show();
 
         Calendar c = Calendar.getInstance();
         curindex = c.get(Calendar.DAY_OF_WEEK);
@@ -96,38 +67,11 @@ public class ChungFoodActivity extends AppCompatActivity
         else curindex -= 2;
 
         mDatamod = new chungFooddata(this);
-        mParsemod = new chungFoodparser(this, mHandler);
-        if(mDatamod.checkTS()){
-            mParsemod.execute("");
-        } else{
-            MealMenu = mDatamod.getMenu();
-            mViewPager.setAdapter(mSectionsPagerAdapter);
-            tabLayout.setupWithViewPager(mViewPager);
-            mProgressView.dismiss();
-            Snackbar.make(mCLayout, getString(R.string.msg_gotcurrent), Snackbar.LENGTH_SHORT).show();
-            mViewPager.setCurrentItem(curindex);
-        }
+        MealMenu = mDatamod.getMenu();
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(curindex);
     }
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case -1:
-                    mProgressView.dismiss();
-                    Snackbar.make(mCLayout, getString(R.string.msg_failed), Snackbar.LENGTH_LONG).show();
-                    break;
-                case 1:
-                    MealMenu = mDatamod.getMenu();
-                    mViewPager.setAdapter(mSectionsPagerAdapter);
-                    tabLayout.setupWithViewPager(mViewPager);
-                    mProgressView.dismiss();
-                    Snackbar.make(mCLayout, getString(R.string.msg_gotnew), Snackbar.LENGTH_SHORT).show();
-                    mViewPager.setCurrentItem(curindex);
-                    break;
-
-            }
-        }
-    };
 
     @Override
     public void onBackPressed() {
@@ -142,7 +86,6 @@ public class ChungFoodActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mProgressView.dismiss();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -152,13 +95,13 @@ public class ChungFoodActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if(id == R.id.nav_meal1){
-            startActivity((new Intent(this, LawFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+            startActivity((new Intent(this, LawFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         } else if(id == R.id.nav_meal2){
-            startActivity((new Intent(this, StuFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+            startActivity((new Intent(this, StuFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         } else if(id == R.id.nav_meal3){
-            startActivity((new Intent(this, StaffFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+            startActivity((new Intent(this, StaffFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         } else if(id == R.id.nav_meal5){
-            startActivity((new Intent(this, DormFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+            startActivity((new Intent(this, DormFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -167,23 +110,13 @@ public class ChungFoodActivity extends AppCompatActivity
     }
 
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
         public static PlaceholderFragment newInstance(int sectionNumber) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
@@ -204,16 +137,13 @@ public class ChungFoodActivity extends AppCompatActivity
             ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
             ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
             ((TextView) rootView.findViewById(R.id.content_section2_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
-            rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(250);
+            rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -222,8 +152,6 @@ public class ChungFoodActivity extends AppCompatActivity
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);
         }
 

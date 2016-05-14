@@ -22,8 +22,6 @@ public class stuFooddata {
     private String[] Rule0 = {"mor","wif","han","bogl","boga","nood","cafe","din1","din2","din3","inst"};
     private String[] Rule1 = {"mon", "tue", "wed", "thu", "fri", "sat","sun"};
 
-    SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy.MM.dd");
-
     public stuFooddata(Context c){
         mContext = c;
     }
@@ -35,7 +33,7 @@ public class stuFooddata {
         for(int i=0; i<11; i++){
             for(int j=0; j<7; j++){
                 mPrefEditor.putString("stu-"+Rule1[j]+"-"+Rule0[i],parsedData[i][j].replace(" ", "\n"));
-                Log.d("stuFoodparser-Data", "Data for key "+"stu-"+Rule1[j]+"-"+Rule0[i]+" is "+parsedData[i][j]);
+                Log.d("stuFood-Data", "Data for key "+"stu-"+Rule1[j]+"-"+Rule0[i]+" is "+parsedData[i][j]);
             }
         }
         mPrefEditor.commit();
@@ -48,37 +46,9 @@ public class stuFooddata {
         for(int i=0; i<7; i++){
             for(int j=0; j<11; j++){
                 returnMenu[i][j] = mPref.getString("stu-"+Rule1[i]+"-"+Rule0[j],"blank");
-                Log.d("stuFoodparser-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(stu-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
+                Log.d("stuFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(stu-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }
         return returnMenu;
-    }
-
-    public void updateTS(){
-        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
-                Activity.MODE_PRIVATE);
-        SharedPreferences.Editor mPrefEditor = mPref.edit();
-        Date mDate = new Date(System.currentTimeMillis());
-        mPrefEditor.putString("stu-update",mDateFormat.format(mDate));
-        mPrefEditor.commit();
-    }
-
-    public Boolean checkTS(){
-        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
-                Activity.MODE_PRIVATE);
-        String update = mPref.getString("stu-update", null);
-        Calendar curCal = Calendar.getInstance();
-        Calendar recCal = Calendar.getInstance();
-        if(update == null) return true;
-        try {
-            recCal.setTime(mDateFormat.parse(update));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        int[] chkvar = {curCal.get(Calendar.WEEK_OF_YEAR) - recCal.get(Calendar.WEEK_OF_YEAR), curCal.get(Calendar.DAY_OF_WEEK)};
-
-        if(chkvar[0] > 1 || (chkvar[0] == 1 && chkvar[1] != 1)) return true;
-        else return false;
     }
 }

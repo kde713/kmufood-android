@@ -22,8 +22,6 @@ public class lawFooddata {
     private String[] Rule0 = {"baro1","baro2","nood","bap1","bap2","fire1","fire2"};
     private String[] Rule1 = {"mon", "tue", "wed", "thu", "fri"};
 
-    SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy.MM.dd");
-
     public lawFooddata(Context c){
         mContext = c;
     }
@@ -35,7 +33,7 @@ public class lawFooddata {
         for(int i=0; i<7; i++){
             for(int j=0; j<5; j++){
                 mPrefEditor.putString("law-"+Rule1[j]+"-"+Rule0[i],parsedData[i][j].replace(" ", "\n"));
-                Log.d("lawFoodparser-Data", "Data for key "+"law-"+Rule1[j]+"-"+Rule0[i]+" is "+parsedData[i][j]);
+                Log.d("lawFood-Data", "Data for key "+"law-"+Rule1[j]+"-"+Rule0[i]+" is "+parsedData[i][j]);
             }
         }
         mPrefEditor.commit();
@@ -48,37 +46,9 @@ public class lawFooddata {
         for(int i=0; i<5; i++){
             for(int j=0; j<7; j++){
                 returnMenu[i][j] = mPref.getString("law-"+Rule1[i]+"-"+Rule0[j],"blank");
-                Log.d("lawFoodparser-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(law-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
+                Log.d("lawFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(law-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }
         return returnMenu;
-    }
-
-    public void updateTS(){
-        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
-                Activity.MODE_PRIVATE);
-        SharedPreferences.Editor mPrefEditor = mPref.edit();
-        Date mDate = new Date(System.currentTimeMillis());
-        mPrefEditor.putString("law-update",mDateFormat.format(mDate));
-        mPrefEditor.commit();
-    }
-
-    public Boolean checkTS(){
-        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
-                Activity.MODE_PRIVATE);
-        String update = mPref.getString("law-update", null);
-        Calendar curCal = Calendar.getInstance();
-        Calendar recCal = Calendar.getInstance();
-        if(update == null) return true;
-        try {
-            recCal.setTime(mDateFormat.parse(update));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        int[] chkvar = {curCal.get(Calendar.WEEK_OF_YEAR) - recCal.get(Calendar.WEEK_OF_YEAR)};
-
-        if(chkvar[0] > 1) return true;
-        else return false;
     }
 }

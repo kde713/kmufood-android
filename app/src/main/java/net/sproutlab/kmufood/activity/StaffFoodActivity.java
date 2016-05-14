@@ -1,13 +1,9 @@
 package net.sproutlab.kmufood.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,7 +22,6 @@ import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.datamod.staffFooddata;
-import net.sproutlab.kmufood.parsemod.staffFoodparser;
 
 import java.util.Calendar;
 
@@ -38,10 +33,7 @@ public class StaffFoodActivity extends AppCompatActivity
     private TabLayout tabLayout;
 
     staffFooddata mDatamod;
-    staffFoodparser mParsemod;
     public static String[][] MealMenu = new String[5][4];
-
-    ProgressDialog mProgressView;
 
     CoordinatorLayout mCLayout;
     int curindex;
@@ -84,50 +76,17 @@ public class StaffFoodActivity extends AppCompatActivity
 
         mCLayout = (CoordinatorLayout) findViewById(R.id.appbar_view);
 
-        mProgressView = new ProgressDialog(StaffFoodActivity.this);
-        mProgressView.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgressView.setMessage(getString(R.string.msg_inupdate));
-
-        mProgressView.show();
-
         Calendar c = Calendar.getInstance();
         curindex = c.get(Calendar.DAY_OF_WEEK);
         if(curindex == 1 || curindex == 7) curindex = 0;
         else curindex -= 2;
 
         mDatamod = new staffFooddata(this);
-        mParsemod = new staffFoodparser(this, mHandler);
-        if(mDatamod.checkTS()){
-            mParsemod.execute("");
-        } else{
-            MealMenu = mDatamod.getMenu();
-            mViewPager.setAdapter(mSectionsPagerAdapter);
-            tabLayout.setupWithViewPager(mViewPager);
-            mProgressView.dismiss();
-            Snackbar.make(mCLayout, getString(R.string.msg_gotcurrent), Snackbar.LENGTH_SHORT).show();
-            mViewPager.setCurrentItem(curindex);
-        }
+        MealMenu = mDatamod.getMenu();
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(curindex);
     }
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case -1:
-                    mProgressView.dismiss();
-                    Snackbar.make(mCLayout, getString(R.string.msg_failed), Snackbar.LENGTH_LONG).show();
-                    break;
-                case 1:
-                    MealMenu = mDatamod.getMenu();
-                    mViewPager.setAdapter(mSectionsPagerAdapter);
-                    tabLayout.setupWithViewPager(mViewPager);
-                    mProgressView.dismiss();
-                    Snackbar.make(mCLayout, getString(R.string.msg_gotnew), Snackbar.LENGTH_SHORT).show();
-                    mViewPager.setCurrentItem(curindex);
-                    break;
-
-            }
-        }
-    };
 
     @Override
     public void onBackPressed() {
@@ -142,7 +101,6 @@ public class StaffFoodActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mProgressView.dismiss();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -200,7 +158,7 @@ public class StaffFoodActivity extends AppCompatActivity
             ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
             ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
             ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
-            rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(250);
+            rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;
         }

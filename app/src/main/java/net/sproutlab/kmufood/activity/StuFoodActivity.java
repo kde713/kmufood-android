@@ -1,13 +1,9 @@
 package net.sproutlab.kmufood.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,7 +22,6 @@ import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.datamod.stuFooddata;
-import net.sproutlab.kmufood.parsemod.stuFoodparser;
 
 import java.util.Calendar;
 
@@ -38,10 +33,7 @@ public class StuFoodActivity extends AppCompatActivity
     private TabLayout tabLayout;
 
     stuFooddata mDatamod;
-    stuFoodparser mParsemod;
     public static String[][] MealMenu = new String[7][11];
-
-    ProgressDialog mProgressView;
 
     CoordinatorLayout mCLayout;
     int curindex;
@@ -52,17 +44,6 @@ public class StuFoodActivity extends AppCompatActivity
         setContentView(R.layout.activity_stufood);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-/*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,50 +65,17 @@ public class StuFoodActivity extends AppCompatActivity
 
         mCLayout = (CoordinatorLayout) findViewById(R.id.appbar_view);
 
-        mProgressView = new ProgressDialog(StuFoodActivity.this);
-        mProgressView.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mProgressView.setMessage(getString(R.string.msg_inupdate));
-
-        mProgressView.show();
-
         Calendar c = Calendar.getInstance();
         curindex = c.get(Calendar.DAY_OF_WEEK);
         if(curindex == 1) curindex = 6;
         else curindex -= 2;
 
         mDatamod = new stuFooddata(this);
-        mParsemod = new stuFoodparser(this, mHandler);
-        if(mDatamod.checkTS()){
-            mParsemod.execute("");
-        } else{
-            MealMenu = mDatamod.getMenu();
-            mViewPager.setAdapter(mSectionsPagerAdapter);
-            tabLayout.setupWithViewPager(mViewPager);
-            mProgressView.dismiss();
-            Snackbar.make(mCLayout, getString(R.string.msg_gotcurrent), Snackbar.LENGTH_SHORT).show();
-            mViewPager.setCurrentItem(curindex);
-        }
+        MealMenu = mDatamod.getMenu();
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(curindex);
     }
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch(msg.what) {
-                case -1:
-                    mProgressView.dismiss();
-                    Snackbar.make(mCLayout, getString(R.string.msg_failed), Snackbar.LENGTH_LONG).show();
-                    break;
-                case 1:
-                    MealMenu = mDatamod.getMenu();
-                    mViewPager.setAdapter(mSectionsPagerAdapter);
-                    tabLayout.setupWithViewPager(mViewPager);
-                    mProgressView.dismiss();
-                    Snackbar.make(mCLayout, getString(R.string.msg_gotnew), Snackbar.LENGTH_SHORT).show();
-                    mViewPager.setCurrentItem(curindex);
-                    break;
-
-            }
-        }
-    };
 
     @Override
     public void onBackPressed() {
@@ -142,7 +90,6 @@ public class StuFoodActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mProgressView.dismiss();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -207,7 +154,7 @@ public class StuFoodActivity extends AppCompatActivity
             ((TextView) rootView.findViewById(R.id.content_section8_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][8]);
             ((TextView) rootView.findViewById(R.id.content_section8_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][9]);
             ((TextView) rootView.findViewById(R.id.content_section9)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][10]);
-            rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(250);
+            rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;
         }
