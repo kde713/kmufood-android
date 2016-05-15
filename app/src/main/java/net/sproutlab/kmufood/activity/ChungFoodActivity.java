@@ -132,21 +132,33 @@ public class ChungFoodActivity extends AppCompatActivity
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_chungfood, container, false);
             ((TextView) rootView.findViewById(R.id.content_section1_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
-            ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section1_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            ((TextView) rootView.findViewById(R.id.content_section1_4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
-            ((TextView) rootView.findViewById(R.id.content_section1_5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
-            ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
-            ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
-            ((TextView) rootView.findViewById(R.id.content_section2_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
             ((TextView) rootView.findViewById(R.id.content_section1_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
+            ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
             ((TextView) rootView.findViewById(R.id.content_section1_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
+            ((TextView) rootView.findViewById(R.id.content_section1_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
             ((TextView) rootView.findViewById(R.id.content_section1_3p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
+            ((TextView) rootView.findViewById(R.id.content_section1_4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
             ((TextView) rootView.findViewById(R.id.content_section1_4p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
-            ((TextView) rootView.findViewById(R.id.content_section1_5p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
-            ((TextView) rootView.findViewById(R.id.content_section2_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
-            ((TextView) rootView.findViewById(R.id.content_section2_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
-            ((TextView) rootView.findViewById(R.id.content_section2_3p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
+
+            if(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4] == "") rootView.findViewById(R.id.view_section1_sub5).setVisibility(View.GONE);
+            else{
+                ((TextView) rootView.findViewById(R.id.content_section1_5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
+                ((TextView) rootView.findViewById(R.id.content_section1_5p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
+            }
+
+            if(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5] == "") rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
+            else{
+                ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
+                ((TextView) rootView.findViewById(R.id.content_section2_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
+                ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
+                ((TextView) rootView.findViewById(R.id.content_section2_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
+                if(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7] == "") rootView.findViewById(R.id.view_section2_sub3).setVisibility(View.GONE);
+                else{
+                    ((TextView) rootView.findViewById(R.id.content_section2_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
+                    ((TextView) rootView.findViewById(R.id.content_section2_3p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
+                }
+            }
+
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;
