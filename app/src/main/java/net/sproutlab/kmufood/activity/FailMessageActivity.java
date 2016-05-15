@@ -18,7 +18,7 @@ import net.sproutlab.kmufood.parsemod.IntegratedParser;
 
 public class FailMessageActivity extends AppCompatActivity {
 
-    ProgressDialog loadingDiag = new ProgressDialog(this);
+    ProgressDialog loadingDiag;
     Timestampdata mTSAdapter;
 
     @Override
@@ -32,6 +32,7 @@ public class FailMessageActivity extends AppCompatActivity {
 
         mTSAdapter = new Timestampdata(getApplicationContext());
 
+        loadingDiag = new ProgressDialog(FailMessageActivity.this);
         loadingDiag.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         loadingDiag.setMessage(getString(R.string.msg_retry));
 
