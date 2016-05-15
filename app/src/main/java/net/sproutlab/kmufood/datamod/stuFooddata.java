@@ -3,12 +3,6 @@ package net.sproutlab.kmufood.datamod;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by kde713 on 2016. 5. 1..
@@ -34,7 +28,6 @@ public class stuFooddata {
         for(int i=0; i<11; i++){
             for(int j=0; j<7; j++){
                 mPrefEditor.putString("stu-"+Rule1[j]+"-"+Rule0[i],parsedData[i][j].replace("[ ","[").replace(" ]","]").replace(" ", "\n"));
-                Log.d("stuFood-Data", "Data for key "+"stu-"+Rule1[j]+"-"+Rule0[i]+" is "+parsedData[i][j]);
             }
         }
         mPrefEditor.commit();
@@ -47,7 +40,6 @@ public class stuFooddata {
         for(int i=0; i<7; i++){
             for(int j=0; j<11; j++){
                 returnMenu[i][j] = mPref.getString("stu-"+Rule1[i]+"-"+Rule0[j],"");
-                Log.d("stuFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(stu-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }
         return returnMenu;

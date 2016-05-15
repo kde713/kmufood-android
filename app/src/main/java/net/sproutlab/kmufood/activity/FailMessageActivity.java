@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -47,7 +46,6 @@ public class FailMessageActivity extends AppCompatActivity {
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            Log.d("FailScreen-Handler","Message "+Integer.toString(msg.what)+" Received.");
             switch(msg.what) {
                 case -1:
                     Snackbar.make(findViewById(R.id.failview_container), getString(R.string.msg_refail), Snackbar.LENGTH_LONG).show();

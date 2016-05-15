@@ -3,12 +3,7 @@ package net.sproutlab.kmufood.datamod;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,9 +36,7 @@ public class chungFooddata {
                     target_price = mMatcher.group(0).replace(" ","");
                 }
                 mPrefEditor.putString("chung-"+Rule1[j]+"-"+Rule0[i], mPattern.matcher(parsedData[i][j]).replaceAll(""));
-                Log.d("chungFood-Data", "Data for key "+"chung-"+Rule1[j]+"-"+Rule0[i]+" is "+mPattern.matcher(parsedData[i][j]).replaceAll(""));
                 mPrefEditor.putString("chung-"+Rule1[j]+"-"+Rule0[i]+"-price", target_price.replace(" ", ""));
-                Log.d("chungFood-Data", "Data for key "+"chung-"+Rule1[j]+"-"+Rule0[i]+"-price is "+target_price.replace(" ", ""));
             }
         }
         mPrefEditor.commit();
@@ -56,7 +49,6 @@ public class chungFooddata {
         for(int i=0; i<6; i++){
             for(int j=0; j<8; j++){
                 returnMenu[i][j] = mPref.getString("chung-"+Rule1[i]+"-"+Rule0[j],"");
-                Log.d("chungFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(chung-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }
         return returnMenu;
@@ -69,7 +61,6 @@ public class chungFooddata {
         for(int i=0; i<6; i++){
             for(int j=0; j<8; j++){
                 returnPrice[i][j] = mPref.getString("chung-"+Rule1[i]+"-"+Rule0[j]+"-price","");
-                Log.d("chungFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(chung-"+Rule1[i]+"-"+Rule0[j]+"-price) is "+returnPrice[i][j]);
             }
         }
         return returnPrice;
