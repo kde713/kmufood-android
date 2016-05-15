@@ -46,7 +46,7 @@ public class stuFooddata {
                 Activity.MODE_PRIVATE);
         for(int i=0; i<7; i++){
             for(int j=0; j<11; j++){
-                returnMenu[i][j] = mPref.getString("stu-"+Rule1[i]+"-"+Rule0[j],"blank");
+                returnMenu[i][j] = mPref.getString("stu-"+Rule1[i]+"-"+Rule0[j],"");
                 Log.d("stuFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(stu-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }

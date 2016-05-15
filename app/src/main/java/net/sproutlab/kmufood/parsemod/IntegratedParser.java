@@ -102,7 +102,7 @@ public class IntegratedParser extends AsyncTask<String, Void, Boolean> {
             for(int i = 1; i < 9; i++){
                 Elements entry = table.get(i).getElementsByTag("td").select("td.ft_mn");
                 for(int j = 0; j < 6; j++){
-                    chungMenu[i-1][j] = entry.select("tbody > tr > td.ft1").get(j).text();
+                    chungMenu[i-1][j] = entry.select("tbody").get(j).text();
                 }
             }
             Log.d("IntegratedParser","chungfood Parse Complete.");

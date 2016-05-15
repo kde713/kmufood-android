@@ -63,7 +63,7 @@ public class lawFooddata {
                 Activity.MODE_PRIVATE);
         for(int i=0; i<5; i++){
             for(int j=0; j<8; j++){
-                returnMenu[i][j] = mPref.getString("law-"+Rule1[i]+"-"+Rule0[j],"blank");
+                returnMenu[i][j] = mPref.getString("law-"+Rule1[i]+"-"+Rule0[j],"");
                 Log.d("lawFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(law-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }

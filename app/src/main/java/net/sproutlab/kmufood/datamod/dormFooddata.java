@@ -44,7 +44,7 @@ public class dormFooddata {
                 Activity.MODE_PRIVATE);
         for(int i=0; i<7; i++){
             for(int j=0; j<4; j++){
-                returnMenu[i][j] = mPref.getString("dorm-"+Rule1[i]+"-"+Rule0[j],"blank");
+                returnMenu[i][j] = mPref.getString("dorm-"+Rule1[i]+"-"+Rule0[j],"");
                 Log.d("dormFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(dorm-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }

@@ -20,9 +20,6 @@ public class SplashActivity extends AppCompatActivity {
 
     IntegratedParser mParser;
 
-    private final String PREF_NAME = "net.sproutlab.kmufood";
-    private final int specialKey = 1095;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +31,9 @@ public class SplashActivity extends AppCompatActivity {
 
         Timestampdata mTSAdapter = new Timestampdata(getApplicationContext());
         mParser = new IntegratedParser(this, mHandler);
-        SharedPreferences mPref = getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
-        SharedPreferences.Editor mPrefEditor = mPref.edit();
 
-        if(mPref.getInt("specialKey",0) != specialKey){
-            mPrefEditor.putInt("specialKey", specialKey);
+        if(!mTSAdapter.checkKey()){
+            mTSAdapter.patchKey();
             Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
             mParser.execute("");
         } else if(mTSAdapter.checkTS()){

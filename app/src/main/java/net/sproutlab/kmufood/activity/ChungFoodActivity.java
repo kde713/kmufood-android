@@ -34,6 +34,7 @@ public class ChungFoodActivity extends AppCompatActivity
 
     chungFooddata mDatamod;
     public static String[][] MealMenu = new String[6][8];
+    public static String[][] MealPrice = new String[6][8];
 
     CoordinatorLayout mCLayout;
     int curindex;
@@ -68,6 +69,7 @@ public class ChungFoodActivity extends AppCompatActivity
 
         mDatamod = new chungFooddata(this);
         MealMenu = mDatamod.getMenu();
+        MealPrice = mDatamod.getPrice();
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(curindex);
@@ -137,6 +139,14 @@ public class ChungFoodActivity extends AppCompatActivity
             ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
             ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
             ((TextView) rootView.findViewById(R.id.content_section2_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
+            ((TextView) rootView.findViewById(R.id.content_section1_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
+            ((TextView) rootView.findViewById(R.id.content_section1_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
+            ((TextView) rootView.findViewById(R.id.content_section1_3p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
+            ((TextView) rootView.findViewById(R.id.content_section1_4p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            ((TextView) rootView.findViewById(R.id.content_section1_5p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
+            ((TextView) rootView.findViewById(R.id.content_section2_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
+            ((TextView) rootView.findViewById(R.id.content_section2_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
+            ((TextView) rootView.findViewById(R.id.content_section2_3p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;

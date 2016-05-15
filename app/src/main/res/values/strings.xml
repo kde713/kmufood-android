@@ -8,6 +8,8 @@
     <string name="nav_meal4">청향(법학관5F)</string>
     <string name="nav_meal5">기숙사식당</string>
 
+    <string name="guide">누르거나 오른쪽으로 미세요</string>
+
     <string name="main_txt1">현재식단정보</string>
     <string name="main_txt2"># 좌측 상단 버튼으로 식당 전환이 가능해요</string>
     <string name="main_txt3">Dongeon Kim\nHyeongon Kim</string>

@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
@@ -53,6 +55,11 @@ public class MainActivity extends AppCompatActivity
         mTSAdapter = new Timestampdata(getApplicationContext());
         lastup = (TextView) findViewById(R.id.main_lastupdate);
         lastup.setText(mTSAdapter.getTS());
+
+        if(mTSAdapter.FirstRun()){
+            findViewById(R.id.main_guideview).setVisibility(View.VISIBLE);
+            mTSAdapter.logRun();
+        }
     }
 
     @Override

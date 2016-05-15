@@ -20,6 +20,8 @@ public class Timestampdata {
 
     SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
+    private final int specialKey = 9999;
+
     public Timestampdata(Context c){
         mContext = c;
     }
@@ -64,5 +66,34 @@ public class Timestampdata {
 
         if(chkvar[0] > 1 || (chkvar[0] == 1 && chkvar[1] != 1)) return true;
         else return false;
+    }
+
+    public Boolean FirstRun(){
+        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
+                Activity.MODE_PRIVATE);
+        return mPref.getBoolean("firstrun", true);
+    }
+
+    public Boolean checkKey(){
+        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
+                Activity.MODE_PRIVATE);
+        if(mPref.getInt("specialkey", 0) != specialKey) return false;
+        else return true;
+    }
+
+    public void logRun(){
+        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor mPrefEditor = mPref.edit();
+        mPrefEditor.putBoolean("firstrun",false);
+        mPrefEditor.commit();
+    }
+
+    public void patchKey(){
+        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor mPrefEditor = mPref.edit();
+        mPrefEditor.putInt("specialkey", specialKey);
+        mPrefEditor.commit();
     }
 }

@@ -45,7 +45,7 @@ public class staffFooddata {
                 Activity.MODE_PRIVATE);
         for(int i=0; i<5; i++){
             for(int j=0; j<4; j++){
-                returnMenu[i][j] = mPref.getString("staff-"+Rule1[i]+"-"+Rule0[j],"blank");
+                returnMenu[i][j] = mPref.getString("staff-"+Rule1[i]+"-"+Rule0[j],"");
                 Log.d("staffFood-Data", "returned Data for section "+Integer.toString(i)+","+Integer.toString(j)+"(staff-"+Rule1[i]+"-"+Rule0[j]+") is "+returnMenu[i][j]);
             }
         }

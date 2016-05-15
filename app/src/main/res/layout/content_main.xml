@@ -18,10 +18,30 @@
         android:paddingTop="32dp"
         android:gravity="center_horizontal" >
 
-        <LinearLayout android:orientation="horizontal"
+        <LinearLayout android:id="@+id/main_guideview"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guide"
+                android:scaleType="fitXY" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="128dp" />
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+            android:id="@+id/maindesc_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:baselineAligned="true">
 
             <LinearLayout android:orientation="vertical"
                 android:layout_width="0dp"
@@ -56,22 +76,24 @@
 
         </LinearLayout>
 
-        <ImageView
+        <ImageView android:id="@+id/maindesc_img"
             android:layout_margin="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/main_centerimg"/>
 
-        <TextView
+        <TextView android:id="@+id/maindesc_int"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main_txt2"
             android:textColor="@color/colorPrimary"/>
 
         <LinearLayout android:orientation="horizontal"
+            android:id="@+id/maindesc_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:baselineAligned="true">
 
             <LinearLayout android:orientation="vertical"
                 android:layout_width="0dp"
