@@ -1,5 +1,6 @@
 package net.sproutlab.kmufood.activity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,9 +13,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import net.sproutlab.kmufood.R;
+import net.sproutlab.kmufood.datamod.Timestampdata;
 import net.sproutlab.kmufood.parsemod.IntegratedParser;
 
 public class FailMessageActivity extends AppCompatActivity {
+
+    ProgressDialog loadingDiag = new ProgressDialog(this);
+    Timestampdata mTSAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +30,21 @@ public class FailMessageActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_fail_message);
 
+        mTSAdapter = new Timestampdata(getApplicationContext());
+
+        loadingDiag.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        loadingDiag.setMessage(getString(R.string.msg_retry));
+
         findViewById(R.id.btn_retry).setOnClickListener(mListner);
         findViewById(R.id.btn_exit).setOnClickListener(mListner);
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        loadingDiag.dismiss();
+    }
+
 
     ImageButton.OnClickListener mListner = new ImageButton.OnClickListener(){
 
@@ -35,6 +52,7 @@ public class FailMessageActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.btn_retry:
+                    loadingDiag.show();
                     (new IntegratedParser(getApplicationContext(), mHandler)).execute("");
                     break;
                 case R.id.btn_exit:
@@ -48,9 +66,12 @@ public class FailMessageActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch(msg.what) {
                 case -1:
+                    loadingDiag.dismiss();
                     Snackbar.make(findViewById(R.id.failview_container), getString(R.string.msg_refail), Snackbar.LENGTH_LONG).show();
                     break;
                 case 2:
+                    loadingDiag.dismiss();
+                    if(!mTSAdapter.checkKey()) mTSAdapter.patchKey();
                     Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
                     finish();
                     break;

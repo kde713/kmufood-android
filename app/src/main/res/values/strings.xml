@@ -53,6 +53,7 @@
 
     <string name="msg_loading">식단 정보를 최신 정보로 업데이트 합니다.</string>
     <string name="msg_itsok">이미 최신 정보가 저장되어 있습니다.\n저장된 정보를 불러옵니다.</string>
+    <string name="msg_retry">다시 정보를 불러오는 중입니다</string>
     <string name="failtxt1">!!! 이런, 식단 정보를 불러오는데 실패했어요 !!!</string>
     <string name="failtxt2">1. 혹시 인터넷에 연결되어 있나요?
         \n2. 어라...? 인터넷에 연결해도 안되나요?
