@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">국민밥</string>
 
+    <string name="custommsg_title">사과문</string>
+    <string name="custommsg">
+        오류로 인해 불편을 겪게 해드린 점, 국민밥을 사용해주시는 모든 분께 고개 숙여 사과드립니다.
+        \n이번 일을 계기로 더욱더 안정적이고 좋은 서비스를 제공해드리기 위해 앞으로 더욱 더 노력하겠습니다.
+        \n다시 한 번 죄송하다는 말씀을 드립니다.
+        \n
+        \n더 이상의 이런 일은 없어야겠지만, 혹시라도 문제나 불편한 점이 있으시면 주저하지 마시고 카카오톡 @sprout로 연락주시길 바랍니다.
+        \n새벽에 보내도, 주말에 보내도 적극적으로 수렴하겠습니다.
+    </string>
+
     <string name="nav_main">국민밥</string>
     <string name="nav_meal1">한울식당(법학관B1)</string>
     <string name="nav_meal2">학생식당(복지관1F)</string>

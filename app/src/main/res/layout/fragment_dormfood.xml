@@ -51,6 +51,7 @@
                     android:gravity="center"/>
 
                 <TextView
+                    android:id="@+id/content_section1p"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￦3300"
@@ -87,12 +88,13 @@
                     android:background="@color/colorDivider"/>
 
                 <TextView
-                    android:id="@+id/content_section2"
+                    android:id="@+id/content_section2_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
 
                 <TextView
+                    android:id="@+id/content_section2_1p"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￦2800"
@@ -120,6 +122,7 @@
                         android:gravity="center"/>
 
                     <TextView
+                        android:id="@+id/content_section2_2p"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="￦5500"
@@ -164,6 +167,7 @@
                     android:gravity="center"/>
 
                 <TextView
+                    android:id="@+id/content_section3p"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￦3300"

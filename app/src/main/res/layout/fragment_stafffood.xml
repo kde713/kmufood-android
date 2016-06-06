@@ -50,6 +50,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
 
+                <TextView
+                    android:id="@+id/content_section1_1p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorDivider"/>
+
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1dp"
@@ -64,6 +71,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/content_section1_2p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorDivider"/>
 
             </LinearLayout>
 
@@ -101,6 +115,13 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
 
+                <TextView
+                    android:id="@+id/content_section2p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorDivider"/>
+
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -136,6 +157,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/content_section3p"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/colorDivider"/>
 
             </LinearLayout>
 

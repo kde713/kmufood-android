@@ -34,6 +34,7 @@ public class DormFoodActivity extends AppCompatActivity
 
     dormFooddata mDatamod;
     public static String[][] MealMenu = new String[7][3];
+    public static String[][] MealPrice = new String[7][3];
 
     CoordinatorLayout mCLayout;
     int curindex;
@@ -66,7 +67,8 @@ public class DormFoodActivity extends AppCompatActivity
         else curindex -= 2;
 
         mDatamod = new dormFooddata(this);
-        MealMenu = mDatamod.getMenu();
+        MealMenu = mDatamod.loadMenu();
+        MealPrice = mDatamod.loadPrice();
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(curindex);
@@ -122,11 +124,37 @@ public class DormFoodActivity extends AppCompatActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_dormfood, container, false);
-            ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
-            ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
-            ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            if(getArguments().getInt(ARG_SECTION_NUMBER) >= 6) rootView.findViewById(R.id.view_section2_sub2).setVisibility(View.GONE);
+            int sect = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
+
+            if(MealMenu[sect][0].isEmpty()){
+                rootView.findViewById(R.id.card_section1).setVisibility(View.GONE);
+            } else{
+                ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[sect][0]);
+                if(!MealPrice[sect][0].isEmpty()) ((TextView) rootView.findViewById(R.id.content_section1p)).setText("￦"+MealPrice[sect][0]);
+            }
+
+            if(MealMenu[sect][1].isEmpty() && MealMenu[sect][2].isEmpty()){
+                rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
+            } else{
+                ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[sect][1]);
+                if(!MealPrice[sect][1].isEmpty()) ((TextView) rootView.findViewById(R.id.content_section2_1p)).setText("￦"+MealPrice[sect][1]);
+
+                if(MealMenu[sect][2].isEmpty()){
+                    rootView.findViewById(R.id.view_section2_sub2).setVisibility(View.GONE);
+                } else{
+                    ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[sect][2]);
+                    if(!MealPrice[sect][2].isEmpty()) ((TextView) rootView.findViewById(R.id.content_section2_2p)).setText("￦"+MealPrice[sect][2]);
+                }
+            }
+
+            if(MealMenu[sect][3].isEmpty()){
+                rootView.findViewById(R.id.card_section3).setVisibility(View.GONE);
+            } else {
+                ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[sect][3]);
+                if (!MealPrice[sect][3].isEmpty())
+                    ((TextView) rootView.findViewById(R.id.content_section3p)).setText("￦"+MealPrice[sect][3]);
+            }
+
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
 
             return rootView;

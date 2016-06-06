@@ -20,7 +20,7 @@ public class Timestampdata {
 
     SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
-    private final int specialKey = 2016415;
+    private final int specialKey = 201666;
 
     public Timestampdata(Context c){
         mContext = c;
@@ -95,5 +95,19 @@ public class Timestampdata {
         SharedPreferences.Editor mPrefEditor = mPref.edit();
         mPrefEditor.putInt("specialkey", specialKey);
         mPrefEditor.commit();
+    }
+
+    public void setShowMsg(Boolean opt){
+        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
+                Activity.MODE_PRIVATE);
+        SharedPreferences.Editor mPrefEditor = mPref.edit();
+        mPrefEditor.putBoolean("showcustommsg", opt);
+        mPrefEditor.commit();
+    }
+
+    public Boolean isShowMsg(){
+        SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
+                Activity.MODE_PRIVATE);
+        return mPref.getBoolean("showcustommsg", true);
     }
 }
