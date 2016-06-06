@@ -26,9 +26,9 @@ Used Library
 > - com.android.support:cardview-v7:23.2.1
 > 
 > .
-> **jsoup Java HTML Parser:**
+> **Volley:**
 > 
-> - org.jsoup:jsoup:1.9.1
+> - com.android.volley
 
 
 
@@ -54,21 +54,6 @@ LICENSE
 > WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 > See the License for the specific language governing permissions and
 > limitations under the License.
-
-
-본 어플리케이션에 사용된 **jsoup**에 대해서는 아래 라이센스가 적용됩니다.
-> The MIT License
-> Copyright © 2009 - 2013 Jonathan Hedley (jonathan@hedley.net)
-
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this 
-> software and associated documentation files (the "Software"), to deal in the 
-> Software without restriction, including without limitation the rights to use, copy, 
-> modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
-> and to permit persons to whom the Software is furnished to do so, subject to the 
-> following conditions:
-
-> The above copyright notice and this permission notice shall be included in all 
-> copies or substantial portions of the Software.
 
 
 위에서 명시되지 않은 모든 부분에 대해서는 아래 라이센스가 적용됩니다.
