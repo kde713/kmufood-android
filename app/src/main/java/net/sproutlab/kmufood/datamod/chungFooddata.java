@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import net.sproutlab.kmufood.parsemod.JSONParse;
 
 /**
  * Created by kde713 on 2016. 5. 1..
@@ -23,44 +22,40 @@ public class chungFooddata {
         mContext = c;
     }
 
-    public void saveMenu(String[][] parsedData){
+    public void saveData(JSONParse.returnUnit parsedData){
         SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor mPrefEditor = mPref.edit();
-        Pattern mPattern = Pattern.compile("[ ][￦][ ]\\d{1,2}[,]\\d{3}");
-        for(int i=0; i<8; i++){
-            for(int j=0; j<6; j++){
-                Matcher mMatcher = mPattern.matcher(parsedData[i][j]);
-                String target_price = "";
-                while(mMatcher.find()){
-                    target_price = mMatcher.group(0).replace(" ","");
-                }
-                mPrefEditor.putString("chung-"+Rule1[j]+"-"+Rule0[i], mPattern.matcher(parsedData[i][j]).replaceAll(""));
-                mPrefEditor.putString("chung-"+Rule1[j]+"-"+Rule0[i]+"-price", target_price.replace(" ", ""));
+        String[][] mFood = parsedData.mFood;
+        String[][] mPrice = parsedData.mPrice;
+        for(int i=0; i<6; i++){
+            for(int j=0; j<8; j++){
+                mPrefEditor.putString("chungfood-"+Rule1[i]+"-"+Rule0[j], mFood[i][j]);
+                mPrefEditor.putString("chungprice-"+Rule1[i]+"-"+Rule0[j], mPrice[i][j]);
             }
         }
         mPrefEditor.commit();
     }
 
-    public String[][] getMenu(){
+    public String[][] loadMenu(){
         String[][] returnMenu = new String[6][8];
         SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
                 Activity.MODE_PRIVATE);
         for(int i=0; i<6; i++){
             for(int j=0; j<8; j++){
-                returnMenu[i][j] = mPref.getString("chung-"+Rule1[i]+"-"+Rule0[j],"");
+                returnMenu[i][j] = mPref.getString("chungfood-"+Rule1[i]+"-"+Rule0[j],"");
             }
         }
         return returnMenu;
     }
 
-    public String[][] getPrice(){
+    public String[][] loadPrice(){
         String[][] returnPrice = new String[6][8];
         SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
                 Activity.MODE_PRIVATE);
         for(int i=0; i<6; i++){
             for(int j=0; j<8; j++){
-                returnPrice[i][j] = mPref.getString("chung-"+Rule1[i]+"-"+Rule0[j]+"-price","");
+                returnPrice[i][j] = mPref.getString("chungprice-"+Rule1[i]+"-"+Rule0[j],"");
             }
         }
         return returnPrice;

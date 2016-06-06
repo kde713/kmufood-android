@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import net.sproutlab.kmufood.parsemod.JSONParse;
 
 /**
  * Created by kde713 on 2016. 5. 1..
@@ -16,61 +15,49 @@ public class lawFooddata {
 
     static Context mContext;
 
-    private String[] Rule0 = {"baro1_1","baro1_2","baro2","nood","bap1","bap2","fire1","fire2"};
+    private String[] Rule0 = {"baro1","baro2","nood","bap1","bap2","fire1","fire2"};
     private String[] Rule1 = {"mon", "tue", "wed", "thu", "fri"};
 
     public lawFooddata(Context c){
         mContext = c;
     }
 
-    public void saveMenu(String[][] parsedData){
+    public void saveData(JSONParse.returnUnit parsedData){
         SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
                 Activity.MODE_PRIVATE);
         SharedPreferences.Editor mPrefEditor = mPref.edit();
-        Pattern mPattern = Pattern.compile("[￦][ ]\\d?[,]?\\d{1,3}");
-        for(int i=0; i<7; i++){
-            if(i == 0){
-                for(int j=0; j<5; j++){
-                    int t=0;
-                    Matcher mMatcher = mPattern.matcher(parsedData[i][j]);
-                    while(mMatcher.find()){
-                        mPrefEditor.putString("law-"+Rule1[j]+"-"+Rule0[t]+"-price", mMatcher.group(0).replace(" ", ""));
-                        t += 1;
-                    }
-                    String[] tempitem = mPattern.matcher(parsedData[i][j]).replaceAll("").split("  ");
-                    mPrefEditor.putString("law-"+Rule1[j]+"-"+Rule0[0], tempitem[0].replace(" ", "\n"));
-                    mPrefEditor.putString("law-"+Rule1[j]+"-"+Rule0[1], tempitem[1].replace(" ", "\n"));
-                }
-            } else{
-                for(int j=0; j<5; j++){
-                    mPrefEditor.putString("law-"+Rule1[j]+"-"+Rule0[i+1],parsedData[i][j].replace("￦ ", "￦").replace(" ", "\n"));
-                }
+        String[][] mFood = parsedData.mFood;
+        String[][] mPrice = parsedData.mPrice;
+        for(int i=0; i<5; i++){
+            for(int j=0; j<7; j++){
+                mPrefEditor.putString("lawfood-"+Rule1[i]+"-"+Rule0[j], mFood[i][j]);
+                mPrefEditor.putString("lawprice-"+Rule1[i]+"-"+Rule0[j], mPrice[i][j]);
             }
         }
         mPrefEditor.commit();
     }
 
-    public String[][] getMenu(){
-        String[][] returnMenu = new String[5][8];
+    public String[][] loadMenu(){
+        String[][] returnMenu = new String[5][7];
         SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
                 Activity.MODE_PRIVATE);
         for(int i=0; i<5; i++){
-            for(int j=0; j<8; j++){
-                returnMenu[i][j] = mPref.getString("law-"+Rule1[i]+"-"+Rule0[j],"");
+            for(int j=0; j<7; j++){
+                returnMenu[i][j] = mPref.getString("lawfood-"+Rule1[i]+"-"+Rule0[j],"");
             }
         }
         return returnMenu;
     }
 
-    public String[][] getPrice(){
-        String[][] returnMenu = new String[5][2];
+    public String[][] loadPrice(){
+        String[][] returnPrice = new String[5][7];
         SharedPreferences mPref = mContext.getSharedPreferences(PREF_NAME,
                 Activity.MODE_PRIVATE);
         for(int i=0; i<5; i++){
-            for(int j=0; j<2; j++){
-                returnMenu[i][j] = mPref.getString("law-"+Rule1[i]+"-"+Rule0[j]+"-price","");
+            for(int j=0; j<7; j++){
+                returnPrice[i][j] = mPref.getString("lawprice-"+Rule1[i]+"-"+Rule0[j],"");
             }
         }
-        return returnMenu;
+        return returnPrice;
     }
 }

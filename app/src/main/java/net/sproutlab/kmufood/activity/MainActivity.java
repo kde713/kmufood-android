@@ -1,11 +1,13 @@
 package net.sproutlab.kmufood.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -48,6 +50,20 @@ public class MainActivity extends AppCompatActivity
         if(mTSAdapter.FirstRun()){
             findViewById(R.id.main_guideview).setVisibility(View.VISIBLE);
             mTSAdapter.logRun();
+        }
+
+        if(mTSAdapter.isShowMsg()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.custommsg_title))
+                    .setMessage(getString(R.string.custommsg))
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog, int whichButton){
+                            dialog.dismiss();
+                        }
+                    });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+            mTSAdapter.setShowMsg(false);
         }
     }
 

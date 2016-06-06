@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.datamod.Timestampdata;
-import net.sproutlab.kmufood.parsemod.IntegratedParser;
+import net.sproutlab.kmufood.parsemod.APIRequest;
 
 public class FailMessageActivity extends AppCompatActivity {
 
@@ -54,7 +54,7 @@ public class FailMessageActivity extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.btn_retry:
                     loadingDiag.show();
-                    (new IntegratedParser(getApplicationContext(), mHandler)).execute("");
+                    (new APIRequest(getApplicationContext(), mHandler)).callAPI();
                     break;
                 case R.id.btn_exit:
                     finishAffinity();

@@ -68,8 +68,8 @@ public class ChungFoodActivity extends AppCompatActivity
         else curindex -= 2;
 
         mDatamod = new chungFooddata(this);
-        MealMenu = mDatamod.getMenu();
-        MealPrice = mDatamod.getPrice();
+        MealMenu = mDatamod.loadMenu();
+        MealPrice = mDatamod.loadPrice();
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(curindex);
@@ -124,31 +124,69 @@ public class ChungFoodActivity extends AppCompatActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_chungfood, container, false);
-            ((TextView) rootView.findViewById(R.id.content_section1_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
-            ((TextView) rootView.findViewById(R.id.content_section1_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][0]);
-            ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section1_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][1]);
-            ((TextView) rootView.findViewById(R.id.content_section1_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            ((TextView) rootView.findViewById(R.id.content_section1_3p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][2]);
-            ((TextView) rootView.findViewById(R.id.content_section1_4)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
-            ((TextView) rootView.findViewById(R.id.content_section1_4p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][3]);
+            int sect = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
 
-            if(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4] == "") rootView.findViewById(R.id.view_section1_sub5).setVisibility(View.GONE);
-            else{
-                ((TextView) rootView.findViewById(R.id.content_section1_5)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
-                ((TextView) rootView.findViewById(R.id.content_section1_5p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][4]);
+            if(MealMenu[sect][0].isEmpty() && MealMenu[sect][1].isEmpty() && MealMenu[sect][2].isEmpty() && MealMenu[sect][3].isEmpty() && MealMenu[sect][4].isEmpty()){
+                rootView.findViewById(R.id.card_section1).setVisibility(View.GONE);
+            } else{
+                ((TextView) rootView.findViewById(R.id.content_section1_1)).setText(MealMenu[sect][0]);
+                if(MealPrice[sect][0].isEmpty()) rootView.findViewById(R.id.content_section1_1p).setVisibility(View.GONE);
+                else ((TextView) rootView.findViewById(R.id.content_section1_1p)).setText("￦"+MealPrice[sect][0]);
+
+                if(MealMenu[sect][1].isEmpty()){
+                    rootView.findViewById(R.id.view_section1_sub2).setVisibility(View.GONE);
+                } else{
+                    ((TextView) rootView.findViewById(R.id.content_section1_2)).setText(MealMenu[sect][1]);
+                    if(MealPrice[sect][1].isEmpty()) rootView.findViewById(R.id.content_section1_2p).setVisibility(View.GONE);
+                    else ((TextView) rootView.findViewById(R.id.content_section1_2p)).setText("￦"+MealPrice[sect][1]);
+                }
+
+                if(MealMenu[sect][2].isEmpty()){
+                    rootView.findViewById(R.id.view_section1_sub3).setVisibility(View.GONE);
+                } else{
+                    ((TextView) rootView.findViewById(R.id.content_section1_3)).setText(MealMenu[sect][2]);
+                    if(MealPrice[sect][2].isEmpty()) rootView.findViewById(R.id.content_section1_3p).setVisibility(View.GONE);
+                    else ((TextView) rootView.findViewById(R.id.content_section1_3p)).setText("￦"+MealPrice[sect][2]);
+                }
+
+                if(MealMenu[sect][3].isEmpty()){
+                    rootView.findViewById(R.id.view_section1_sub4).setVisibility(View.GONE);
+                } else{
+                    ((TextView) rootView.findViewById(R.id.content_section1_4)).setText(MealMenu[sect][3]);
+                    if(MealPrice[sect][3].isEmpty()) rootView.findViewById(R.id.content_section1_4p).setVisibility(View.GONE);
+                    else ((TextView) rootView.findViewById(R.id.content_section1_4p)).setText("￦"+MealPrice[sect][3]);
+                }
+
+                if(MealMenu[sect][4].isEmpty()){
+                    rootView.findViewById(R.id.view_section1_sub5).setVisibility(View.GONE);
+                } else{
+                    ((TextView) rootView.findViewById(R.id.content_section1_5)).setText(MealMenu[sect][4]);
+                    if(MealPrice[sect][4].isEmpty()) rootView.findViewById(R.id.content_section1_5p).setVisibility(View.GONE);
+                    else ((TextView) rootView.findViewById(R.id.content_section1_5p)).setText("￦"+MealPrice[sect][4]);
+                }
             }
 
-            if(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5] == "") rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
-            else{
-                ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
-                ((TextView) rootView.findViewById(R.id.content_section2_1p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][5]);
-                ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
-                ((TextView) rootView.findViewById(R.id.content_section2_2p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][6]);
-                if(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7] == "") rootView.findViewById(R.id.view_section2_sub3).setVisibility(View.GONE);
-                else{
-                    ((TextView) rootView.findViewById(R.id.content_section2_3)).setText(MealMenu[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
-                    ((TextView) rootView.findViewById(R.id.content_section2_3p)).setText(MealPrice[getArguments().getInt(ARG_SECTION_NUMBER) - 1][7]);
+            if(MealMenu[sect][5].isEmpty() && MealMenu[sect][6].isEmpty() && MealMenu[sect][7].isEmpty()){
+                rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
+            } else{
+                ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[sect][5]);
+                if(MealPrice[sect][5].isEmpty()) rootView.findViewById(R.id.content_section2_1p).setVisibility(View.GONE);
+                else ((TextView) rootView.findViewById(R.id.content_section2_1p)).setText("￦"+MealPrice[sect][5]);
+
+                if(MealMenu[sect][6].isEmpty()){
+                    rootView.findViewById(R.id.view_section2_sub2).setVisibility(View.GONE);
+                } else{
+                    ((TextView) rootView.findViewById(R.id.content_section2_2)).setText(MealMenu[sect][6]);
+                    if(MealPrice[sect][6].isEmpty()) rootView.findViewById(R.id.content_section2_2p).setVisibility(View.GONE);
+                    else ((TextView) rootView.findViewById(R.id.content_section2_2p)).setText("￦"+MealPrice[sect][6]);
+                }
+
+                if(MealMenu[sect][7].isEmpty()){
+                    rootView.findViewById(R.id.view_section2_sub3).setVisibility(View.GONE);
+                } else{
+                    ((TextView) rootView.findViewById(R.id.content_section2_3)).setText(MealMenu[sect][7]);
+                    if(MealPrice[sect][7].isEmpty()) rootView.findViewById(R.id.content_section2_3p).setVisibility(View.GONE);
+                    else ((TextView) rootView.findViewById(R.id.content_section2_3p)).setText("￦"+MealPrice[sect][7]);
                 }
             }
 

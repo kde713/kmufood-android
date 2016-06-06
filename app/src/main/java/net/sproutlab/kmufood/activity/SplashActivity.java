@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.datamod.Timestampdata;
-import net.sproutlab.kmufood.parsemod.IntegratedParser;
+import net.sproutlab.kmufood.parsemod.APIRequest;
 
 public class SplashActivity extends AppCompatActivity {
 
-    IntegratedParser mParser;
+    APIRequest mAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +27,16 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         Timestampdata mTSAdapter = new Timestampdata(getApplicationContext());
-        mParser = new IntegratedParser(this, mHandler);
+        mAPI = new APIRequest(this, mHandler);
 
         if(!mTSAdapter.checkKey()){
             mTSAdapter.patchKey();
+            mTSAdapter.setShowMsg(true);
             Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
-            mParser.execute("");
+            mAPI.callAPI();
         } else if(mTSAdapter.checkTS()){
             Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
-            mParser.execute("");
+            mAPI.callAPI();
         } else{
             Toast.makeText(SplashActivity.this, getString(R.string.msg_itsok), Toast.LENGTH_SHORT).show();
             mSplashHandler.sendEmptyMessageDelayed(2000, 0);
@@ -44,7 +45,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            mParser.cancel(true);
             switch(msg.what) {
                 case -1:
                     startActivity((new Intent(SplashActivity.this, FailMessageActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
