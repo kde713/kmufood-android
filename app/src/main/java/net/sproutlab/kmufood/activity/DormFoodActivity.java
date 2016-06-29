@@ -126,8 +126,11 @@ public class DormFoodActivity extends AppCompatActivity
             View rootView = inflater.inflate(R.layout.fragment_dormfood, container, false);
             int sect = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
 
+            int emptycnt = 0;
+
             if(MealMenu[sect][0].isEmpty()){
                 rootView.findViewById(R.id.card_section1).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[sect][0]);
                 if(!MealPrice[sect][0].isEmpty()) ((TextView) rootView.findViewById(R.id.content_section1p)).setText("￦"+MealPrice[sect][0]);
@@ -135,6 +138,7 @@ public class DormFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][1].isEmpty() && MealMenu[sect][2].isEmpty()){
                 rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section2_1)).setText(MealMenu[sect][1]);
                 if(!MealPrice[sect][1].isEmpty()) ((TextView) rootView.findViewById(R.id.content_section2_1p)).setText("￦"+MealPrice[sect][1]);
@@ -149,6 +153,7 @@ public class DormFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][3].isEmpty()){
                 rootView.findViewById(R.id.card_section3).setVisibility(View.GONE);
+                emptycnt++;
             } else {
                 ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[sect][3]);
                 if (!MealPrice[sect][3].isEmpty())
@@ -156,6 +161,10 @@ public class DormFoodActivity extends AppCompatActivity
             }
 
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
+
+            if(emptycnt >= 3){
+                rootView.findViewById(R.id.ndmsg).setVisibility(View.VISIBLE);
+            }
 
             return rootView;
         }

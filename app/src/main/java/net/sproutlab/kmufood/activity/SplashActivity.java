@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
 
         if(!mTSAdapter.checkKey()){
             mTSAdapter.patchKey();
-            mTSAdapter.setShowMsg(true);
+            mTSAdapter.setShowMsg(false); //Custom Message Toggle
             Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
             mAPI.callAPI();
         } else if(mTSAdapter.checkTS()){

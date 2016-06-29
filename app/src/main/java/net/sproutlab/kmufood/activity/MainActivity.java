@@ -52,19 +52,19 @@ public class MainActivity extends AppCompatActivity
             mTSAdapter.logRun();
         }
 
-        if(mTSAdapter.isShowMsg()){
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(getString(R.string.custommsg_title))
-                    .setMessage(getString(R.string.custommsg))
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int whichButton){
-                            dialog.dismiss();
-                        }
-                    });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-            mTSAdapter.setShowMsg(false);
-        }
+//        if(mTSAdapter.isShowMsg()){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setTitle(getString(R.string.custommsg_title))
+//                    .setMessage(getString(R.string.custommsg))
+//                    .setPositiveButton("확인", new DialogInterface.OnClickListener(){
+//                        public void onClick(DialogInterface dialog, int whichButton){
+//                            dialog.dismiss();
+//                        }
+//                    });
+//            AlertDialog dialog = builder.create();
+//            dialog.show();
+//            mTSAdapter.setShowMsg(false);
+//        }
     }
 
     @Override

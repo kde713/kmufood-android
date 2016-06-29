@@ -123,8 +123,11 @@ public class LawFoodActivity extends AppCompatActivity
             View rootView = inflater.inflate(R.layout.fragment_lawfood, container, false);
             int sect = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
 
+            int emptycnt = 0;
+
             if(MealMenu[sect][0].isEmpty()){
                 rootView.findViewById(R.id.card_section1).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section1)).setText(MealMenu[sect][0].replace("\\","￦"));
                 if(MealPrice[sect][0].isEmpty()) rootView.findViewById(R.id.content_section1p).setVisibility(View.GONE);
@@ -133,6 +136,7 @@ public class LawFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][1].isEmpty()){
                 rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[sect][1].replace("\\","￦"));
                 if(MealPrice[sect][1].isEmpty()) rootView.findViewById(R.id.content_section2p).setVisibility(View.GONE);
@@ -141,6 +145,7 @@ public class LawFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][2].isEmpty()){
                 rootView.findViewById(R.id.card_section3).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[sect][2].replace("\\","￦"));
                 if(MealPrice[sect][2].isEmpty()) rootView.findViewById(R.id.content_section3p).setVisibility(View.GONE);
@@ -149,6 +154,7 @@ public class LawFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][3].isEmpty()){
                 rootView.findViewById(R.id.card_section4).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section4)).setText(MealMenu[sect][3].replace("\\","￦"));
                 if(MealPrice[sect][3].isEmpty()) rootView.findViewById(R.id.content_section4p).setVisibility(View.GONE);
@@ -157,6 +163,7 @@ public class LawFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][4].isEmpty()){
                 rootView.findViewById(R.id.card_section5).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section5)).setText(MealMenu[sect][4].replace("\\","￦"));
                 if(MealPrice[sect][4].isEmpty()) rootView.findViewById(R.id.content_section5p).setVisibility(View.GONE);
@@ -165,6 +172,7 @@ public class LawFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][5].isEmpty()){
                 rootView.findViewById(R.id.card_section6).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section6)).setText(MealMenu[sect][5].replace("\\","￦"));
                 if(MealPrice[sect][5].isEmpty()) rootView.findViewById(R.id.content_section6p).setVisibility(View.GONE);
@@ -173,6 +181,7 @@ public class LawFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][6].isEmpty()){
                 rootView.findViewById(R.id.card_section7).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section7)).setText(MealMenu[sect][6].replace("\\","￦"));
                 if(MealPrice[sect][6].isEmpty()) rootView.findViewById(R.id.content_section7p).setVisibility(View.GONE);
@@ -180,6 +189,10 @@ public class LawFoodActivity extends AppCompatActivity
             }
 
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
+
+            if(emptycnt>=7){
+                rootView.findViewById(R.id.ndmsg).setVisibility(View.VISIBLE);
+            }
 
             return rootView;
         }

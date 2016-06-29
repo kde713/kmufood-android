@@ -115,3 +115,7 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
+
+# Do not upload cause of security reason
+app/google-services.json
+
