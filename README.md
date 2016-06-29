@@ -21,14 +21,20 @@ Used Library
 
 > **Android Support Library:**
 > 
-> - com.android.support:appcompat-v7:23.3.0
-> - com.android.support:design:23.3.0
-> - com.android.support:cardview-v7:23.2.1
+> - com.android.support:appcompat-v7
+> - com.android.support:design
+> - com.android.support:cardview-v7
 > 
 > .
 > **Volley:**
 > 
 > - com.android.volley
+>
+> **Firebase:**
+>
+> - com.google.firebase:firebase-core
+> - com.google.firebase:firebase-crash
+> - com.google.firebase:firebase-messaging
 
 
 
