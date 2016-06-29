@@ -20,7 +20,7 @@ public class Timestampdata {
 
     SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 
-    private final int specialKey = 201666;
+    private final int specialKey = 2010105;
 
     public Timestampdata(Context c){
         mContext = c;

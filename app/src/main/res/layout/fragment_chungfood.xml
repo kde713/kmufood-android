@@ -15,7 +15,15 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin" >
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:gravity="center" >
+
+        <TextView android:id="@+id/ndmsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/msg_nodata"
+            android:visibility="gone"
+            android:gravity="center"/>
 
         <android.support.v7.widget.CardView
             android:id="@+id/card_section1"

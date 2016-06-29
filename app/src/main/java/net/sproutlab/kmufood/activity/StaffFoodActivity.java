@@ -127,8 +127,11 @@ public class StaffFoodActivity extends AppCompatActivity
             View rootView = inflater.inflate(R.layout.fragment_stafffood, container, false);
             int sect = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
 
+            int emptycnt = 0;
+
             if(MealMenu[sect][0].isEmpty() && MealMenu[sect][1].isEmpty()){
                 rootView.findViewById(R.id.card_section1).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section1_1)).setText("[가마]\n"+MealMenu[sect][0]);
                 if(MealPrice[sect][0].isEmpty()) rootView.findViewById(R.id.content_section1_1p).setVisibility(View.GONE);
@@ -140,6 +143,7 @@ public class StaffFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][2].isEmpty()){
                 rootView.findViewById(R.id.card_section2).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section2)).setText(MealMenu[sect][2]);
                 if(MealPrice[sect][2].isEmpty()) rootView.findViewById(R.id.content_section2p).setVisibility(View.GONE);
@@ -148,6 +152,7 @@ public class StaffFoodActivity extends AppCompatActivity
 
             if(MealMenu[sect][3].isEmpty()){
                 rootView.findViewById(R.id.card_section3).setVisibility(View.GONE);
+                emptycnt++;
             } else{
                 ((TextView) rootView.findViewById(R.id.content_section3)).setText(MealMenu[sect][3]);
                 if(MealPrice[sect][3].isEmpty()) rootView.findViewById(R.id.content_section3p).setVisibility(View.GONE);
@@ -155,6 +160,10 @@ public class StaffFoodActivity extends AppCompatActivity
             }
 
             rootView.findViewById(R.id.card_scrollv).setFadingEdgeLength(150);
+
+            if(emptycnt>=3){
+                rootView.findViewById(R.id.ndmsg).setVisibility(View.VISIBLE);
+            }
 
             return rootView;
         }
