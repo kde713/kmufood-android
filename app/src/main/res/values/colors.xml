@@ -3,7 +3,8 @@
     <!-- Set: Deep Orange + Amber -->
     <color name="colorPrimary">#FF5722</color>
     <color name="colorPrimaryDark">#E64A19</color>
-    <color name="colorAccent">#FFC107</color>
-    <color name="colorDivider">#B6B6B6</color>
-    <color name="colorSubDivider">#DBDBDB</color>
+    <color name="colorAccent">#F99300</color>
+    <color name="colorDivider">#6C6C6C</color>
+    <color name="colorSubDivider">#A3A3A3</color>
+    <color name="colorText">#000000</color>
 </resources>

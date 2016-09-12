@@ -1,51 +1,67 @@
 <resources>
     <string name="app_name">국민밥</string>
 
-    <string name="custommsg_title">사과문</string>
-    <string name="custommsg">
-        오류로 인해 불편을 겪게 해드린 점, 국민밥을 사용해주시는 모든 분께 고개 숙여 사과드립니다.
-        \n이번 일을 계기로 더욱더 안정적이고 좋은 서비스를 제공해드리기 위해 앞으로 더욱 더 노력하겠습니다.
-        \n다시 한 번 죄송하다는 말씀을 드립니다.
-        \n
-        \n더 이상의 이런 일은 없어야겠지만, 혹시라도 문제나 불편한 점이 있으시면 주저하지 마시고 카카오톡 @sprout로 연락주시길 바랍니다.
-        \n새벽에 보내도, 주말에 보내도 적극적으로 수렴하겠습니다.
-    </string>
-
+    <string name="msg_loading">식단 정보를 최신 정보로 업데이트 합니다.\n업데이트에는 최대 1분 정도 소요될 수 있습니다.</string>
+    <string name="msg_itsok">이미 최신 정보가 저장되어 있습니다.\n저장된 정보를 불러옵니다.</string>
+    <string name="msg_retry">다시 정보를 불러오는 중입니다</string>
+    <string name="msg_refail">아… 다시 시도 해봤는데도 안돼요.... ㅠㅠ</string>
+    <string name="msg_resuccess">이번엔 정상적으로 불러왔어요!</string>
+    <string name="msg_preferpick">자주가는 식당을 골라주세요</string>
     <string name="msg_nodata">식단을 보여드려야 하는데… 이 날은 식단이 없다네요…\n저희한테 뭐라 하셔도 어쩔수가 없어요 ㅠㅠ</string>
 
-    <string name="nav_main">국민밥</string>
-    <string name="nav_meal1">한울식당(법학관B1)</string>
-    <string name="nav_meal2">학생식당(복지관1F)</string>
-    <string name="nav_meal3">교직원식당(복지관1F)</string>
-    <string name="nav_meal4">청향(법학관5F)</string>
-    <string name="nav_meal5">기숙사식당</string>
+    <string name="label_retry">재시도</string>
+    <string name="label_close">닫기</string>
+    <string name="label_feedback">버그신고/피드백</string>
+    <string name="label_setting">설정/정보</string>
+    <string name="label_contact_kakaotalk">카카오톡으로 연락하기</string>
+    <string name="label_contact_email">메일로 연락하기</string>
+    <string name="label_contact_facebook">Facebook으로 연락하기</string>
 
-    <string name="guide">누르거나 오른쪽으로 미세요</string>
+    <string name="dialog_foodinfo_title">%1$s 운영정보</string>
+    <string name="dialog_otherfood_title">식당을 골라주세요</string>
+    <string name="dialog_feedback_title">피드백을 주실 방법을 골라주세요</string>
 
-    <string name="main_txt1">현재식단정보</string>
-    <string name="main_txt2"># 좌측 상단 버튼으로 식당 전환이 가능해요</string>
-    <string name="main_txt3">Dongeon Kim\nHyeongon Kim</string>
+    <string name="feedback_c1">카카오톡</string>
+    <string name="feedback_c2">페이스북</string>
+    <string name="feedback_c3">이메일</string>
 
-    <string name="dorm_section1">아침</string>
-    <string name="dorm_section2">점심</string>
-    <string name="dorm_section3">저녁</string>
+    <string name="nav_prefer1">학생</string>
+    <string name="nav_prefer2">한울</string>
+    <string name="nav_prefer3">교직원</string>
+    <string name="nav_prefer4">생활관</string>
+    <string name="nav_prefer5">청향</string>
 
-    <string name="staff_section1">점심</string>
-    <string name="staff_section2">주문식</string>
-    <string name="staff_section3">저녁</string>
+    <string name="monday">월요일</string>
+    <string name="tuesday">화요일</string>
+    <string name="wednesday">수요일</string>
+    <string name="thursday">목요일</string>
+    <string name="friday">금요일</string>
+    <string name="saturday">토요일</string>
+    <string name="sunday">일요일</string>
 
-    <string name="chung_section1">주간메뉴</string>
-    <string name="chung_section2">고정메뉴</string>
+    <string name="stu_title">학생식당</string>
+    <string name="stu_subtitle">(종합복지관 1F)</string>
 
-    <string name='stu_section1'>아침</string>
-    <string name='stu_section2'>위프</string>
-    <string name='stu_section3'>한아름</string>
-    <string name='stu_section4'>뽀글뽀글</string>
-    <string name='stu_section5'>뽀까뽀까</string>
-    <string name='stu_section6'>누들누들</string>
-    <string name='stu_section7'>카페테리아</string>
-    <string name='stu_section8'>저녁</string>
-    <string name="stu_section9">즉석메뉴</string>
+    <string name='stu_section1'>착한아침</string>
+    <string name='stu_section2'>가마</string>
+    <string name='stu_section3'>누들송</string>
+    <string name="stu_section3_1">[면]</string>
+    <string name="stu_section3_2">[카페테리아]</string>
+    <string name='stu_section4'>인터셰프</string>
+    <string name='stu_section5'>데일리밥</string>
+    <string name='stu_section6'>가마</string>
+    <string name='stu_section7'>인터셰프</string>
+    <string name='stu_section8'>데일리밥</string>
+    <string name="stu_section9">차이웨이 상시</string>
+    <string name="stu_section10">차이웨이 특화</string>
+
+    <string name="stu_subsection0">아침</string>
+    <string name="stu_subsection1">점심</string>
+    <string name="stu_subsection2">저녁</string>
+    <string name="stu_subsection3">스페셜</string>
+
+    <string name="law_title">한울식당</string>
+    <string name="law_subtitle">(법학관 B1)</string>
 
     <string name="law_section1">바로바로1</string>
     <string name="law_section2">바로바로2</string>
@@ -55,27 +71,81 @@
     <string name="law_section6">석화랑</string>
     <string name="law_section7">석화랑(아침)</string>
 
-    <string name='wd0'>월</string>
-    <string name='wd1'>화</string>
-    <string name='wd2'>수</string>
-    <string name='wd3'>목</string>
-    <string name='wd4'>금</string>
-    <string name='wd5'>토</string>
-    <string name='wd6'>일</string>
+    <string name="staff_title">교직원식당</string>
+    <string name="staff_subtitle">(종합복지관 1F)</string>
 
-    <string name="msg_loading">식단 정보를 최신 정보로 업데이트 합니다.</string>
-    <string name="msg_itsok">이미 최신 정보가 저장되어 있습니다.\n저장된 정보를 불러옵니다.</string>
-    <string name="msg_retry">다시 정보를 불러오는 중입니다</string>
-    <string name="failtxt1">!!! 이런, 식단 정보를 불러오는데 실패했어요 !!!</string>
-    <string name="failtxt2">1. 혹시 인터넷에 연결되어 있나요?
-        \n2. 어라…? 인터넷에 연결해도 안되나요?
-        \n3. 어플리케이션 재설치 해보셨나요?
-        \n4. 헐… 그래도 안되나요?
-        \n5. 카카오톡 @sprout 으로 연락주세요!
+    <string name="staff_section1">키친1</string>
+    <string name="staff_section2">키친2</string>
+    <string name="staff_section3">주문식</string>
+    <string name="staff_section4">석식</string>
+
+    <string name="dorm_title">생활관식당</string>
+    <string name="dorm_subtitle">(교내생활관 A동 B1)</string>
+
+    <string name="dorm_section1">아침</string>
+    <string name="dorm_section2">점심</string>
+    <string name="dorm_section3">저녁</string>
+
+    <string name="chung_title">청향</string>
+    <string name="chung_subtitle">(법학관 5F)</string>
+
+    <string name="chung_section1">메뉴1</string>
+    <string name="chung_section2">메뉴2</string>
+    <string name="chung_section3">메뉴3</string>
+    <string name="chung_section4">메뉴4</string>
+    <string name="chung_section5">메뉴5</string>
+    <string name="chung_section6">메뉴6</string>
+    <string name="chung_section7">메뉴7</string>
+
+    <string name="setting_title">설정/정보</string>
+    <string name="setting_prefer">선호 식당</string>
+    <string name="setting_dataver">식단 데이터</string>
+    <string name="setting_dataver_msg_ok">식단 데이터가 최신입니다.</string>
+    <string name="setting_dataver_msg_old">식단 데이터가 오래되었습니다. 앱을 재시작하여 데이터를 업데이트하세요.</string>
+    <string name="setting_credit">개발팀</string>
+    <string name="setting_credit_msg">
+        Sprout Lab 국민밥팀\n
+        \n개발,총괄: 김동언
+        \n디자인: 김현곤
     </string>
-    <string name="msg_refail">아… 다시 시도 해봤는데도 안돼요.... ㅠㅠ</string>
-    <string name="msg_resuccess">이번엔 정상적으로 불러왔어요!</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <string name="temp_foodinfo_stufood">
+        * 원산지 일괄 표기사항 - 밥 (쌀:국내산)/ 배추김치(배추:국내산/고춧가루:중국산)\n
+        * 학기중 이용안내\n
+        -조식: 평일 8시부터 / 주말 및 공휴일 8시30분부터\n
+        -중식:\n
+        가마,인터쉐프 코너 10시부터\n
+        누들송, 데일리밥 코너 11시부터\n
+        ->카페테리아(도시락옵션코너) 11:30~ 도시락한정판매!!\n
+        13시 50분부터 ~ 17시까지는 2코너로 운영됩니다. 양해 부탁드립니다.\n
+        -석식 : 학기중 17시~ 19시까지\n
+        -토요일 &amp; 일요일 &amp; 공휴일 8시 30분~ 15시 00분 까지 운영\n
+        * 본 메뉴와 원산지는 당일 수급사정에 따라 달라질 수 있습니다.\n
+        * 예약식문의는 사무실로 방문예약시 가능합니다.(02-910-4959)
+    </string>
+    <string name="temp_foodinfo_lawfood">
+        *한울식당에서는 배추김치(배추,고춧가루:국내산), \n
+        볶음밥∙비빔밥∙국수∙죽 김치(배추:국내산,고춧가루:중국산), 쌀(국내산)을 사용합니다.\n
+        **상기 메뉴는 물류수급 및 식수변동에 따라 변경될 수 있습니다.\n
+        ***운영시간은 학기중 8시30분~19시 입니다.(조식 8시30분~10시30분, 중석식10시30분~19시)
+    </string>
+    <string name="temp_foodinfo_stafffood">
+        *쌀:국내산/배추김치(배추:국내산,고추가루:중국산)\n
+        *상단의 메뉴 및 원산지는 식재 수급상황에 따라 변경 될 수 있습니다.\n
+        소중한 의견 문의(910-4959)mj7151.kim@ourhome.co.kr\n
+        *운영시간안내 : 중식(11:30~14:00) 석식(17:00~18:30)
+    </string>
+    <string name="temp_foodinfo_dormfood">
+        * 쌀:국내산 / 배추김치(배추:국내산,고춧가루:중국산)\n
+        * 상기 메뉴는 식재 수급상황에 따라 변경될 수 있습니다.\n
+        * 운영시간 : 조식 07:30~09:00 중식 11:50~13:00/석식 17:30~19:00
+    </string>
+    <string name="temp_foodinfo_chungfood">
+        쌀:국내산,배추김치:배추-국내산,고춧가루-중국산\n
+        *상기메뉴는 식재수급상황에 따라 변경 될 수 있습니다.
+    </string>
+
 </resources>

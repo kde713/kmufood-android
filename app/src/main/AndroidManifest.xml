@@ -9,7 +9,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".KMUFoodApplication">
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
@@ -22,29 +23,26 @@
         </activity>
 
         <activity
-            android:name=".activity.LawFoodActivity"
-            android:label="@string/nav_meal1"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.StuFoodActivity"
-            android:label="@string/nav_meal2"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.StaffFoodActivity"
-            android:label="@string/nav_meal3"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.ChungFoodActivity"
-            android:label="@string/nav_meal4"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.DormFoodActivity"
-            android:label="@string/nav_meal5"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.FailMessageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.StuFoodActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.LawFoodActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.StaffFoodActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.DormFoodActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.ChungFoodActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activity.SettingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

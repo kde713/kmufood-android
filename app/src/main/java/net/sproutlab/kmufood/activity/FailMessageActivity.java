@@ -4,22 +4,36 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import net.sproutlab.kmufood.KMUFoodApplication;
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.datamod.Timestampdata;
-import net.sproutlab.kmufood.parsemod.APIRequest;
+import net.sproutlab.kmufood.api.APIGlobal;
+import net.sproutlab.kmufood.api.MenuJSONParse;
+import net.sproutlab.kmufood.data.Prefdata;
+import net.sproutlab.kmufood.data.chungFooddata;
+import net.sproutlab.kmufood.data.dormFooddata;
+import net.sproutlab.kmufood.data.lawFooddata;
+import net.sproutlab.kmufood.data.staffFooddata;
+import net.sproutlab.kmufood.data.stuFooddata;
+import net.sproutlab.kmufood.dialog.FeedbackDialog;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FailMessageActivity extends AppCompatActivity {
 
     ProgressDialog loadingDiag;
-    Timestampdata mTSAdapter;
+    Prefdata mTSAdapter;
+
+    KMUFoodApplication kmuFoodApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,33 +44,80 @@ public class FailMessageActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_fail_message);
 
-        mTSAdapter = new Timestampdata(getApplicationContext());
+        kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
+
+        mTSAdapter = new Prefdata(getApplicationContext());
 
         loadingDiag = new ProgressDialog(FailMessageActivity.this);
         loadingDiag.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         loadingDiag.setMessage(getString(R.string.msg_retry));
 
         findViewById(R.id.btn_retry).setOnClickListener(mListner);
-        findViewById(R.id.btn_exit).setOnClickListener(mListner);
+        findViewById(R.id.btn_close).setOnClickListener(mListner);
+        findViewById(R.id.btn_feedback).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                (new FeedbackDialog(FailMessageActivity.this)).show();
+            }
+        });
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         loadingDiag.dismiss();
     }
 
 
-    ImageButton.OnClickListener mListner = new ImageButton.OnClickListener(){
+    ImageButton.OnClickListener mListner = new ImageButton.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.btn_retry:
                     loadingDiag.show();
-                    (new APIRequest(getApplicationContext(), mHandler)).callAPI();
+                    Call<String> call = APIGlobal.callInterface.downloadMenu();
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.isSuccessful()) {
+                                MenuJSONParse jsonparse = new MenuJSONParse(response.body());
+                                lawFooddata mLawfood = new lawFooddata(FailMessageActivity.this);
+                                mLawfood.saveData(jsonparse.runParse("lawfood"));
+                                stuFooddata mStufood = new stuFooddata(FailMessageActivity.this);
+                                mStufood.saveData(jsonparse.runParse("stufood"));
+                                staffFooddata mStafffood = new staffFooddata(FailMessageActivity.this);
+                                mStafffood.saveData(jsonparse.runParse("stafffood"));
+                                chungFooddata mChungfood = new chungFooddata(FailMessageActivity.this);
+                                mChungfood.saveData(jsonparse.runParse("chungfood"));
+                                dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
+                                mDormfood.saveData(jsonparse.runParse("dormfood"));
+                                Prefdata mTSData = new Prefdata(FailMessageActivity.this);
+                                mTSData.updateTS();
+                                mHandler.sendEmptyMessage(1);
+                                Message msg = mHandler.obtainMessage();
+                                msg.what = 2;
+                                mHandler.sendMessage(msg);
+                            } else {
+                                Log.d("MenuDownload", "HTTP " + response.code());
+                                mHandler.sendEmptyMessage(1);
+                                Message msg = mHandler.obtainMessage();
+                                msg.what = -1;
+                                mHandler.sendMessage(msg);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            t.printStackTrace();
+                            mHandler.sendEmptyMessage(1);
+                            Message msg = mHandler.obtainMessage();
+                            msg.what = -1;
+                            mHandler.sendMessage(msg);
+                        }
+                    });
                     break;
-                case R.id.btn_exit:
+                case R.id.btn_close:
                     finishAffinity();
                     break;
             }
@@ -65,15 +126,16 @@ public class FailMessageActivity extends AppCompatActivity {
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            switch(msg.what) {
+            switch (msg.what) {
                 case -1:
                     loadingDiag.dismiss();
-                    Snackbar.make(findViewById(R.id.failview_container), getString(R.string.msg_refail), Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(FailMessageActivity.this, getString(R.string.msg_refail), Toast.LENGTH_LONG).show();
                     break;
                 case 2:
                     loadingDiag.dismiss();
-                    if(!mTSAdapter.checkKey()) mTSAdapter.patchKey();
+                    if (!mTSAdapter.checkKey()) mTSAdapter.patchKey();
                     Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
+                    kmuFoodApplication.setUpdateChecked(true);
                     finish();
                     break;
             }
