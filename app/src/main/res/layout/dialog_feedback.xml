@@ -54,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/feedback_c1"
+                android:textSize="10sp"
                 android:textColor="@color/colorAccent" />
 
         </LinearLayout>
@@ -78,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/feedback_c2"
+                android:textSize="10sp"
                 android:textColor="@color/colorAccent" />
 
         </LinearLayout>
@@ -102,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/feedback_c3"
+                android:textSize="10sp"
                 android:textColor="@color/colorAccent" />
 
         </LinearLayout>
