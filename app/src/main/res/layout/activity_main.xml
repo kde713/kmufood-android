@@ -61,6 +61,7 @@
                         android:layout_marginTop="4dp"
                         android:text="@string/nav_prefer1"
                         android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
@@ -86,6 +87,7 @@
                         android:layout_marginTop="4dp"
                         android:text="@string/nav_prefer2"
                         android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
@@ -111,6 +113,7 @@
                         android:layout_marginTop="4dp"
                         android:text="@string/nav_prefer3"
                         android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
@@ -136,6 +139,7 @@
                         android:layout_marginTop="4dp"
                         android:text="@string/nav_prefer4"
                         android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
@@ -161,6 +165,7 @@
                         android:layout_marginTop="4dp"
                         android:text="@string/nav_prefer5"
                         android:textSize="10sp"
+                        android:textStyle="bold"
                         android:textColor="@color/colorAccent" />
 
                 </LinearLayout>
