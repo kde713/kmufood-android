@@ -21,10 +21,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
+        mPrefAdapter = new Prefdata(getApplicationContext());
 
         startActivity((new Intent(this, SplashActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
-
-        mPrefAdapter = new Prefdata(getApplicationContext());
         findViewById(R.id.btn_feedback).setOnClickListener(this);
     }
 
