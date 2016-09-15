@@ -55,12 +55,6 @@ public class LawFoodActivity extends AppCompatActivity implements View.OnClickLi
 
         Log.d("Preferfood???", mPrefAdapter.getPreferfood());
 
-        if (mPrefAdapter.getPreferfood() == "law") {
-            btn_favorite.setImageResource(R.drawable.ic_star_on);
-            isFavorite = true;
-            Log.d("PreferFood", "Action Complete");
-        }
-
         mViewPager.setAdapter(mAdapter);
         mViewPager.setPageTransformer(true, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);

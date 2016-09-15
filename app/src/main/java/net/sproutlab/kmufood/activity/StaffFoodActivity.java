@@ -52,11 +52,6 @@ public class StaffFoodActivity extends AppCompatActivity implements View.OnClick
         if (curindex == 1 || curindex == 7) curindex = 0;
         else curindex -= 2;
 
-        if (mPrefAdapter.getPreferfood() == "staff") {
-            btn_favorite.setImageResource(R.drawable.ic_star_on);
-            isFavorite = true;
-        }
-
         mViewPager.setAdapter(mAdapter);
         mViewPager.setPageTransformer(true, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);

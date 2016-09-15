@@ -43,11 +43,6 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
         if (curindex == 1) curindex = 6;
         else curindex -= 2;
 
-        if (mPrefAdapter.getPreferfood() == "stu") {
-            btn_favorite.setImageResource(R.drawable.ic_star_on);
-            isFavorite = true;
-        }
-
         mViewPager.setAdapter(mAdapter);
         mViewPager.setPageTransformer(true, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);

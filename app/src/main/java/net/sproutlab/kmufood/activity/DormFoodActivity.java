@@ -38,12 +38,6 @@ public class DormFoodActivity extends AppCompatActivity implements View.OnClickL
         mAdapter = new DormlistAdapter(this);
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
 
-
-        if (mPrefAdapter.getPreferfood() == "dorm") {
-            btn_favorite.setImageResource(R.drawable.ic_star_on);
-            isFavorite = true;
-        }
-
         Calendar c = Calendar.getInstance();
         int curindex = c.get(Calendar.DAY_OF_WEEK);
         if (curindex == 1) curindex = 6;
