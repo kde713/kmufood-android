@@ -9,15 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.data.Prefdata;
 import net.sproutlab.kmufood.dialog.FeedbackDialog;
 import net.sproutlab.kmufood.dialog.UpdatelogDialog;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import de.psdev.licensesdialog.LicensesDialog;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Prefdata mPrefAdapter;
+    PrefHelper prefHelper;
 
     TextView txt_prefer;
     TextView txt_dataver_date;
@@ -32,7 +32,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         startActivity((new Intent(this, SplashActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
 
-        mPrefAdapter = new Prefdata(getApplicationContext());
+        prefHelper = new PrefHelper(getApplicationContext());
 
         findViewById(R.id.btn_feedback).setOnClickListener(this);
         findViewById(R.id.btn_updatelog).setOnClickListener(this);
@@ -42,7 +42,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         txt_dataver_date = (TextView) findViewById(R.id.setting_dataver_label_date);
         txt_dataver_msg = (TextView) findViewById(R.id.setting_dataver_label_msg);
 
-        switch (mPrefAdapter.getPreferfood()) {
+        switch (prefHelper.getPreferFood()) {
             case "stu":
                 txt_prefer.setText(getString(R.string.stu_title));
                 break;
@@ -59,8 +59,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 txt_prefer.setText(getString(R.string.chung_title));
                 break;
         }
-        txt_dataver_date.setText(mPrefAdapter.getTS());
-        if (mPrefAdapter.checkTS())
+        txt_dataver_date.setText(prefHelper.getLastUpdate());
+        if (prefHelper.needUpdate())
             txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_old));
         else txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_ok));
 
@@ -77,7 +77,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onResume() {
         super.onResume();
-        switch (mPrefAdapter.getPreferfood()) {
+        switch (prefHelper.getPreferFood()) {
             case "stu":
                 txt_prefer.setText(getString(R.string.stu_title));
                 break;
@@ -94,8 +94,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 txt_prefer.setText(getString(R.string.chung_title));
                 break;
         }
-        txt_dataver_date.setText(mPrefAdapter.getTS());
-        if (mPrefAdapter.checkTS())
+        txt_dataver_date.setText(prefHelper.getLastUpdate());
+        if (prefHelper.needUpdate())
             txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_old));
         else txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_ok));
     }

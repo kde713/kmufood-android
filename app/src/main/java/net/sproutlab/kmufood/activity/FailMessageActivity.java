@@ -16,13 +16,13 @@ import net.sproutlab.kmufood.KMUFoodApplication;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.APIGlobal;
 import net.sproutlab.kmufood.api.MenuJSONParse;
-import net.sproutlab.kmufood.data.Prefdata;
 import net.sproutlab.kmufood.data.chungFooddata;
 import net.sproutlab.kmufood.data.dormFooddata;
 import net.sproutlab.kmufood.data.lawFooddata;
 import net.sproutlab.kmufood.data.staffFooddata;
 import net.sproutlab.kmufood.data.stuFooddata;
 import net.sproutlab.kmufood.dialog.FeedbackDialog;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +31,7 @@ import retrofit2.Response;
 public class FailMessageActivity extends AppCompatActivity {
 
     ProgressDialog loadingDiag;
-    Prefdata mTSAdapter;
+    PrefHelper prefHelper;
 
     KMUFoodApplication kmuFoodApplication;
 
@@ -46,7 +46,7 @@ public class FailMessageActivity extends AppCompatActivity {
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
 
-        mTSAdapter = new Prefdata(getApplicationContext());
+        prefHelper = new PrefHelper(getApplicationContext());
 
         loadingDiag = new ProgressDialog(FailMessageActivity.this);
         loadingDiag.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -92,8 +92,7 @@ public class FailMessageActivity extends AppCompatActivity {
                                 mChungfood.saveData(jsonparse.runParse("chungfood"));
                                 dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
                                 mDormfood.saveData(jsonparse.runParse("dormfood"));
-                                Prefdata mTSData = new Prefdata(FailMessageActivity.this);
-                                mTSData.updateTS();
+                                prefHelper.updateLastUpdate();
                                 mHandler.sendEmptyMessage(1);
                                 Message msg = mHandler.obtainMessage();
                                 msg.what = 2;
@@ -133,7 +132,7 @@ public class FailMessageActivity extends AppCompatActivity {
                     break;
                 case 2:
                     loadingDiag.dismiss();
-                    if (!mTSAdapter.checkKey()) mTSAdapter.patchKey();
+                    if (!prefHelper.checkUniqueKey()) prefHelper.updateKey();
                     Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
                     kmuFoodApplication.setUpdateChecked(true);
                     finish();

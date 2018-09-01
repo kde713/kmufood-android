@@ -10,15 +10,17 @@ import android.widget.ImageButton;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
 import net.sproutlab.kmufood.adapter.StulistAdapter;
-import net.sproutlab.kmufood.data.Prefdata;
 import net.sproutlab.kmufood.dialog.OtherFoodDialog;
 import net.sproutlab.kmufood.dialog.OtherFoodInterface;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import java.util.Calendar;
 
 public class StuFoodActivity extends AppCompatActivity implements View.OnClickListener, OtherFoodInterface {
 
-    private Prefdata mPrefAdapter;
+    private final String FOOD_CODE = "stu";
+
+    private PrefHelper prefHelper;
     private ImageButton btn_favorite;
     private boolean isFavorite = false;
 
@@ -34,7 +36,7 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
         btn_favorite = (ImageButton) findViewById(R.id.btn_favorite);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        mPrefAdapter = new Prefdata(this);
+        prefHelper = new PrefHelper(this);
         mAdapter = new StulistAdapter(this);
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
 
@@ -48,16 +50,25 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setCurrentItem(curindex);
 
+        updatePreferIndicator();
+
         btn_favorite.setOnClickListener(this);
         findViewById(R.id.btn_otherfood).setOnClickListener(this);
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-        if (mPrefAdapter.getPreferfood() == "stu") {
+        updatePreferIndicator();
+    }
+
+    private void updatePreferIndicator() {
+        if (prefHelper.getPreferFood().equals(FOOD_CODE)) {
             btn_favorite.setImageResource(R.drawable.ic_star_on);
             isFavorite = true;
+        } else {
+            btn_favorite.setImageResource(R.drawable.ic_star_off);
+            isFavorite = false;
         }
     }
 
@@ -66,7 +77,7 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.btn_favorite:
                 if (!isFavorite) {
-                    mPrefAdapter.setPreferfood("stu");
+                    prefHelper.setPreferFood(FOOD_CODE);
                     btn_favorite.setImageResource(R.drawable.ic_star_on);
                     isFavorite = true;
                 }

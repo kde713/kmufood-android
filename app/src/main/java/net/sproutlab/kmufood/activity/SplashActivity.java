@@ -12,8 +12,7 @@ import net.sproutlab.kmufood.KMUFoodApplication;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.APIGlobal;
 import net.sproutlab.kmufood.api.models.ApiResponse;
-import net.sproutlab.kmufood.api.models.Sikdan;
-import net.sproutlab.kmufood.data.Prefdata;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,10 +33,10 @@ public class SplashActivity extends AppCompatActivity {
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
 
-        Prefdata mTSAdapter = new Prefdata(getApplicationContext());
+        PrefHelper prefHelper = new PrefHelper(getApplicationContext());
 
-        if (!mTSAdapter.checkKey()) {
-//            mTSAdapter.patchKey();
+        if (!prefHelper.checkUniqueKey()) {
+//            prefHelper.patchKey();
 //            Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
 //            Call<ApiResponse> call = APIGlobal.callInterface.coopApi("2018-09-01", "2018-09-05");
 //            call.enqueue(new Callback<ApiResponse>() {
@@ -99,7 +98,7 @@ public class SplashActivity extends AppCompatActivity {
 //                    mHandler.sendMessage(msg);
 //                }
 //            });
-        } else if (mTSAdapter.checkTS()) {
+        } else if (prefHelper.needUpdate()) {
 //            Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
 //            Call<String> call = APIGlobal.callInterface.downloadMenu();
 //            call.enqueue(new Callback<String>() {
@@ -142,7 +141,7 @@ public class SplashActivity extends AppCompatActivity {
 //                }
 //            });
         } else {
-            Toast.makeText(SplashActivity.this, getString(R.string.msg_itsok), Toast.LENGTH_SHORT).show();\
+            Toast.makeText(SplashActivity.this, getString(R.string.msg_itsok), Toast.LENGTH_SHORT).show();
             kmuFoodApplication.setUpdateChecked(true);
             finish();
         }

@@ -10,15 +10,17 @@ import android.widget.ImageButton;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.adapter.DormlistAdapter;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
-import net.sproutlab.kmufood.data.Prefdata;
 import net.sproutlab.kmufood.dialog.OtherFoodDialog;
 import net.sproutlab.kmufood.dialog.OtherFoodInterface;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import java.util.Calendar;
 
 public class DormFoodActivity extends AppCompatActivity implements View.OnClickListener, OtherFoodInterface {
 
-    private Prefdata mPrefAdapter;
+    private final String FOOD_CODE = "dorm";
+
+    private PrefHelper prefHelper;
     private ImageButton btn_favorite;
     private boolean isFavorite = false;
 
@@ -34,7 +36,7 @@ public class DormFoodActivity extends AppCompatActivity implements View.OnClickL
         btn_favorite = (ImageButton) findViewById(R.id.btn_favorite);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        mPrefAdapter = new Prefdata(this);
+        prefHelper = new PrefHelper(this);
         mAdapter = new DormlistAdapter(this);
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
 
@@ -48,8 +50,26 @@ public class DormFoodActivity extends AppCompatActivity implements View.OnClickL
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setCurrentItem(curindex);
 
+        updatePreferIndicator();
+
         findViewById(R.id.btn_otherfood).setOnClickListener(this);
         btn_favorite.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePreferIndicator();
+    }
+
+    private void updatePreferIndicator() {
+        if (prefHelper.getPreferFood().equals(FOOD_CODE)) {
+            btn_favorite.setImageResource(R.drawable.ic_star_on);
+            isFavorite = true;
+        } else {
+            btn_favorite.setImageResource(R.drawable.ic_star_off);
+            isFavorite = false;
+        }
     }
 
     @Override
@@ -57,7 +77,7 @@ public class DormFoodActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.btn_favorite:
                 if (!isFavorite) {
-                    mPrefAdapter.setPreferfood("dorm");
+                    prefHelper.setPreferFood(FOOD_CODE);
                     btn_favorite.setImageResource(R.drawable.ic_star_on);
                     isFavorite = true;
                 }
