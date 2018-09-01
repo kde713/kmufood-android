@@ -10,7 +10,7 @@ public class Lawfood {
     public Sikdan baro2;
 
     @SerializedName("면이랑")
-    public Sikdan nood;
+    public Sikdan noodle;
 
     @SerializedName("밥이랑 하나")
     public Sikdan bap1;
