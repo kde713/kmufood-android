@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class MenuDataHelper {
 
+    private final String PREF_NAME = "net.sproutlab.kmufood";
+
     private final String[] dayKeys = {"mon", "tue", "wed", "thu", "fri", "sat"};
     private final String[] chungKeys = {"1", "2", "3", "4", "5", "6", "7"};
     private final String[] dormKeys = {"mor", "lun", "lun2", "din"};
@@ -26,11 +28,17 @@ public class MenuDataHelper {
 
     private Date startDate;
     private SharedPreferences preferences;
+    private boolean isReadonly;
 
     public MenuDataHelper(Context c, Date startDate) {
-        String PREF_NAME = "net.sproutlab.kmufood";
         this.preferences = c.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
         this.startDate = startDate;
+        this.isReadonly = false;
+    }
+
+    public MenuDataHelper(Context c) {
+        this.preferences = c.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
+        this.isReadonly = true;
     }
 
     private void saveMenuData(
@@ -50,22 +58,24 @@ public class MenuDataHelper {
     }
 
     public void saveChungFood(Map<String, ChungFood> chungFoodMap) {
-        SharedPreferences.Editor prefEditor = preferences.edit();
-        Date loopDate = (Date) startDate.clone();
-        for (String dayKey : dayKeys) {
-            ChungFood currentFood = chungFoodMap.get(DateUtil.getStringFromDate(loopDate));
+        if (!this.isReadonly) {
+            SharedPreferences.Editor prefEditor = preferences.edit();
+            Date loopDate = (Date) startDate.clone();
+            for (String dayKey : dayKeys) {
+                ChungFood currentFood = chungFoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-            saveMenuData(prefEditor, "chung", dayKey, chungKeys[0], currentFood.menu1);
-            saveMenuData(prefEditor, "chung", dayKey, chungKeys[1], currentFood.menu2);
-            saveMenuData(prefEditor, "chung", dayKey, chungKeys[2], currentFood.menu3);
-            saveMenuData(prefEditor, "chung", dayKey, chungKeys[3], currentFood.menu4);
-            saveMenuData(prefEditor, "chung", dayKey, chungKeys[4], currentFood.menu5);
-            saveMenuData(prefEditor, "chung", dayKey, chungKeys[5], currentFood.menu6);
-            saveMenuData(prefEditor, "chung", dayKey, chungKeys[6], currentFood.menu7);
+                saveMenuData(prefEditor, "chung", dayKey, chungKeys[0], currentFood.menu1);
+                saveMenuData(prefEditor, "chung", dayKey, chungKeys[1], currentFood.menu2);
+                saveMenuData(prefEditor, "chung", dayKey, chungKeys[2], currentFood.menu3);
+                saveMenuData(prefEditor, "chung", dayKey, chungKeys[3], currentFood.menu4);
+                saveMenuData(prefEditor, "chung", dayKey, chungKeys[4], currentFood.menu5);
+                saveMenuData(prefEditor, "chung", dayKey, chungKeys[5], currentFood.menu6);
+                saveMenuData(prefEditor, "chung", dayKey, chungKeys[6], currentFood.menu7);
 
-            loopDate = DateUtil.addDaysToDate(loopDate, 1);
+                loopDate = DateUtil.addDaysToDate(loopDate, 1);
+            }
+            prefEditor.commit();
         }
-        prefEditor.commit();
     }
 
     public Sikdan[][] loadChungFood() {
@@ -78,25 +88,23 @@ public class MenuDataHelper {
         return chungFood;
     }
 
-    public int getChungFoodCount() {
-        return chungKeys.length;
-    }
-
     public void saveDormFood(Map<String, DormFood1> dormFoodMap1, Map<String, DormFood2> dormFoodMap2) {
-        SharedPreferences.Editor prefEditor = preferences.edit();
-        Date loopDate = (Date) startDate.clone();
-        for (String dayKey : dayKeys) {
-            DormFood1 currentFood1 = dormFoodMap1.get(DateUtil.getStringFromDate(loopDate));
-            DormFood2 currentFood2 = dormFoodMap2.get(DateUtil.getStringFromDate(loopDate));
+        if (!this.isReadonly) {
+            SharedPreferences.Editor prefEditor = preferences.edit();
+            Date loopDate = (Date) startDate.clone();
+            for (String dayKey : dayKeys) {
+                DormFood1 currentFood1 = dormFoodMap1.get(DateUtil.getStringFromDate(loopDate));
+                DormFood2 currentFood2 = dormFoodMap2.get(DateUtil.getStringFromDate(loopDate));
 
-            saveMenuData(prefEditor, "dorm", dayKey, dormKeys[0], currentFood2.morning);
-            saveMenuData(prefEditor, "dorm", dayKey, dormKeys[1], currentFood2.lunch);
-            saveMenuData(prefEditor, "dorm", dayKey, dormKeys[2], currentFood1.lunch);
-            saveMenuData(prefEditor, "dorm", dayKey, dormKeys[3], currentFood2.dinner);
+                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[0], currentFood2.morning);
+                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[1], currentFood2.lunch);
+                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[2], currentFood1.lunch);
+                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[3], currentFood2.dinner);
 
-            loopDate = DateUtil.addDaysToDate(loopDate, 1);
+                loopDate = DateUtil.addDaysToDate(loopDate, 1);
+            }
+            prefEditor.commit();
         }
-        prefEditor.commit();
     }
 
     public Sikdan[][] loadDormFood() {
@@ -109,27 +117,25 @@ public class MenuDataHelper {
         return dormFood;
     }
 
-    public int getDormFoodCount() {
-        return dormKeys.length;
-    }
-
     public void saveLawFood(Map<String, Lawfood> lawfoodMap) {
-        SharedPreferences.Editor prefEditor = preferences.edit();
-        Date loopDate = (Date) startDate.clone();
-        for (String dayKey : dayKeys) {
-            Lawfood currentFood = lawfoodMap.get(DateUtil.getStringFromDate(loopDate));
+        if (!this.isReadonly) {
+            SharedPreferences.Editor prefEditor = preferences.edit();
+            Date loopDate = (Date) startDate.clone();
+            for (String dayKey : dayKeys) {
+                Lawfood currentFood = lawfoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-            saveMenuData(prefEditor, "law", dayKey, lawKeys[0], currentFood.baro1);
-            saveMenuData(prefEditor, "law", dayKey, lawKeys[1], currentFood.baro2);
-            saveMenuData(prefEditor, "law", dayKey, lawKeys[2], currentFood.noodle);
-            saveMenuData(prefEditor, "law", dayKey, lawKeys[3], currentFood.bap1);
-            saveMenuData(prefEditor, "law", dayKey, lawKeys[4], currentFood.bap2);
-            saveMenuData(prefEditor, "law", dayKey, lawKeys[5], currentFood.fire1);
-            saveMenuData(prefEditor, "law", dayKey, lawKeys[6], currentFood.fire2);
+                saveMenuData(prefEditor, "law", dayKey, lawKeys[0], currentFood.baro1);
+                saveMenuData(prefEditor, "law", dayKey, lawKeys[1], currentFood.baro2);
+                saveMenuData(prefEditor, "law", dayKey, lawKeys[2], currentFood.noodle);
+                saveMenuData(prefEditor, "law", dayKey, lawKeys[3], currentFood.bap1);
+                saveMenuData(prefEditor, "law", dayKey, lawKeys[4], currentFood.bap2);
+                saveMenuData(prefEditor, "law", dayKey, lawKeys[5], currentFood.fire1);
+                saveMenuData(prefEditor, "law", dayKey, lawKeys[6], currentFood.fire2);
 
-            loopDate = DateUtil.addDaysToDate(loopDate, 1);
+                loopDate = DateUtil.addDaysToDate(loopDate, 1);
+            }
+            prefEditor.commit();
         }
-        prefEditor.commit();
     }
 
     public Sikdan[][] loadLawFood() {
@@ -142,24 +148,22 @@ public class MenuDataHelper {
         return lawFood;
     }
 
-    public int getLawFoodCount() {
-        return lawKeys.length;
-    }
-
     public void saveStaffFood(Map<String, StaffFood> staffFoodMap) {
-        SharedPreferences.Editor prefEditor = preferences.edit();
-        Date loopDate = (Date) startDate.clone();
-        for (String dayKey : dayKeys) {
-            StaffFood currentFood = staffFoodMap.get(DateUtil.getStringFromDate(loopDate));
+        if (!this.isReadonly) {
+            SharedPreferences.Editor prefEditor = preferences.edit();
+            Date loopDate = (Date) startDate.clone();
+            for (String dayKey : dayKeys) {
+                StaffFood currentFood = staffFoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-            saveMenuData(prefEditor, "staff", dayKey, staffKeys[0], currentFood.kitchen1);
-            saveMenuData(prefEditor, "staff", dayKey, staffKeys[1], currentFood.kitchen1);
-            saveMenuData(prefEditor, "staff", dayKey, staffKeys[2], currentFood.joomoon);
-            saveMenuData(prefEditor, "staff", dayKey, staffKeys[3], currentFood.dinner);
+                saveMenuData(prefEditor, "staff", dayKey, staffKeys[0], currentFood.kitchen1);
+                saveMenuData(prefEditor, "staff", dayKey, staffKeys[1], currentFood.kitchen1);
+                saveMenuData(prefEditor, "staff", dayKey, staffKeys[2], currentFood.joomoon);
+                saveMenuData(prefEditor, "staff", dayKey, staffKeys[3], currentFood.dinner);
 
-            loopDate = DateUtil.addDaysToDate(loopDate, 1);
+                loopDate = DateUtil.addDaysToDate(loopDate, 1);
+            }
+            prefEditor.commit();
         }
-        prefEditor.commit();
     }
 
     public Sikdan[][] loadStaffFood() {
@@ -172,31 +176,29 @@ public class MenuDataHelper {
         return staffFood;
     }
 
-    public int getStaffFoodCount() {
-        return staffKeys.length;
-    }
-
     public void saveStuFood(Map<String, StuFood> stuFoodMap) {
-        SharedPreferences.Editor prefEditor = preferences.edit();
-        Date loopDate = (Date) startDate.clone();
-        for (String dayKey : dayKeys) {
-            StuFood currentFood = stuFoodMap.get(DateUtil.getStringFromDate(loopDate));
+        if (!this.isReadonly) {
+            SharedPreferences.Editor prefEditor = preferences.edit();
+            Date loopDate = (Date) startDate.clone();
+            for (String dayKey : dayKeys) {
+                StuFood currentFood = stuFoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[0], currentFood.morning);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[1], currentFood.gamaLunch);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[2], currentFood.noodleLunch);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[3], currentFood.cafeLunch);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[4], currentFood.chefLunch);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[5], currentFood.dailyLunch);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[6], currentFood.gamaDinner);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[7], currentFood.chefDinner);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[8], currentFood.dailyDinner);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[9], currentFood.china);
-            saveMenuData(prefEditor, "stu", dayKey, stuKeys[10], currentFood.chinaSpecial);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[0], currentFood.morning);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[1], currentFood.gamaLunch);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[2], currentFood.noodleLunch);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[3], currentFood.cafeLunch);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[4], currentFood.chefLunch);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[5], currentFood.dailyLunch);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[6], currentFood.gamaDinner);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[7], currentFood.chefDinner);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[8], currentFood.dailyDinner);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[9], currentFood.china);
+                saveMenuData(prefEditor, "stu", dayKey, stuKeys[10], currentFood.chinaSpecial);
 
-            loopDate = DateUtil.addDaysToDate(loopDate, 1);
+                loopDate = DateUtil.addDaysToDate(loopDate, 1);
+            }
+            prefEditor.commit();
         }
-        prefEditor.commit();
     }
 
     public Sikdan[][] loadStuFood() {
@@ -207,9 +209,5 @@ public class MenuDataHelper {
             }
         }
         return stuFood;
-    }
-
-    public int getStuFoodCount() {
-        return stuKeys.length;
     }
 }

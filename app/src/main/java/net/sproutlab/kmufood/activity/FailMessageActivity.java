@@ -15,12 +15,6 @@ import android.widget.Toast;
 import net.sproutlab.kmufood.KMUFoodApplication;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.APIGlobal;
-import net.sproutlab.kmufood.api.MenuJSONParse;
-import net.sproutlab.kmufood.data.chungFooddata;
-import net.sproutlab.kmufood.data.dormFooddata;
-import net.sproutlab.kmufood.data.lawFooddata;
-import net.sproutlab.kmufood.data.staffFooddata;
-import net.sproutlab.kmufood.data.stuFooddata;
 import net.sproutlab.kmufood.dialog.FeedbackDialog;
 import net.sproutlab.kmufood.utils.PrefHelper;
 
@@ -81,17 +75,17 @@ public class FailMessageActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             if (response.isSuccessful()) {
-                                MenuJSONParse jsonparse = new MenuJSONParse(response.body());
-                                lawFooddata mLawfood = new lawFooddata(FailMessageActivity.this);
-                                mLawfood.saveData(jsonparse.runParse("lawfood"));
-                                stuFooddata mStufood = new stuFooddata(FailMessageActivity.this);
-                                mStufood.saveData(jsonparse.runParse("stufood"));
-                                staffFooddata mStafffood = new staffFooddata(FailMessageActivity.this);
-                                mStafffood.saveData(jsonparse.runParse("stafffood"));
-                                chungFooddata mChungfood = new chungFooddata(FailMessageActivity.this);
-                                mChungfood.saveData(jsonparse.runParse("chungfood"));
-                                dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
-                                mDormfood.saveData(jsonparse.runParse("dormfood"));
+//                                MenuJSONParse jsonparse = new MenuJSONParse(response.body());
+//                                lawFooddata mLawfood = new lawFooddata(FailMessageActivity.this);
+//                                mLawfood.saveData(jsonparse.runParse("lawfood"));
+//                                stuFooddata mStufood = new stuFooddata(FailMessageActivity.this);
+//                                mStufood.saveData(jsonparse.runParse("stufood"));
+//                                staffFooddata mStafffood = new staffFooddata(FailMessageActivity.this);
+//                                mStafffood.saveData(jsonparse.runParse("stafffood"));
+//                                chungFooddata mChungfood = new chungFooddata(FailMessageActivity.this);
+//                                mChungfood.saveData(jsonparse.runParse("chungfood"));
+//                                dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
+//                                mDormfood.saveData(jsonparse.runParse("dormfood"));
                                 prefHelper.updateLastUpdate();
                                 mHandler.sendEmptyMessage(1);
                                 Message msg = mHandler.obtainMessage();
