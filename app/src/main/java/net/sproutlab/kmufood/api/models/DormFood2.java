@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class DormFood2 {
     @SerializedName("조식")
-    Sikdan morning;
+    public Sikdan morning;
 
     @SerializedName("중식")
-    Sikdan lunch;
+    public Sikdan lunch;
 
     @SerializedName("석식")
-    Sikdan dinner;
+    public Sikdan dinner;
 }
