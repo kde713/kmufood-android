@@ -78,32 +78,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        switch (prefHelper.getPreferFood()) {
-            case "stu":
-                txt_prefer.setText(getString(R.string.stu_title));
-                break;
-            case "law":
-                txt_prefer.setText(getString(R.string.law_title));
-                break;
-            case "staff":
-                txt_prefer.setText(getString(R.string.staff_title));
-                break;
-            case "dorm":
-                txt_prefer.setText(getString(R.string.dorm_title));
-                break;
-            case "chung":
-                txt_prefer.setText(getString(R.string.chung_title));
-                break;
-        }
-        txt_dataver_date.setText(prefHelper.getLastUpdate());
-        if (prefHelper.needUpdate())
-            txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_old));
-        else txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_ok));
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_feedback:
@@ -117,6 +91,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                         .setNotices(R.raw.opensourcelicense)
                         .build()
                         .show();
+                break;
+            default:
+                break;
         }
     }
 }

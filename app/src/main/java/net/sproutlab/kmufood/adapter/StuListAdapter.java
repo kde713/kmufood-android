@@ -12,7 +12,6 @@ import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.models.Sikdan;
 import net.sproutlab.kmufood.dialog.FoodInfoDialog;
 import net.sproutlab.kmufood.utils.MenuDataHelper;
-import net.sproutlab.kmufood.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
