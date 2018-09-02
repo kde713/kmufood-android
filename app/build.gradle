@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.3'
     implementation 'com.google.firebase:firebase-crash:16.2.0'
     implementation 'com.google.firebase:firebase-messaging:17.3.0'
+    implementation 'com.google.firebase:firebase-inappmessaging-display:17.0.1'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
 }
 
