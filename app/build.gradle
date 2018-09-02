@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "net.sproutlab.kmufood"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 21
         versionName "2.0.3"
