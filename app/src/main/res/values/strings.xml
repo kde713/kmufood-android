@@ -8,6 +8,7 @@
     <string name="msg_resuccess">정상적으로 불러왔습니다.</string>
     <string name="msg_preferpick">자주가는 식당을 골라주세요.</string>
     <string name="msg_nodata">식단이 등록되지 않았습니다.\n국민대학교 생활협동조합으로 문의바랍니다.</string>
+    <string name="msg_exit">뒤로가기 버튼을 한번 더 누르시면 종료됩니다.</string>
 
     <string name="label_retry">재시도</string>
     <string name="label_close">닫기</string>

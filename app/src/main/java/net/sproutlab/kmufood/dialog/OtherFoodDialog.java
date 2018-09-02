@@ -60,7 +60,7 @@ public class OtherFoodDialog extends Dialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.btn_setting:
-                c.startActivity(new Intent(c, SettingActivity.class));
+                c.startActivity(new Intent(c, SettingActivity.class).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
                 dismiss();
                 break;
             case R.id.btn_close:

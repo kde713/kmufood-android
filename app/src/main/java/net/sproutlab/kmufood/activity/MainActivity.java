@@ -70,27 +70,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.btn_stufood:
                 prefHelper.setPreferFood("stu");
-                startActivity((new Intent(this, StuFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity((new Intent(this, StuFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 break;
             case R.id.btn_lawfood:
                 prefHelper.setPreferFood("law");
-                startActivity((new Intent(this, LawFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity((new Intent(this, LawFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 break;
             case R.id.btn_stafffood:
                 prefHelper.setPreferFood("staff");
-                startActivity((new Intent(this, StaffFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity((new Intent(this, StaffFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 break;
             case R.id.btn_dormfood:
                 prefHelper.setPreferFood("dorm");
-                startActivity((new Intent(this, DormFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity((new Intent(this, DormFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 break;
             case R.id.btn_chungfood:
                 prefHelper.setPreferFood("chung");
-                startActivity((new Intent(this, ChungFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity((new Intent(this, ChungFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 break;
             case R.id.btn_feedback:
