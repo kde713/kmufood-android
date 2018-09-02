@@ -13,6 +13,7 @@ import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.models.Sikdan;
 import net.sproutlab.kmufood.dialog.FoodInfoDialog;
 import net.sproutlab.kmufood.utils.MenuDataHelper;
+import net.sproutlab.kmufood.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +96,8 @@ public class StaffListAdapter extends PagerAdapter implements CardAdapter {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(staffMenu[position][i].menu);
-                ((TextView) view.findViewById(priceset[i])).setText(staffMenu[position][i].price);
+                ((TextView) view.findViewById(foodset[i])).setText(StringUtil.processMenuString(staffMenu[position][i].menu));
+                ((TextView) view.findViewById(priceset[i])).setText(StringUtil.processMenuString(staffMenu[position][i].price));
             }
         }
 
