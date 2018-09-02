@@ -8,14 +8,12 @@ import android.util.Log;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class PrefHelper {
 
     private final String PREF_NAME = "net.sproutlab.kmufood";
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
     private final int uniqueKey = 160912200;
 
     private final String KEY_LASTUPDATE = "last_update";
@@ -32,15 +30,15 @@ public class PrefHelper {
         SharedPreferences preferences = prefContext.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = preferences.edit();
         Date currentDate = new Date(System.currentTimeMillis());
-        prefEditor.putString(KEY_LASTUPDATE, dateFormat.format(currentDate));
+        prefEditor.putString(KEY_LASTUPDATE, DateUtil.getStringFromDate(currentDate));
         prefEditor.apply();
     }
 
     public String getLastUpdate() {
         SharedPreferences preferences = prefContext.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
         try {
-            Date lastUpdate = dateFormat.parse(preferences.getString(KEY_LASTUPDATE, "Error"));
-            return dateFormat.format(lastUpdate);
+            Date lastUpdate = DateUtil.getDateFromString(preferences.getString(KEY_LASTUPDATE, "Error"));
+            return DateUtil.getStringFromDate(lastUpdate);
         } catch (ParseException e) {
             e.printStackTrace();
             return "Error";
@@ -50,7 +48,7 @@ public class PrefHelper {
     public Boolean needUpdate() {
         SharedPreferences preferences = prefContext.getSharedPreferences(PREF_NAME, Activity.MODE_PRIVATE);
         try {
-            Date lastUpdate = dateFormat.parse(preferences.getString(KEY_LASTUPDATE, "Error"));
+            Date lastUpdate = DateUtil.getDateFromString(preferences.getString(KEY_LASTUPDATE, "Error"));
             Calendar todayCal = Calendar.getInstance();
             Calendar diffCal = Calendar.getInstance();
             diffCal.setTime(lastUpdate);
