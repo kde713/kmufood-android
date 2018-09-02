@@ -85,7 +85,7 @@ public class MenuDataHelper {
     }
 
     public Sikdan[][] loadChungFood() {
-        Sikdan[][] chungFood = new Sikdan[dayKeys.length][chungKeys.length];
+        Sikdan[][] chungFood = new Sikdan[chungDayLength][chungKeys.length];
         for (int i = 0; i < chungDayLength; i++) {
             for (int j = 0; j < chungKeys.length; j++) {
                 chungFood[i][j] = loadMenuData("chung", dayKeys[i], chungKeys[j]);
@@ -115,7 +115,7 @@ public class MenuDataHelper {
     }
 
     public Sikdan[][] loadDormFood() {
-        Sikdan[][] dormFood = new Sikdan[dayKeys.length][dormKeys.length];
+        Sikdan[][] dormFood = new Sikdan[dormDayLength][dormKeys.length];
         for (int i = 0; i < dormDayLength; i++) {
             for (int j = 0; j < dormKeys.length; j++) {
                 dormFood[i][j] = loadMenuData("dorm", dayKeys[i], dormKeys[j]);
@@ -147,7 +147,7 @@ public class MenuDataHelper {
     }
 
     public Sikdan[][] loadLawFood() {
-        Sikdan[][] lawFood = new Sikdan[dayKeys.length][lawKeys.length];
+        Sikdan[][] lawFood = new Sikdan[lawDayLength][lawKeys.length];
         for (int i = 0; i < lawDayLength; i++) {
             for (int j = 0; j < lawKeys.length; j++) {
                 lawFood[i][j] = loadMenuData("law", dayKeys[i], lawKeys[j]);
@@ -176,7 +176,7 @@ public class MenuDataHelper {
     }
 
     public Sikdan[][] loadStaffFood() {
-        Sikdan[][] staffFood = new Sikdan[dayKeys.length][staffKeys.length];
+        Sikdan[][] staffFood = new Sikdan[staffDayLength][staffKeys.length];
         for (int i = 0; i < staffDayLength; i++) {
             for (int j = 0; j < staffKeys.length; j++) {
                 staffFood[i][j] = loadMenuData("staff", dayKeys[i], staffKeys[j]);
@@ -212,7 +212,7 @@ public class MenuDataHelper {
     }
 
     public Sikdan[][] loadStuFood() {
-        Sikdan[][] stuFood = new Sikdan[dayKeys.length][stuKeys.length];
+        Sikdan[][] stuFood = new Sikdan[stuDayLength][stuKeys.length];
         for (int i = 0; i < stuDayLength; i++) {
             for (int j = 0; j < stuKeys.length; j++) {
                 stuFood[i][j] = loadMenuData("stu", dayKeys[i], stuKeys[j]);
