@@ -17,12 +17,6 @@ import de.psdev.licensesdialog.LicensesDialog;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private PrefHelper prefHelper;
-
-    private TextView txt_prefer;
-    private TextView txt_dataver_date;
-    private TextView txt_dataver_msg;
-
     private String APP_VER;
 
     @Override
@@ -32,40 +26,40 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         startActivity((new Intent(this, SplashActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
 
-        prefHelper = new PrefHelper(getApplicationContext());
+        PrefHelper prefHelper = new PrefHelper(getApplicationContext());
 
         findViewById(R.id.btn_feedback).setOnClickListener(this);
         findViewById(R.id.btn_updatelog).setOnClickListener(this);
         findViewById(R.id.btn_opensource).setOnClickListener(this);
 
-        txt_prefer = findViewById(R.id.setting_prefer_msg);
-        txt_dataver_date = findViewById(R.id.setting_dataver_label_date);
-        txt_dataver_msg = findViewById(R.id.setting_dataver_label_msg);
+        TextView txtPrefer = findViewById(R.id.setting_prefer_msg);
+        TextView txtLastUpdate = findViewById(R.id.setting_dataver_label_date);
+        TextView txtUpdateMessage = findViewById(R.id.setting_dataver_label_msg);
 
         switch (prefHelper.getPreferFood()) {
             case "stu":
-                txt_prefer.setText(getString(R.string.stu_title));
+                txtPrefer.setText(getString(R.string.stu_title));
                 break;
             case "law":
-                txt_prefer.setText(getString(R.string.law_title));
+                txtPrefer.setText(getString(R.string.law_title));
                 break;
             case "staff":
-                txt_prefer.setText(getString(R.string.staff_title));
+                txtPrefer.setText(getString(R.string.staff_title));
                 break;
             case "dorm":
-                txt_prefer.setText(getString(R.string.dorm_title));
+                txtPrefer.setText(getString(R.string.dorm_title));
                 break;
             case "chung":
-                txt_prefer.setText(getString(R.string.chung_title));
+                txtPrefer.setText(getString(R.string.chung_title));
                 break;
             default:
-                txt_prefer.setText(getString(R.string.null_title));
+                txtPrefer.setText(getString(R.string.null_title));
                 break;
         }
-        txt_dataver_date.setText(prefHelper.getLastUpdate());
+        txtLastUpdate.setText(prefHelper.getLastUpdate());
         if (prefHelper.needUpdate())
-            txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_old));
-        else txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_ok));
+            txtUpdateMessage.setText(getString(R.string.setting_dataver_msg_old));
+        else txtUpdateMessage.setText(getString(R.string.setting_dataver_msg_ok));
 
         try {
             APP_VER = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
