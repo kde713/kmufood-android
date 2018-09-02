@@ -29,6 +29,7 @@
 
     <string name="feedback_c1">이메일</string>
     <string name="feedback_c2">Github</string>
+    <string name="feedback_c3">카카오톡</string>
 
     <string name="nav_prefer1">학생</string>
     <string name="nav_prefer2">한울</string>
