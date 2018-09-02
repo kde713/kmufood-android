@@ -22,4 +22,27 @@ public class DateUtil {
         c.add(Calendar.DATE, addDays);
         return c.getTime();
     }
+
+    public static class WeekRange {
+        private Date startDate;
+        private Date endDate;
+
+        public WeekRange() {
+            Calendar startCal = Calendar.getInstance();
+            startCal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+            this.startDate = startCal.getTime();
+
+            Calendar endCal = (Calendar) startCal.clone();
+            endCal.add(Calendar.DATE, 6);
+            this.endDate = endCal.getTime();
+        }
+
+        public Date getStartDate() {
+            return startDate;
+        }
+
+        public Date getEndDate() {
+            return endDate;
+        }
+    }
 }
