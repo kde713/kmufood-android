@@ -111,9 +111,8 @@
     <string name="setting_appver">국민밥\n버전</string>
     <string name="setting_credit">개발진</string>
     <string name="setting_credit_msg">
-        개발진\n
-        \n개발, 총괄(진짜 무급): 김동언
-        \n디자인, 노예(무급): 김현곤
+        개발, 총괄(진짜 무급): 김동언\n
+        디자인, 노예(무급): 김현곤
     </string>
 
     <string name="temp_foodinfo_stufood">
