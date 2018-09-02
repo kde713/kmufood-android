@@ -70,45 +70,45 @@ public class FailMessageActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_retry:
                     loadingDiag.show();
-                    Call<String> call = APIGlobal.callInterface.downloadMenu();
-                    call.enqueue(new Callback<String>() {
-                        @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
-                            if (response.isSuccessful()) {
-//                                MenuJSONParse jsonparse = new MenuJSONParse(response.body());
-//                                lawFooddata mLawfood = new lawFooddata(FailMessageActivity.this);
-//                                mLawfood.saveData(jsonparse.runParse("lawfood"));
-//                                stuFooddata mStufood = new stuFooddata(FailMessageActivity.this);
-//                                mStufood.saveData(jsonparse.runParse("stufood"));
-//                                staffFooddata mStafffood = new staffFooddata(FailMessageActivity.this);
-//                                mStafffood.saveData(jsonparse.runParse("stafffood"));
-//                                chungFooddata mChungfood = new chungFooddata(FailMessageActivity.this);
-//                                mChungfood.saveData(jsonparse.runParse("chungfood"));
-//                                dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
-//                                mDormfood.saveData(jsonparse.runParse("dormfood"));
-                                prefHelper.updateLastUpdate();
-                                mHandler.sendEmptyMessage(1);
-                                Message msg = mHandler.obtainMessage();
-                                msg.what = 2;
-                                mHandler.sendMessage(msg);
-                            } else {
-                                Log.d("MenuDownload", "HTTP " + response.code());
-                                mHandler.sendEmptyMessage(1);
-                                Message msg = mHandler.obtainMessage();
-                                msg.what = -1;
-                                mHandler.sendMessage(msg);
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<String> call, Throwable t) {
-                            t.printStackTrace();
-                            mHandler.sendEmptyMessage(1);
-                            Message msg = mHandler.obtainMessage();
-                            msg.what = -1;
-                            mHandler.sendMessage(msg);
-                        }
-                    });
+//                    Call<String> call = APIGlobal.callInterface.downloadMenu();
+//                    call.enqueue(new Callback<String>() {
+//                        @Override
+//                        public void onResponse(Call<String> call, Response<String> response) {
+//                            if (response.isSuccessful()) {
+////                                MenuJSONParse jsonparse = new MenuJSONParse(response.body());
+////                                lawFooddata mLawfood = new lawFooddata(FailMessageActivity.this);
+////                                mLawfood.saveData(jsonparse.runParse("lawfood"));
+////                                stuFooddata mStufood = new stuFooddata(FailMessageActivity.this);
+////                                mStufood.saveData(jsonparse.runParse("stufood"));
+////                                staffFooddata mStafffood = new staffFooddata(FailMessageActivity.this);
+////                                mStafffood.saveData(jsonparse.runParse("stafffood"));
+////                                chungFooddata mChungfood = new chungFooddata(FailMessageActivity.this);
+////                                mChungfood.saveData(jsonparse.runParse("chungfood"));
+////                                dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
+////                                mDormfood.saveData(jsonparse.runParse("dormfood"));
+//                                prefHelper.updateLastUpdate();
+//                                mHandler.sendEmptyMessage(1);
+//                                Message msg = mHandler.obtainMessage();
+//                                msg.what = 2;
+//                                mHandler.sendMessage(msg);
+//                            } else {
+//                                Log.d("MenuDownload", "HTTP " + response.code());
+//                                mHandler.sendEmptyMessage(1);
+//                                Message msg = mHandler.obtainMessage();
+//                                msg.what = -1;
+//                                mHandler.sendMessage(msg);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<String> call, Throwable t) {
+//                            t.printStackTrace();
+//                            mHandler.sendEmptyMessage(1);
+//                            Message msg = mHandler.obtainMessage();
+//                            msg.what = -1;
+//                            mHandler.sendMessage(msg);
+//                        }
+//                    });
                     break;
                 case R.id.btn_close:
                     finishAffinity();
