@@ -22,6 +22,7 @@ public class FeedbackDialog extends Dialog implements View.OnClickListener {
 
         findViewById(R.id.btn_contact_email).setOnClickListener(this);
         findViewById(R.id.btn_contact_github).setOnClickListener(this);
+        findViewById(R.id.btn_contact_kakaotalk).setOnClickListener(this);
         findViewById(R.id.btn_close).setOnClickListener(this);
     }
 
@@ -34,6 +35,10 @@ public class FeedbackDialog extends Dialog implements View.OnClickListener {
                 break;
             case R.id.btn_contact_github:
                 c.startActivity(new Intent(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://github.com/kde713/kmufood-android"))));
+                dismiss();
+                break;
+            case R.id.btn_contact_kakaotalk:
+                c.startActivity(new Intent(new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://open.kakao.com/o/sEe1SqX"))));
                 dismiss();
                 break;
             case R.id.btn_close:
