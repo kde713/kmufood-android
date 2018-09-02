@@ -28,6 +28,7 @@ public class FailMessageActivity extends AppCompatActivity {
 
     public static final int REASON_NETWORK = 1;
     public static final int REASON_COOPAPI = 2;
+    public static final int REASON_UNKNOWN = 3;
 
     ProgressDialog loadingDiag;
     PrefHelper prefHelper;
@@ -45,17 +46,7 @@ public class FailMessageActivity extends AppCompatActivity {
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
 
-        int reasonCode = getIntent().getIntExtra("reason", REASON_COOPAPI);
-        int failImageId = R.drawable.msg_fail_network;
-        switch (reasonCode) {
-            case REASON_NETWORK:
-                failImageId = R.drawable.msg_fail_network;
-                break;
-            case REASON_COOPAPI:
-                failImageId = R.drawable.msg_fail_network;
-                break;
-        }
-        ((ImageView) findViewById(R.id.img_failmessage)).setImageResource(failImageId);
+        updateFailImage(getIntent().getIntExtra("reason", REASON_COOPAPI));
 
         prefHelper = new PrefHelper(getApplicationContext());
 
@@ -79,9 +70,23 @@ public class FailMessageActivity extends AppCompatActivity {
         loadingDiag.dismiss();
     }
 
-    private void showFailMessage() {
+    private void showFailMessage(int reasonCode) {
         loadingDiag.dismiss();
+        updateFailImage(reasonCode);
         Toast.makeText(FailMessageActivity.this, getString(R.string.msg_refail), Toast.LENGTH_LONG).show();
+    }
+
+    private void updateFailImage(int reasonCode) {
+        int failImageId = R.drawable.msg_fail_unknown;
+        switch (reasonCode) {
+            case REASON_NETWORK:
+                failImageId = R.drawable.msg_fail_network;
+                break;
+            case REASON_COOPAPI:
+                failImageId = R.drawable.msg_fail_network;
+                break;
+        }
+        ((ImageView) findViewById(R.id.img_failmessage)).setImageResource(failImageId);
     }
 
 
@@ -116,11 +121,11 @@ public class FailMessageActivity extends AppCompatActivity {
                                 } catch (NullPointerException e) {
                                     e.printStackTrace();
                                     Log.d("coopApi", "Parse Exception (NullPointerException)");
-                                    showFailMessage();
+                                    showFailMessage(REASON_UNKNOWN);
                                 }
                             } else {
                                 Log.d("coopApi", "API Failed with STATUS=" + Integer.toString(response.code()));
-                                showFailMessage();
+                                showFailMessage(REASON_COOPAPI);
                             }
                         }
 
@@ -128,7 +133,7 @@ public class FailMessageActivity extends AppCompatActivity {
                         public void onFailure(Call<ApiResponse> call, Throwable t) {
                             t.printStackTrace();
                             Log.d("coopApi", "Network Error");
-                            showFailMessage();
+                            showFailMessage(REASON_NETWORK);
                         }
                     });
                     break;

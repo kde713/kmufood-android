@@ -71,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                         Log.d("coopApi", "Parse Exception (NullPointerException)");
-                        showFailMessage(FailMessageActivity.REASON_COOPAPI);
+                        showFailMessage(FailMessageActivity.REASON_UNKNOWN);
                     }
                 } else {
                     Log.d("coopApi", "API Failed with STATUS=" + Integer.toString(response.code()));
