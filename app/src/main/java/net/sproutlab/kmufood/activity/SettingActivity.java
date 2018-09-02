@@ -9,21 +9,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.data.Prefdata;
 import net.sproutlab.kmufood.dialog.FeedbackDialog;
 import net.sproutlab.kmufood.dialog.UpdatelogDialog;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import de.psdev.licensesdialog.LicensesDialog;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Prefdata mPrefAdapter;
-
-    TextView txt_prefer;
-    TextView txt_dataver_date;
-    TextView txt_dataver_msg;
-
-    String APP_VER;
+    private String APP_VER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,37 +26,40 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         startActivity((new Intent(this, SplashActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
 
-        mPrefAdapter = new Prefdata(getApplicationContext());
+        PrefHelper prefHelper = new PrefHelper(getApplicationContext());
 
         findViewById(R.id.btn_feedback).setOnClickListener(this);
         findViewById(R.id.btn_updatelog).setOnClickListener(this);
         findViewById(R.id.btn_opensource).setOnClickListener(this);
 
-        txt_prefer = (TextView) findViewById(R.id.setting_prefer_msg);
-        txt_dataver_date = (TextView) findViewById(R.id.setting_dataver_label_date);
-        txt_dataver_msg = (TextView) findViewById(R.id.setting_dataver_label_msg);
+        TextView txtPrefer = findViewById(R.id.setting_prefer_msg);
+        TextView txtLastUpdate = findViewById(R.id.setting_dataver_label_date);
+        TextView txtUpdateMessage = findViewById(R.id.setting_dataver_label_msg);
 
-        switch (mPrefAdapter.getPreferfood()) {
+        switch (prefHelper.getPreferFood()) {
             case "stu":
-                txt_prefer.setText(getString(R.string.stu_title));
+                txtPrefer.setText(getString(R.string.stu_title));
                 break;
             case "law":
-                txt_prefer.setText(getString(R.string.law_title));
+                txtPrefer.setText(getString(R.string.law_title));
                 break;
             case "staff":
-                txt_prefer.setText(getString(R.string.staff_title));
+                txtPrefer.setText(getString(R.string.staff_title));
                 break;
             case "dorm":
-                txt_prefer.setText(getString(R.string.dorm_title));
+                txtPrefer.setText(getString(R.string.dorm_title));
                 break;
             case "chung":
-                txt_prefer.setText(getString(R.string.chung_title));
+                txtPrefer.setText(getString(R.string.chung_title));
+                break;
+            default:
+                txtPrefer.setText(getString(R.string.null_title));
                 break;
         }
-        txt_dataver_date.setText(mPrefAdapter.getTS());
-        if (mPrefAdapter.checkTS())
-            txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_old));
-        else txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_ok));
+        txtLastUpdate.setText(prefHelper.getLastUpdate());
+        if (prefHelper.needUpdate())
+            txtUpdateMessage.setText(getString(R.string.setting_dataver_msg_old));
+        else txtUpdateMessage.setText(getString(R.string.setting_dataver_msg_ok));
 
         try {
             APP_VER = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
@@ -72,32 +69,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         ((TextView) findViewById(R.id.setting_appver_msg)).setText(APP_VER);
         ((Button) findViewById(R.id.btn_updatelog)).setText(String.format(getString(R.string.label_updatelog), APP_VER));
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        switch (mPrefAdapter.getPreferfood()) {
-            case "stu":
-                txt_prefer.setText(getString(R.string.stu_title));
-                break;
-            case "law":
-                txt_prefer.setText(getString(R.string.law_title));
-                break;
-            case "staff":
-                txt_prefer.setText(getString(R.string.staff_title));
-                break;
-            case "dorm":
-                txt_prefer.setText(getString(R.string.dorm_title));
-                break;
-            case "chung":
-                txt_prefer.setText(getString(R.string.chung_title));
-                break;
-        }
-        txt_dataver_date.setText(mPrefAdapter.getTS());
-        if (mPrefAdapter.checkTS())
-            txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_old));
-        else txt_dataver_msg.setText(getString(R.string.setting_dataver_msg_ok));
     }
 
     @Override
@@ -114,6 +85,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                         .setNotices(R.raw.opensourcelicense)
                         .build()
                         .show();
+                break;
+            default:
+                break;
         }
     }
 }

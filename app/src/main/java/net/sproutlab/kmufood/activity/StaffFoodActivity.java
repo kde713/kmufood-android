@@ -9,56 +9,63 @@ import android.widget.ImageButton;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
-import net.sproutlab.kmufood.adapter.StafflistAdapter;
-import net.sproutlab.kmufood.data.Prefdata;
+import net.sproutlab.kmufood.adapter.StaffListAdapter;
 import net.sproutlab.kmufood.dialog.OtherFoodDialog;
 import net.sproutlab.kmufood.dialog.OtherFoodInterface;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import java.util.Calendar;
 
 public class StaffFoodActivity extends AppCompatActivity implements View.OnClickListener, OtherFoodInterface {
 
-    private Prefdata mPrefAdapter;
+    private final String FOOD_CODE = "staff";
+
+    private PrefHelper prefHelper;
     private ImageButton btn_favorite;
     private boolean isFavorite = false;
-
-    private ViewPager mViewPager;
-    private StafflistAdapter mAdapter;
-    private ShadowTransformer mCardShadowTransformer;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mPrefAdapter.getPreferfood() == "staff") {
-            btn_favorite.setImageResource(R.drawable.ic_star_on);
-            isFavorite = true;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stafffood);
 
-        btn_favorite = (ImageButton) findViewById(R.id.btn_favorite);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        btn_favorite = findViewById(R.id.btn_favorite);
+        ViewPager viewPager = findViewById(R.id.viewPager);
 
-        mPrefAdapter = new Prefdata(this);
-        mAdapter = new StafflistAdapter(this);
-        mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
+        prefHelper = new PrefHelper(this);
+        StaffListAdapter listAdapter = new StaffListAdapter(this);
+        ShadowTransformer cardShadowTransformer = new ShadowTransformer(viewPager, listAdapter);
 
         Calendar c = Calendar.getInstance();
         int curindex = c.get(Calendar.DAY_OF_WEEK);
         if (curindex == 1 || curindex == 7) curindex = 0;
         else curindex -= 2;
 
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setPageTransformer(true, mCardShadowTransformer);
-        mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setCurrentItem(curindex);
+        viewPager.setAdapter(listAdapter);
+        viewPager.setPageTransformer(true, cardShadowTransformer);
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setCurrentItem(curindex);
+
+        updatePreferIndicator();
 
         findViewById(R.id.btn_otherfood).setOnClickListener(this);
         btn_favorite.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePreferIndicator();
+    }
+
+    private void updatePreferIndicator() {
+        if (prefHelper.getPreferFood().equals(FOOD_CODE)) {
+            btn_favorite.setImageResource(R.drawable.ic_star_on);
+            isFavorite = true;
+        } else {
+            btn_favorite.setImageResource(R.drawable.ic_star_off);
+            isFavorite = false;
+        }
     }
 
     @Override
@@ -66,7 +73,7 @@ public class StaffFoodActivity extends AppCompatActivity implements View.OnClick
         switch (view.getId()) {
             case R.id.btn_favorite:
                 if (!isFavorite) {
-                    mPrefAdapter.setPreferfood("staff");
+                    prefHelper.setPreferFood(FOOD_CODE);
                     btn_favorite.setImageResource(R.drawable.ic_star_on);
                     isFavorite = true;
                 }

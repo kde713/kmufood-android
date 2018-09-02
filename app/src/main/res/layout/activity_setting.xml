@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main"
     android:padding="8dp"
     tools:context="net.sproutlab.kmufood.activity.SettingActivity">
 
@@ -69,7 +68,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginStart="4dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -113,7 +112,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginStart="4dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -163,7 +162,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginStart="4dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -206,7 +205,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="4dp"
+                                android:layout_marginStart="4dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -252,7 +251,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:text="@string/label_feedback"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />

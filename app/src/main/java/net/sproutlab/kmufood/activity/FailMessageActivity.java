@@ -2,27 +2,23 @@ package net.sproutlab.kmufood.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import net.sproutlab.kmufood.KMUFoodApplication;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.APIGlobal;
-import net.sproutlab.kmufood.api.MenuJSONParse;
-import net.sproutlab.kmufood.data.Prefdata;
-import net.sproutlab.kmufood.data.chungFooddata;
-import net.sproutlab.kmufood.data.dormFooddata;
-import net.sproutlab.kmufood.data.lawFooddata;
-import net.sproutlab.kmufood.data.staffFooddata;
-import net.sproutlab.kmufood.data.stuFooddata;
+import net.sproutlab.kmufood.api.models.ApiResponse;
 import net.sproutlab.kmufood.dialog.FeedbackDialog;
+import net.sproutlab.kmufood.utils.DateUtil;
+import net.sproutlab.kmufood.utils.MenuDataHelper;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,10 +26,14 @@ import retrofit2.Response;
 
 public class FailMessageActivity extends AppCompatActivity {
 
-    ProgressDialog loadingDiag;
-    Prefdata mTSAdapter;
+    public static final int REASON_NETWORK = 1;
+    public static final int REASON_COOPAPI = 2;
+    public static final int REASON_UNKNOWN = 3;
 
-    KMUFoodApplication kmuFoodApplication;
+    private ProgressDialog loadingDiag;
+    private PrefHelper prefHelper;
+
+    private KMUFoodApplication kmuFoodApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,9 @@ public class FailMessageActivity extends AppCompatActivity {
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
 
-        mTSAdapter = new Prefdata(getApplicationContext());
+        updateFailImage(getIntent().getIntExtra("reason", REASON_COOPAPI));
+
+        prefHelper = new PrefHelper(getApplicationContext());
 
         loadingDiag = new ProgressDialog(FailMessageActivity.this);
         loadingDiag.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -68,75 +70,78 @@ public class FailMessageActivity extends AppCompatActivity {
         loadingDiag.dismiss();
     }
 
+    private void showFailMessage(int reasonCode) {
+        loadingDiag.dismiss();
+        updateFailImage(reasonCode);
+        Toast.makeText(FailMessageActivity.this, getString(R.string.msg_refail), Toast.LENGTH_LONG).show();
+    }
 
-    ImageButton.OnClickListener mListner = new ImageButton.OnClickListener() {
+    private void updateFailImage(int reasonCode) {
+        int failImageId;
+        switch (reasonCode) {
+            case REASON_NETWORK:
+                failImageId = R.drawable.msg_fail_network;
+                break;
+            case REASON_COOPAPI:
+                failImageId = R.drawable.msg_fail_coopapi;
+                break;
+            default:
+                failImageId = R.drawable.msg_fail_unknown;
+                break;
+        }
+        ((ImageView) findViewById(R.id.img_failmessage)).setImageResource(failImageId);
+    }
+
+
+    private final ImageButton.OnClickListener mListner = new ImageButton.OnClickListener() {
 
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.btn_retry:
                     loadingDiag.show();
-                    Call<String> call = APIGlobal.callInterface.downloadMenu();
-                    call.enqueue(new Callback<String>() {
+                    final DateUtil.WeekRange weekRange = new DateUtil.WeekRange();
+                    Call<ApiResponse> call = APIGlobal.callInterface.coopApi(DateUtil.getStringFromDate(weekRange.getStartDate()), DateUtil.getStringFromDate(weekRange.getEndDate()));
+                    call.enqueue(new Callback<ApiResponse>() {
                         @Override
-                        public void onResponse(Call<String> call, Response<String> response) {
+                        public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                             if (response.isSuccessful()) {
-                                MenuJSONParse jsonparse = new MenuJSONParse(response.body());
-                                lawFooddata mLawfood = new lawFooddata(FailMessageActivity.this);
-                                mLawfood.saveData(jsonparse.runParse("lawfood"));
-                                stuFooddata mStufood = new stuFooddata(FailMessageActivity.this);
-                                mStufood.saveData(jsonparse.runParse("stufood"));
-                                staffFooddata mStafffood = new staffFooddata(FailMessageActivity.this);
-                                mStafffood.saveData(jsonparse.runParse("stafffood"));
-                                chungFooddata mChungfood = new chungFooddata(FailMessageActivity.this);
-                                mChungfood.saveData(jsonparse.runParse("chungfood"));
-                                dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
-                                mDormfood.saveData(jsonparse.runParse("dormfood"));
-                                Prefdata mTSData = new Prefdata(FailMessageActivity.this);
-                                mTSData.updateTS();
-                                mHandler.sendEmptyMessage(1);
-                                Message msg = mHandler.obtainMessage();
-                                msg.what = 2;
-                                mHandler.sendMessage(msg);
+                                try {
+                                    MenuDataHelper dataHelper = new MenuDataHelper(getApplicationContext(), weekRange.getStartDate());
+                                    ApiResponse body = response.body();
+                                    dataHelper.saveChungFood(body.chungFood);
+                                    dataHelper.saveDormFood(body.dormFood1, body.dormFood2);
+                                    dataHelper.saveLawFood(body.lawFood);
+                                    dataHelper.saveStaffFood(body.staffFood);
+                                    dataHelper.saveStuFood(body.stuFood);
+                                    Log.d("coopApi", "OK");
+
+                                    loadingDiag.dismiss();
+                                    if (!prefHelper.checkUniqueKey()) prefHelper.updateKey();
+                                    Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
+                                    kmuFoodApplication.setUpdateChecked(true);
+                                    finish();
+                                } catch (NullPointerException e) {
+                                    e.printStackTrace();
+                                    Log.d("coopApi", "Parse Exception (NullPointerException)");
+                                    showFailMessage(REASON_UNKNOWN);
+                                }
                             } else {
-                                Log.d("MenuDownload", "HTTP " + response.code());
-                                mHandler.sendEmptyMessage(1);
-                                Message msg = mHandler.obtainMessage();
-                                msg.what = -1;
-                                mHandler.sendMessage(msg);
+                                Log.d("coopApi", "API Failed with STATUS=" + Integer.toString(response.code()));
+                                showFailMessage(REASON_COOPAPI);
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<String> call, Throwable t) {
+                        public void onFailure(Call<ApiResponse> call, Throwable t) {
                             t.printStackTrace();
-                            mHandler.sendEmptyMessage(1);
-                            Message msg = mHandler.obtainMessage();
-                            msg.what = -1;
-                            mHandler.sendMessage(msg);
+                            Log.d("coopApi", "Network Error");
+                            showFailMessage(REASON_NETWORK);
                         }
                     });
                     break;
                 case R.id.btn_close:
                     finishAffinity();
-                    break;
-            }
-        }
-    };
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case -1:
-                    loadingDiag.dismiss();
-                    Toast.makeText(FailMessageActivity.this, getString(R.string.msg_refail), Toast.LENGTH_LONG).show();
-                    break;
-                case 2:
-                    loadingDiag.dismiss();
-                    if (!mTSAdapter.checkKey()) mTSAdapter.patchKey();
-                    Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
-                    kmuFoodApplication.setUpdateChecked(true);
-                    finish();
                     break;
             }
         }

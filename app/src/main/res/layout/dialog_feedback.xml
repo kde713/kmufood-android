@@ -8,7 +8,7 @@
         android:id="@+id/btn_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:background="?selectableItemBackground"
         android:padding="10dp"
@@ -42,11 +42,11 @@
             android:orientation="vertical">
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btn_contact_kakaotalk"
+                android:id="@+id/btn_contact_email"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="center"
-                android:src="@drawable/ic_temp_talk"
+                android:src="@drawable/ic_email"
                 card_view:fabSize="mini" />
 
             <TextView
@@ -62,16 +62,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="32dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btn_contact_facebook"
+                android:id="@+id/btn_contact_github"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="center"
-                android:src="@drawable/ic_temp_facebook"
+                android:src="@drawable/ic_github"
                 card_view:fabSize="mini" />
 
             <TextView
@@ -79,31 +79,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/feedback_c2"
-                android:textSize="10sp"
-                android:textColor="@color/colorAccent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btn_contact_email"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="center"
-                android:src="@drawable/ic_email"
-                card_view:fabSize="mini" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/feedback_c3"
                 android:textSize="10sp"
                 android:textColor="@color/colorAccent" />
 

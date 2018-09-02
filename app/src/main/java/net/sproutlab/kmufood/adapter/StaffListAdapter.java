@@ -2,7 +2,6 @@ package net.sproutlab.kmufood.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,39 +9,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.data.staffFooddata;
+import net.sproutlab.kmufood.api.models.Sikdan;
 import net.sproutlab.kmufood.dialog.FoodInfoDialog;
+import net.sproutlab.kmufood.utils.MenuDataHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by kde713 on 2016. 9. 7..
  */
-public class StafflistAdapter extends PagerAdapter implements CardAdapter {
+public class StaffListAdapter extends PagerAdapter implements CardAdapter {
 
-    private List<CardView> mViews = new ArrayList<>();
-    private String[] mTitle;
-    private String[][] mFood;
-    private String[][] mPrice;
-    private int mCount;
+    private List<CardView> viewList;
+    private String[] dayTitles;
+    private Sikdan[][] staffMenu;
     private float mBaseElevation;
     private Context c;
 
-    public StafflistAdapter(Context c) {
-        staffFooddata mData = new staffFooddata(c);
+    public StaffListAdapter(Context c) {
         this.c = c;
-        this.mFood = mData.loadMenu();
-        this.mPrice = mData.loadPrice();
-        this.mCount = mData.getFoodCount();
-        this.mTitle = new String[]{
+        this.staffMenu = (new MenuDataHelper(c)).loadStaffFood();
+        this.dayTitles = new String[]{
                 c.getString(R.string.monday), c.getString(R.string.tuesday),
                 c.getString(R.string.wednesday), c.getString(R.string.thursday),
                 c.getString(R.string.friday)
         };
-        for (String ignored : this.mTitle) {
-            this.mViews.add(null);
-        }
+        this.viewList = new ArrayList<>(Collections.<CardView>nCopies(this.dayTitles.length, null));
     }
 
     @Override
@@ -52,17 +46,17 @@ public class StafflistAdapter extends PagerAdapter implements CardAdapter {
 
     @Override
     public CardView getCardViewAt(int position) {
-        return mViews.get(position);
+        return viewList.get(position);
     }
 
     @Override
     public int getCount() {
-        return mTitle.length;
+        return dayTitles.length;
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == object;
+        return view.equals(object);
     }
 
     @Override
@@ -90,21 +84,21 @@ public class StafflistAdapter extends PagerAdapter implements CardAdapter {
                 R.id.staff_s4_price
         };
 
-        ((TextView) view.findViewById(R.id.card_title)).setText(mTitle[position]);
+        ((TextView) view.findViewById(R.id.card_title)).setText(dayTitles[position]);
 
         int emptyCount = 0;
 
-        for (int i = 0; i < mCount; i++) {
-            if (mFood[position][i].isEmpty()) {
+        for (int i = 0; i < staffMenu[position].length; i++) {
+            if (staffMenu[position][i].menu.isEmpty()) {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(mFood[position][i]);
-                ((TextView) view.findViewById(priceset[i])).setText(mPrice[position][i]);
+                ((TextView) view.findViewById(foodset[i])).setText(staffMenu[position][i].menu);
+                ((TextView) view.findViewById(priceset[i])).setText(staffMenu[position][i].price);
             }
         }
 
-        if (emptyCount >= mCount) {
+        if (emptyCount >= staffMenu[position].length) {
             view.findViewById(R.id.card_content).setVisibility(View.GONE);
             view.findViewById(R.id.card_nomsg).setVisibility(View.VISIBLE);
         }
@@ -117,20 +111,19 @@ public class StafflistAdapter extends PagerAdapter implements CardAdapter {
         });
 
         container.addView(view);
-        CardView cardView = (CardView) view.findViewById(R.id.cardView);
+        CardView cardView = view.findViewById(R.id.cardView);
 
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
         }
 
         cardView.setMaxCardElevation(mBaseElevation * MAX_ELEVATION_FACTOR);
-        mViews.set(position, cardView);
+        viewList.set(position, cardView);
         return view;
     }
 
     @Override
-    public void destroyItem(View container, int position, Object object) {
-        ((ViewPager) container).removeView((View) object);
-//        super.destroyItem(container, position, object);
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
     }
 }

@@ -78,7 +78,7 @@
                             android:id="@+id/staff_s1_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -121,7 +121,7 @@
                             android:id="@+id/staff_s2_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -164,7 +164,7 @@
                             android:id="@+id/staff_s3_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -207,7 +207,7 @@
                             android:id="@+id/staff_s4_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>

@@ -8,48 +8,64 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import net.sproutlab.kmufood.R;
+import net.sproutlab.kmufood.adapter.ChungListAdapter;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
-import net.sproutlab.kmufood.adapter.ChunglistAdapter;
-import net.sproutlab.kmufood.data.Prefdata;
 import net.sproutlab.kmufood.dialog.OtherFoodDialog;
 import net.sproutlab.kmufood.dialog.OtherFoodInterface;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import java.util.Calendar;
 
 public class ChungFoodActivity extends AppCompatActivity implements View.OnClickListener, OtherFoodInterface {
 
-    private Prefdata mPrefAdapter;
-    private ImageButton btn_favorite;
-    private boolean isFavorite = false;
+    private final String FOOD_CODE = "chung";
 
-    private ViewPager mViewPager;
-    private ChunglistAdapter mAdapter;
-    private ShadowTransformer mCardShadowTransformer;
+    private PrefHelper prefHelper;
+    private ImageButton btn_favorite;
+    private boolean isFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chungfood);
 
-        btn_favorite = (ImageButton) findViewById(R.id.btn_favorite);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        btn_favorite = findViewById(R.id.btn_favorite);
+        ViewPager viewPager = findViewById(R.id.viewPager);
 
-        mPrefAdapter = new Prefdata(this);
-        mAdapter = new ChunglistAdapter(this);
-        mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
+        prefHelper = new PrefHelper(this);
+        ChungListAdapter listAdapter = new ChungListAdapter(this);
+        ShadowTransformer cardShadowTransformer = new ShadowTransformer(viewPager, listAdapter);
 
         Calendar c = Calendar.getInstance();
         int curindex = c.get(Calendar.DAY_OF_WEEK);
         if (curindex == 1) curindex = 0;
         else curindex -= 2;
 
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setPageTransformer(true, mCardShadowTransformer);
-        mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setCurrentItem(curindex);
+        viewPager.setAdapter(listAdapter);
+        viewPager.setPageTransformer(true, cardShadowTransformer);
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setCurrentItem(curindex);
+
+        updatePreferIndicator();
 
         findViewById(R.id.btn_otherfood).setOnClickListener(this);
         btn_favorite.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updatePreferIndicator();
+    }
+
+    private void updatePreferIndicator() {
+        if (prefHelper.getPreferFood().equals(FOOD_CODE)) {
+            btn_favorite.setImageResource(R.drawable.ic_star_on);
+            isFavorite = true;
+        } else {
+            btn_favorite.setImageResource(R.drawable.ic_star_off);
+            isFavorite = false;
+        }
     }
 
     @Override
@@ -57,7 +73,7 @@ public class ChungFoodActivity extends AppCompatActivity implements View.OnClick
         switch (view.getId()) {
             case R.id.btn_favorite:
                 if (!isFavorite) {
-                    mPrefAdapter.setPreferfood("chung");
+                    prefHelper.setPreferFood(FOOD_CODE);
                     btn_favorite.setImageResource(R.drawable.ic_star_on);
                     isFavorite = true;
                 }

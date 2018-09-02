@@ -20,12 +20,35 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="http"
+                    android:host="kmucoop.kookmin.ac.kr"
+                    android:pathPattern="/restaurant/restaurant.php?w=*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:scheme="https"
+                    android:host="kmucoop.kookmin.ac.kr"
+                    android:pathPattern="/restaurant/restaurant.php?w=*" />
+            </intent-filter>
         </activity>
 
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.FailMessageActivity"
+        <activity
+            android:name=".activity.FailMessageActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
@@ -37,12 +60,15 @@
         <activity
             android:name=".activity.StaffFoodActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.DormFoodActivity"
+        <activity
+            android:name=".activity.DormFoodActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ChungFoodActivity"
+        <activity
+            android:name=".activity.ChungFoodActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".activity.SettingActivity"
+        <activity
+            android:name=".activity.SettingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

@@ -51,10 +51,21 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="8dp"
+                    android:text="@string/stu_subsection0"
+                    android:textColor="@color/colorText"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
                 <LinearLayout
                     android:id="@+id/stu_section1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -79,7 +90,7 @@
                             android:id="@+id/stu_s1_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -132,7 +143,7 @@
                             android:id="@+id/stu_s2_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -175,7 +186,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:orientation="vertical">
 
                             <LinearLayout
@@ -201,14 +212,14 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="17"
-                                        android:paddingRight="2dp"
+                                        android:paddingEnd="2dp"
                                         android:textColor="@color/colorText" />
 
                                     <TextView
                                         android:id="@+id/stu_s3_1_price"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="-2dp"
+                                        android:layout_marginStart="-2dp"
                                         android:layout_weight="5"
                                         android:textColor="@color/colorSubDivider" />
 
@@ -240,14 +251,14 @@
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="17"
-                                        android:paddingRight="2dp"
+                                        android:paddingEnd="2dp"
                                         android:textColor="@color/colorText" />
 
                                     <TextView
                                         android:id="@+id/stu_s3_2_price"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="-2dp"
+                                        android:layout_marginStart="-2dp"
                                         android:layout_weight="5"
                                         android:textColor="@color/colorSubDivider" />
 
@@ -291,7 +302,7 @@
                             android:id="@+id/stu_s4_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -334,7 +345,7 @@
                             android:id="@+id/stu_s5_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -387,7 +398,7 @@
                             android:id="@+id/stu_s6_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -430,7 +441,7 @@
                             android:id="@+id/stu_s7_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -473,7 +484,7 @@
                             android:id="@+id/stu_s8_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -526,7 +537,7 @@
                             android:id="@+id/stu_s9_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>
@@ -569,7 +580,7 @@
                             android:id="@+id/stu_s10_menu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="4dp"
+                            android:layout_marginStart="4dp"
                             android:textColor="@color/colorText" />
 
                     </LinearLayout>

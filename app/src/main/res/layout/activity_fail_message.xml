@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main"
     android:padding="16dp"
     tools:context="net.sproutlab.kmufood.activity.FailMessageActivity">
 
@@ -21,9 +20,9 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/img_failmessage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/msg_fail" />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -35,8 +34,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <android.support.design.widget.FloatingActionButton
                         android:id="@+id/btn_retry"
@@ -51,16 +50,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/label_retry"
+                        android:textColor="@color/colorAccent"
                         android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="32dp"
+                    android:layout_marginStart="32dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -77,9 +76,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:text="@string/label_close"
+                        android:textColor="@color/colorAccent"
                         android:textSize="10sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorAccent" />
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -96,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:text="@string/label_feedback"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />

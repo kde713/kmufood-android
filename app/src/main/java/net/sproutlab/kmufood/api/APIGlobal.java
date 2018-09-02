@@ -1,22 +1,15 @@
 package net.sproutlab.kmufood.api;
 
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by kde713 on 2016. 9. 10..
  */
 public class APIGlobal {
-    final static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .readTimeout(15, TimeUnit.SECONDS)
-            .connectTimeout(15, TimeUnit.SECONDS)
+    private static final Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://kmucoop.kookmin.ac.kr/")
+            .addConverterFactory(GsonConverterFactory.create())
             .build();
-    public static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://kmufood-server.herokuapp.com")
-            .client(okHttpClient)
-            .addConverterFactory(new ToStringConverterFactory())
-            .build();
-    public static CallInterface callInterface = retrofit.create(CallInterface.class);
+    public static final CallInterface callInterface = retrofit.create(CallInterface.class);
 }

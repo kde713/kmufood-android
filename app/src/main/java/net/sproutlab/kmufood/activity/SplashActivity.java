@@ -2,8 +2,6 @@ package net.sproutlab.kmufood.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
@@ -13,13 +11,10 @@ import android.widget.Toast;
 import net.sproutlab.kmufood.KMUFoodApplication;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.APIGlobal;
-import net.sproutlab.kmufood.api.MenuJSONParse;
-import net.sproutlab.kmufood.data.Prefdata;
-import net.sproutlab.kmufood.data.chungFooddata;
-import net.sproutlab.kmufood.data.dormFooddata;
-import net.sproutlab.kmufood.data.lawFooddata;
-import net.sproutlab.kmufood.data.staffFooddata;
-import net.sproutlab.kmufood.data.stuFooddata;
+import net.sproutlab.kmufood.api.models.ApiResponse;
+import net.sproutlab.kmufood.utils.DateUtil;
+import net.sproutlab.kmufood.utils.MenuDataHelper;
+import net.sproutlab.kmufood.utils.PrefHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +22,7 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
-    KMUFoodApplication kmuFoodApplication;
+    private KMUFoodApplication kmuFoodApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,119 +35,65 @@ public class SplashActivity extends AppCompatActivity {
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
 
-        Prefdata mTSAdapter = new Prefdata(getApplicationContext());
+        PrefHelper prefHelper = new PrefHelper(getApplicationContext());
 
-        if (!mTSAdapter.checkKey()) {
-            mTSAdapter.patchKey();
-            Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
-            Call<String> call = APIGlobal.callInterface.downloadMenu();
-            call.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()) {
-                        MenuJSONParse jsonparse = new MenuJSONParse(response.body());
-                        lawFooddata mLawfood = new lawFooddata(SplashActivity.this);
-                        mLawfood.saveData(jsonparse.runParse("lawfood"));
-                        stuFooddata mStufood = new stuFooddata(SplashActivity.this);
-                        mStufood.saveData(jsonparse.runParse("stufood"));
-                        staffFooddata mStafffood = new staffFooddata(SplashActivity.this);
-                        mStafffood.saveData(jsonparse.runParse("stafffood"));
-                        chungFooddata mChungfood = new chungFooddata(SplashActivity.this);
-                        mChungfood.saveData(jsonparse.runParse("chungfood"));
-                        dormFooddata mDormfood = new dormFooddata(SplashActivity.this);
-                        mDormfood.saveData(jsonparse.runParse("dormfood"));
-                        Prefdata mTSData = new Prefdata(SplashActivity.this);
-                        mTSData.updateTS();
-                        mHandler.sendEmptyMessage(1);
-                        Message msg = mHandler.obtainMessage();
-                        msg.what = 2;
-                        mHandler.sendMessage(msg);
-                    } else {
-                        Log.d("MenuDownload", "HTTP " + response.code());
-                        mHandler.sendEmptyMessage(1);
-                        Message msg = mHandler.obtainMessage();
-                        msg.what = -1;
-                        mHandler.sendMessage(msg);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    t.printStackTrace();
-                    mHandler.sendEmptyMessage(1);
-                    Message msg = mHandler.obtainMessage();
-                    msg.what = -1;
-                    mHandler.sendMessage(msg);
-                }
-            });
-        } else if (mTSAdapter.checkTS()) {
-            Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
-            Call<String> call = APIGlobal.callInterface.downloadMenu();
-            call.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()) {
-                        MenuJSONParse jsonparse = new MenuJSONParse(response.body());
-                        lawFooddata mLawfood = new lawFooddata(SplashActivity.this);
-                        mLawfood.saveData(jsonparse.runParse("lawfood"));
-                        stuFooddata mStufood = new stuFooddata(SplashActivity.this);
-                        mStufood.saveData(jsonparse.runParse("stufood"));
-                        staffFooddata mStafffood = new staffFooddata(SplashActivity.this);
-                        mStafffood.saveData(jsonparse.runParse("stafffood"));
-                        chungFooddata mChungfood = new chungFooddata(SplashActivity.this);
-                        mChungfood.saveData(jsonparse.runParse("chungfood"));
-                        dormFooddata mDormfood = new dormFooddata(SplashActivity.this);
-                        mDormfood.saveData(jsonparse.runParse("dormfood"));
-                        Prefdata mTSData = new Prefdata(SplashActivity.this);
-                        mTSData.updateTS();
-                        mHandler.sendEmptyMessage(1);
-                        Message msg = mHandler.obtainMessage();
-                        msg.what = 2;
-                        mHandler.sendMessage(msg);
-                    } else {
-                        Log.d("MenuDownload", "HTTP " + response.code());
-                        mHandler.sendEmptyMessage(1);
-                        Message msg = mHandler.obtainMessage();
-                        msg.what = -1;
-                        mHandler.sendMessage(msg);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    t.printStackTrace();
-                    mHandler.sendEmptyMessage(1);
-                    Message msg = mHandler.obtainMessage();
-                    msg.what = -1;
-                    mHandler.sendMessage(msg);
-                }
-            });
+        if (!prefHelper.checkUniqueKey()) {
+            prefHelper.updateKey();
+            updateFromCoop();
+        } else if (prefHelper.needUpdate()) {
+            updateFromCoop();
         } else {
             Toast.makeText(SplashActivity.this, getString(R.string.msg_itsok), Toast.LENGTH_SHORT).show();
-            mSplashHandler.sendEmptyMessageDelayed(0, 0);
-        }
-    }
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case -1:
-                    startActivity((new Intent(SplashActivity.this, FailMessageActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
-                    break;
-                case 2:
-                    mSplashHandler.sendEmptyMessageDelayed(0, 0);
-                    break;
-            }
-        }
-    };
-
-    private Handler mSplashHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
             kmuFoodApplication.setUpdateChecked(true);
             finish();
         }
-    };
+    }
+
+    private void updateFromCoop() {
+        Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
+        final DateUtil.WeekRange weekRange = new DateUtil.WeekRange();
+        Call<ApiResponse> call = APIGlobal.callInterface.coopApi(DateUtil.getStringFromDate(weekRange.getStartDate()), DateUtil.getStringFromDate(weekRange.getEndDate()));
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        MenuDataHelper dataHelper = new MenuDataHelper(getApplicationContext(), weekRange.getStartDate());
+                        ApiResponse body = response.body();
+                        dataHelper.saveChungFood(body.chungFood);
+                        dataHelper.saveDormFood(body.dormFood1, body.dormFood2);
+                        dataHelper.saveLawFood(body.lawFood);
+                        dataHelper.saveStaffFood(body.staffFood);
+                        dataHelper.saveStuFood(body.stuFood);
+                        Log.d("coopApi", "OK");
+                        kmuFoodApplication.setUpdateChecked(true);
+                        finish();
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                        Log.d("coopApi", "Parse Exception (NullPointerException)");
+                        showFailMessage(FailMessageActivity.REASON_UNKNOWN);
+                    }
+                } else {
+                    Log.d("coopApi", "API Failed with STATUS=" + Integer.toString(response.code()));
+                    showFailMessage(FailMessageActivity.REASON_COOPAPI);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                t.printStackTrace();
+                Log.d("coopApi", "Network Error");
+                showFailMessage(FailMessageActivity.REASON_NETWORK);
+            }
+        });
+    }
+
+    private void showFailMessage(int reasonCode) {
+        Intent failActivity = new Intent(SplashActivity.this, FailMessageActivity.class);
+        failActivity.putExtra("reason", reasonCode);
+        failActivity.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(failActivity);
+    }
 
     @Override
     public void onBackPressed() {

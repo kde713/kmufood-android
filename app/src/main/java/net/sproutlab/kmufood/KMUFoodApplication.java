@@ -6,7 +6,7 @@ import android.app.Application;
  * Created by kde713 on 2016. 9. 12..
  */
 public class KMUFoodApplication extends Application {
-    public boolean isUpdateChecked = false;
+    private boolean isUpdateChecked = false;
 
     public boolean isUpdateChecked() {
         return isUpdateChecked;

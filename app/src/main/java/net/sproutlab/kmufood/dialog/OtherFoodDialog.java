@@ -3,7 +3,6 @@ package net.sproutlab.kmufood.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 
 import net.sproutlab.kmufood.R;
@@ -14,7 +13,7 @@ import net.sproutlab.kmufood.activity.SettingActivity;
  */
 public class OtherFoodDialog extends Dialog implements View.OnClickListener {
 
-    Context c;
+    private final Context c;
 
     public OtherFoodDialog(Context context) {
         super(context);

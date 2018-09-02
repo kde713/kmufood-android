@@ -5,7 +5,7 @@ import android.support.v7.widget.CardView;
 /**
  * Created by kde713 on 2016. 9. 7..
  */
-public interface CardAdapter {
+interface CardAdapter {
 
     int MAX_ELEVATION_FACTOR = 8;
 
