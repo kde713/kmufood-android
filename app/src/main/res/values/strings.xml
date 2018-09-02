@@ -29,9 +29,8 @@
     <string name="dialog_otherfood_title">식당을 골라주세요</string>
     <string name="dialog_feedback_title">개발자와 연락하세요</string>
 
-    <string name="feedback_c1">카카오톡</string>
-    <string name="feedback_c2">페이스북</string>
-    <string name="feedback_c3">이메일</string>
+    <string name="feedback_c1">이메일</string>
+    <string name="feedback_c2">Github</string>
 
     <string name="nav_prefer1">학생</string>
     <string name="nav_prefer2">한울</string>
