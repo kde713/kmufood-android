@@ -20,24 +20,24 @@ import java.util.List;
 /**
  * Created by kde713 on 2016. 9. 7..
  */
-public class ChunglistAdapter extends PagerAdapter implements CardAdapter {
-    private List<CardView> mViews = new ArrayList<>();
+public class LawListAdapter extends PagerAdapter implements CardAdapter {
 
+    private List<CardView> mViews = new ArrayList<>();
     private String[] dayTitles;
-    private Sikdan[][] chungMenu;
+    private Sikdan[][] lawMenu;
     private float mBaseElevation;
     private Context c;
 
-    public ChunglistAdapter(Context c) {
+    public LawListAdapter(Context c) {
         this.c = c;
-        this.chungMenu = (new MenuDataHelper(c)).loadChungFood();
+        this.lawMenu = (new MenuDataHelper(c)).loadLawFood();
         this.dayTitles = new String[]{
                 c.getString(R.string.monday), c.getString(R.string.tuesday),
                 c.getString(R.string.wednesday), c.getString(R.string.thursday),
-                c.getString(R.string.friday), c.getString(R.string.saturday)
+                c.getString(R.string.friday)
         };
         for (String ignored : this.dayTitles) {
-            this.mViews.add(null);
+            mViews.add(null);
         }
     }
 
@@ -64,52 +64,52 @@ public class ChunglistAdapter extends PagerAdapter implements CardAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext())
-                .inflate(R.layout.card_chungfood, container, false);
+                .inflate(R.layout.card_lawfood, container, false);
 
         /* Setting up view */
         int[] containerset = {
-                R.id.chung_section1,
-                R.id.chung_section2,
-                R.id.chung_section3,
-                R.id.chung_section4,
-                R.id.chung_section5,
-                R.id.chung_section6,
-                R.id.chung_section7
+                R.id.law_section1,
+                R.id.law_section2,
+                R.id.law_section3,
+                R.id.law_section4,
+                R.id.law_section5,
+                R.id.law_section6,
+                R.id.law_section7
         };
         int[] foodset = {
-                R.id.chung_s1_menu,
-                R.id.chung_s2_menu,
-                R.id.chung_s3_menu,
-                R.id.chung_s4_menu,
-                R.id.chung_s5_menu,
-                R.id.chung_s6_menu,
-                R.id.chung_s7_menu
+                R.id.law_s1_menu,
+                R.id.law_s2_menu,
+                R.id.law_s3_menu,
+                R.id.law_s4_menu,
+                R.id.law_s5_menu,
+                R.id.law_s6_menu,
+                R.id.law_s7_menu
         };
         int[] priceset = {
-                R.id.chung_s1_price,
-                R.id.chung_s2_price,
-                R.id.chung_s3_price,
-                R.id.chung_s4_price,
-                R.id.chung_s5_price,
-                R.id.chung_s6_price,
-                R.id.chung_s7_price
+                R.id.law_s1_price,
+                R.id.law_s2_price,
+                R.id.law_s3_price,
+                R.id.law_s4_price,
+                R.id.law_s5_price,
+                R.id.law_s6_price,
+                R.id.law_s7_price
         };
 
         ((TextView) view.findViewById(R.id.card_title)).setText(dayTitles[position]);
 
         int emptyCount = 0;
 
-        for (int i = 0; i < chungMenu[position].length; i++) {
-            if (chungMenu[position][i].menu.isEmpty()) {
+        for (int i = 0; i < lawMenu[position].length; i++) {
+            if (lawMenu[position][i].menu.isEmpty()) {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(chungMenu[position][i].menu);
-                ((TextView) view.findViewById(priceset[i])).setText(chungMenu[position][i].price);
+                ((TextView) view.findViewById(foodset[i])).setText(lawMenu[position][i].menu);
+                ((TextView) view.findViewById(priceset[i])).setText(lawMenu[position][i].menu);
             }
         }
 
-        if (emptyCount >= chungMenu[position].length) {
+        if (emptyCount >= lawMenu[position].length) {
             view.findViewById(R.id.card_content).setVisibility(View.GONE);
             view.findViewById(R.id.card_nomsg).setVisibility(View.VISIBLE);
         }
@@ -117,7 +117,7 @@ public class ChunglistAdapter extends PagerAdapter implements CardAdapter {
         view.findViewById(R.id.btn_foodinfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                (new FoodInfoDialog(c, c.getString(R.string.chung_title), c.getString(R.string.temp_foodinfo_chungfood))).show();
+                (new FoodInfoDialog(c, c.getString(R.string.law_title), c.getString(R.string.temp_foodinfo_lawfood))).show();
             }
         });
 

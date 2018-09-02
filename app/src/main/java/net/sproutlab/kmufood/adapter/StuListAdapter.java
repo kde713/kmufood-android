@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by kde713 on 2016. 9. 7..
  */
-public class StulistAdapter extends PagerAdapter implements CardAdapter {
+public class StuListAdapter extends PagerAdapter implements CardAdapter {
 
     private List<CardView> mViews = new ArrayList<>();
     private String[] dayTitles;
@@ -28,7 +28,7 @@ public class StulistAdapter extends PagerAdapter implements CardAdapter {
     private float mBaseElevation;
     private Context c;
 
-    public StulistAdapter(Context c) {
+    public StuListAdapter(Context c) {
         this.c = c;
         this.stuMenu = (new MenuDataHelper(c)).loadStuFood();
         this.dayTitles = new String[]{

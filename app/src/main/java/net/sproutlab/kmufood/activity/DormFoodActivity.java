@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.adapter.DormlistAdapter;
+import net.sproutlab.kmufood.adapter.DormListAdapter;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
 import net.sproutlab.kmufood.dialog.OtherFoodDialog;
 import net.sproutlab.kmufood.dialog.OtherFoodInterface;
@@ -25,7 +25,7 @@ public class DormFoodActivity extends AppCompatActivity implements View.OnClickL
     private boolean isFavorite = false;
 
     private ViewPager mViewPager;
-    private DormlistAdapter mAdapter;
+    private DormListAdapter mAdapter;
     private ShadowTransformer mCardShadowTransformer;
 
     @Override
@@ -37,7 +37,7 @@ public class DormFoodActivity extends AppCompatActivity implements View.OnClickL
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
         prefHelper = new PrefHelper(this);
-        mAdapter = new DormlistAdapter(this);
+        mAdapter = new DormListAdapter(this);
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
 
         Calendar c = Calendar.getInstance();

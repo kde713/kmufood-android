@@ -20,21 +20,21 @@ import java.util.List;
 /**
  * Created by kde713 on 2016. 9. 7..
  */
-public class StafflistAdapter extends PagerAdapter implements CardAdapter {
-
+public class ChungListAdapter extends PagerAdapter implements CardAdapter {
     private List<CardView> mViews = new ArrayList<>();
+
     private String[] dayTitles;
-    private Sikdan[][] staffMenu;
+    private Sikdan[][] chungMenu;
     private float mBaseElevation;
     private Context c;
 
-    public StafflistAdapter(Context c) {
+    public ChungListAdapter(Context c) {
         this.c = c;
-        this.staffMenu = (new MenuDataHelper(c)).loadStaffFood();
+        this.chungMenu = (new MenuDataHelper(c)).loadChungFood();
         this.dayTitles = new String[]{
                 c.getString(R.string.monday), c.getString(R.string.tuesday),
                 c.getString(R.string.wednesday), c.getString(R.string.thursday),
-                c.getString(R.string.friday)
+                c.getString(R.string.friday), c.getString(R.string.saturday)
         };
         for (String ignored : this.dayTitles) {
             this.mViews.add(null);
@@ -64,43 +64,52 @@ public class StafflistAdapter extends PagerAdapter implements CardAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext())
-                .inflate(R.layout.card_stafffood, container, false);
+                .inflate(R.layout.card_chungfood, container, false);
 
         /* Setting up view */
         int[] containerset = {
-                R.id.staff_section1,
-                R.id.staff_section2,
-                R.id.staff_section3,
-                R.id.staff_section4
+                R.id.chung_section1,
+                R.id.chung_section2,
+                R.id.chung_section3,
+                R.id.chung_section4,
+                R.id.chung_section5,
+                R.id.chung_section6,
+                R.id.chung_section7
         };
         int[] foodset = {
-                R.id.staff_s1_menu,
-                R.id.staff_s2_menu,
-                R.id.staff_s3_menu,
-                R.id.staff_s4_menu
+                R.id.chung_s1_menu,
+                R.id.chung_s2_menu,
+                R.id.chung_s3_menu,
+                R.id.chung_s4_menu,
+                R.id.chung_s5_menu,
+                R.id.chung_s6_menu,
+                R.id.chung_s7_menu
         };
         int[] priceset = {
-                R.id.staff_s1_price,
-                R.id.staff_s2_price,
-                R.id.staff_s3_price,
-                R.id.staff_s4_price
+                R.id.chung_s1_price,
+                R.id.chung_s2_price,
+                R.id.chung_s3_price,
+                R.id.chung_s4_price,
+                R.id.chung_s5_price,
+                R.id.chung_s6_price,
+                R.id.chung_s7_price
         };
 
         ((TextView) view.findViewById(R.id.card_title)).setText(dayTitles[position]);
 
         int emptyCount = 0;
 
-        for (int i = 0; i < staffMenu[position].length; i++) {
-            if (staffMenu[position][i].menu.isEmpty()) {
+        for (int i = 0; i < chungMenu[position].length; i++) {
+            if (chungMenu[position][i].menu.isEmpty()) {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(staffMenu[position][i].menu);
-                ((TextView) view.findViewById(priceset[i])).setText(staffMenu[position][i].price);
+                ((TextView) view.findViewById(foodset[i])).setText(chungMenu[position][i].menu);
+                ((TextView) view.findViewById(priceset[i])).setText(chungMenu[position][i].price);
             }
         }
 
-        if (emptyCount >= staffMenu[position].length) {
+        if (emptyCount >= chungMenu[position].length) {
             view.findViewById(R.id.card_content).setVisibility(View.GONE);
             view.findViewById(R.id.card_nomsg).setVisibility(View.VISIBLE);
         }
@@ -108,7 +117,7 @@ public class StafflistAdapter extends PagerAdapter implements CardAdapter {
         view.findViewById(R.id.btn_foodinfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                (new FoodInfoDialog(c, c.getString(R.string.staff_title), c.getString(R.string.temp_foodinfo_stafffood))).show();
+                (new FoodInfoDialog(c, c.getString(R.string.chung_title), c.getString(R.string.temp_foodinfo_chungfood))).show();
             }
         });
 

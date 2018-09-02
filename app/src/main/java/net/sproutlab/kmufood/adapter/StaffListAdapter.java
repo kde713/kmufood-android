@@ -20,22 +20,21 @@ import java.util.List;
 /**
  * Created by kde713 on 2016. 9. 7..
  */
-public class DormlistAdapter extends PagerAdapter implements CardAdapter {
+public class StaffListAdapter extends PagerAdapter implements CardAdapter {
 
     private List<CardView> mViews = new ArrayList<>();
     private String[] dayTitles;
-    private Sikdan[][] dormMenu;
+    private Sikdan[][] staffMenu;
     private float mBaseElevation;
     private Context c;
 
-    public DormlistAdapter(Context c) {
+    public StaffListAdapter(Context c) {
         this.c = c;
-        this.dormMenu = (new MenuDataHelper(c)).loadDormFood();
+        this.staffMenu = (new MenuDataHelper(c)).loadStaffFood();
         this.dayTitles = new String[]{
                 c.getString(R.string.monday), c.getString(R.string.tuesday),
                 c.getString(R.string.wednesday), c.getString(R.string.thursday),
-                c.getString(R.string.friday), c.getString(R.string.saturday),
-                c.getString(R.string.sunday)
+                c.getString(R.string.friday)
         };
         for (String ignored : this.dayTitles) {
             this.mViews.add(null);
@@ -65,44 +64,43 @@ public class DormlistAdapter extends PagerAdapter implements CardAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext())
-                .inflate(R.layout.card_dormfood, container, false);
+                .inflate(R.layout.card_stafffood, container, false);
 
         /* Setting up view */
         int[] containerset = {
-                R.id.dorm_section1,
-                R.id.dorm_section2_1, R.id.dorm_section2_2,
-                R.id.dorm_section3
+                R.id.staff_section1,
+                R.id.staff_section2,
+                R.id.staff_section3,
+                R.id.staff_section4
         };
         int[] foodset = {
-                R.id.dorm_s1_menu,
-                R.id.dorm_s2_1_menu, R.id.dorm_s2_2_menu,
-                R.id.dorm_s3_menu
+                R.id.staff_s1_menu,
+                R.id.staff_s2_menu,
+                R.id.staff_s3_menu,
+                R.id.staff_s4_menu
         };
         int[] priceset = {
-                R.id.dorm_s1_price,
-                R.id.dorm_s2_1_price, R.id.dorm_s2_2_price,
-                R.id.dorm_s3_price
+                R.id.staff_s1_price,
+                R.id.staff_s2_price,
+                R.id.staff_s3_price,
+                R.id.staff_s4_price
         };
 
         ((TextView) view.findViewById(R.id.card_title)).setText(dayTitles[position]);
 
         int emptyCount = 0;
 
-        for (int i = 0; i < dormMenu[position].length; i++) {
-            if (dormMenu[position][i].menu.isEmpty()) {
+        for (int i = 0; i < staffMenu[position].length; i++) {
+            if (staffMenu[position][i].menu.isEmpty()) {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(dormMenu[position][i].menu);
-                ((TextView) view.findViewById(priceset[i])).setText(dormMenu[position][i].price);
+                ((TextView) view.findViewById(foodset[i])).setText(staffMenu[position][i].menu);
+                ((TextView) view.findViewById(priceset[i])).setText(staffMenu[position][i].price);
             }
         }
 
-        if (dormMenu[position][1].menu.isEmpty() && dormMenu[position][2].menu.isEmpty()) {
-            view.findViewById(R.id.dorm_section2).setVisibility(View.GONE);
-        }
-
-        if (emptyCount >= dormMenu[position].length) {
+        if (emptyCount >= staffMenu[position].length) {
             view.findViewById(R.id.card_content).setVisibility(View.GONE);
             view.findViewById(R.id.card_nomsg).setVisibility(View.VISIBLE);
         }
@@ -110,7 +108,7 @@ public class DormlistAdapter extends PagerAdapter implements CardAdapter {
         view.findViewById(R.id.btn_foodinfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                (new FoodInfoDialog(c, c.getString(R.string.dorm_title), c.getString(R.string.temp_foodinfo_dormfood))).show();
+                (new FoodInfoDialog(c, c.getString(R.string.staff_title), c.getString(R.string.temp_foodinfo_stafffood))).show();
             }
         });
 

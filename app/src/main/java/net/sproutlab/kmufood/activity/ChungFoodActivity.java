@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import net.sproutlab.kmufood.R;
-import net.sproutlab.kmufood.adapter.ChunglistAdapter;
+import net.sproutlab.kmufood.adapter.ChungListAdapter;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
 import net.sproutlab.kmufood.dialog.OtherFoodDialog;
 import net.sproutlab.kmufood.dialog.OtherFoodInterface;
@@ -25,7 +25,7 @@ public class ChungFoodActivity extends AppCompatActivity implements View.OnClick
     private boolean isFavorite;
 
     private ViewPager mViewPager;
-    private ChunglistAdapter mAdapter;
+    private ChungListAdapter mAdapter;
     private ShadowTransformer mCardShadowTransformer;
 
     @Override
@@ -37,7 +37,7 @@ public class ChungFoodActivity extends AppCompatActivity implements View.OnClick
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
         prefHelper = new PrefHelper(this);
-        mAdapter = new ChunglistAdapter(this);
+        mAdapter = new ChungListAdapter(this);
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
 
         Calendar c = Calendar.getInstance();

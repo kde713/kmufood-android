@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
-import net.sproutlab.kmufood.adapter.StulistAdapter;
+import net.sproutlab.kmufood.adapter.StuListAdapter;
 import net.sproutlab.kmufood.dialog.OtherFoodDialog;
 import net.sproutlab.kmufood.dialog.OtherFoodInterface;
 import net.sproutlab.kmufood.utils.PrefHelper;
@@ -25,7 +25,7 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
     private boolean isFavorite = false;
 
     private ViewPager mViewPager;
-    private StulistAdapter mAdapter;
+    private StuListAdapter mAdapter;
     private ShadowTransformer mCardShadowTransformer;
 
     @Override
@@ -37,7 +37,7 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
         prefHelper = new PrefHelper(this);
-        mAdapter = new StulistAdapter(this);
+        mAdapter = new StuListAdapter(this);
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
 
         Calendar c = Calendar.getInstance();
