@@ -4,9 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class DateUtil {
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
 
     public static String getStringFromDate(Date date) {
         return dateFormat.format(date);
@@ -24,8 +25,8 @@ public class DateUtil {
     }
 
     public static class WeekRange {
-        private Date startDate;
-        private Date endDate;
+        private final Date startDate;
+        private final Date endDate;
 
         public WeekRange() {
             Calendar startCal = Calendar.getInstance();

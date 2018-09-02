@@ -24,31 +24,27 @@ public class StaffFoodActivity extends AppCompatActivity implements View.OnClick
     private ImageButton btn_favorite;
     private boolean isFavorite = false;
 
-    private ViewPager mViewPager;
-    private StaffListAdapter mAdapter;
-    private ShadowTransformer mCardShadowTransformer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stafffood);
 
-        btn_favorite = (ImageButton) findViewById(R.id.btn_favorite);
-        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        btn_favorite = findViewById(R.id.btn_favorite);
+        ViewPager viewPager = findViewById(R.id.viewPager);
 
         prefHelper = new PrefHelper(this);
-        mAdapter = new StaffListAdapter(this);
-        mCardShadowTransformer = new ShadowTransformer(mViewPager, mAdapter);
+        StaffListAdapter listAdapter = new StaffListAdapter(this);
+        ShadowTransformer cardShadowTransformer = new ShadowTransformer(viewPager, listAdapter);
 
         Calendar c = Calendar.getInstance();
         int curindex = c.get(Calendar.DAY_OF_WEEK);
         if (curindex == 1 || curindex == 7) curindex = 0;
         else curindex -= 2;
 
-        mViewPager.setAdapter(mAdapter);
-        mViewPager.setPageTransformer(true, mCardShadowTransformer);
-        mViewPager.setOffscreenPageLimit(3);
-        mViewPager.setCurrentItem(curindex);
+        viewPager.setAdapter(listAdapter);
+        viewPager.setPageTransformer(true, cardShadowTransformer);
+        viewPager.setOffscreenPageLimit(3);
+        viewPager.setCurrentItem(curindex);
 
         updatePreferIndicator();
 

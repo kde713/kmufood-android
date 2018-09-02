@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ContentDescription" severity="ignore" />
+    <issue id="ApplySharedPref">
+        <ignore path="**/MenuDataHelper.java" />
+    </issue>
+    <issue id="RelativeOverlap">
+        <ignore path="**/dialog_*.xml" />
+    </issue>
+    <issue id="RtlSymmetry" severity="ignore" />
+    <issue id="TooManyViews">
+        <ignore path="**/card_stufood.xml" />
+    </issue>
+    <issue id="TooDeepLayout">
+        <ignore path="**/card_stufood.xml" />
+    </issue>
+    <issue id="AllowBackup" severity="ignore" />
+    <issue id="FullBackupContent" severity="ignore" />
+    <issue id="SmallSp" severity="ignore" />
+    <issue id="Typos" severity="ignore" />
+</lint>

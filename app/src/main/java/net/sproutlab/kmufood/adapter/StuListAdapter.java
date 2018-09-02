@@ -2,7 +2,6 @@ package net.sproutlab.kmufood.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -137,7 +136,7 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
         });
 
         container.addView(view);
-        CardView cardView = (CardView) view.findViewById(R.id.cardView);
+        CardView cardView = view.findViewById(R.id.cardView);
 
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
@@ -149,8 +148,7 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
     }
 
     @Override
-    public void destroyItem(View container, int position, Object object) {
-        ((ViewPager) container).removeView((View) object);
-//        super.destroyItem(container, position, object);
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
     }
 }

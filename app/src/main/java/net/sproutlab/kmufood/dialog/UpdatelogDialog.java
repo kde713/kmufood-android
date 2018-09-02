@@ -14,7 +14,7 @@ public class UpdatelogDialog extends Dialog implements View.OnClickListener {
 
     public UpdatelogDialog(Context context, String APP_VER) {
         super(context);
-        setContentView(R.layout.dialog_foodinfo);
+        setContentView(R.layout.dialog_updatelog);
 
         findViewById(R.id.btn_close).setOnClickListener(this);
 

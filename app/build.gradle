@@ -11,6 +11,11 @@ android {
         versionCode 21
         versionName "2.0.3"
     }
+
+    lintOptions {
+        lintConfig file('lint.xml')
+    }
+
     buildTypes {
         release {
             minifyEnabled false

@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
-    KMUFoodApplication kmuFoodApplication;
+    private KMUFoodApplication kmuFoodApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

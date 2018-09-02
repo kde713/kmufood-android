@@ -20,7 +20,7 @@ public class PrefHelper {
     private final String KEY_UNIQUEKEY = "key";
     private final String KEY_PREFERFOOD = "preferfood";
 
-    private Context prefContext;
+    private final Context prefContext;
 
     public PrefHelper(Context c) {
         prefContext = c;

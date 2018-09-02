@@ -13,7 +13,7 @@ import net.sproutlab.kmufood.R;
  */
 public class FeedbackDialog extends Dialog implements View.OnClickListener {
 
-    Context c;
+    private final Context c;
 
     public FeedbackDialog(Context context) {
         super(context);

@@ -17,13 +17,13 @@ import de.psdev.licensesdialog.LicensesDialog;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    PrefHelper prefHelper;
+    private PrefHelper prefHelper;
 
-    TextView txt_prefer;
-    TextView txt_dataver_date;
-    TextView txt_dataver_msg;
+    private TextView txt_prefer;
+    private TextView txt_dataver_date;
+    private TextView txt_dataver_msg;
 
-    String APP_VER;
+    private String APP_VER;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.btn_updatelog).setOnClickListener(this);
         findViewById(R.id.btn_opensource).setOnClickListener(this);
 
-        txt_prefer = (TextView) findViewById(R.id.setting_prefer_msg);
-        txt_dataver_date = (TextView) findViewById(R.id.setting_dataver_label_date);
-        txt_dataver_msg = (TextView) findViewById(R.id.setting_dataver_label_msg);
+        txt_prefer = findViewById(R.id.setting_prefer_msg);
+        txt_dataver_date = findViewById(R.id.setting_dataver_label_date);
+        txt_dataver_msg = findViewById(R.id.setting_dataver_label_msg);
 
         switch (prefHelper.getPreferFood()) {
             case "stu":

@@ -30,10 +30,10 @@ public class FailMessageActivity extends AppCompatActivity {
     public static final int REASON_COOPAPI = 2;
     public static final int REASON_UNKNOWN = 3;
 
-    ProgressDialog loadingDiag;
-    PrefHelper prefHelper;
+    private ProgressDialog loadingDiag;
+    private PrefHelper prefHelper;
 
-    KMUFoodApplication kmuFoodApplication;
+    private KMUFoodApplication kmuFoodApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,14 +83,14 @@ public class FailMessageActivity extends AppCompatActivity {
                 failImageId = R.drawable.msg_fail_network;
                 break;
             case REASON_COOPAPI:
-                failImageId = R.drawable.msg_fail_network;
+                failImageId = R.drawable.msg_fail_coopapi;
                 break;
         }
         ((ImageView) findViewById(R.id.img_failmessage)).setImageResource(failImageId);
     }
 
 
-    ImageButton.OnClickListener mListner = new ImageButton.OnClickListener() {
+    private final ImageButton.OnClickListener mListner = new ImageButton.OnClickListener() {
 
         @Override
         public void onClick(View v) {

@@ -13,9 +13,6 @@
     <string name="label_close">닫기</string>
     <string name="label_feedback">버그신고/피드백</string>
     <string name="label_setting">설정/정보</string>
-    <string name="label_contact_kakaotalk">카카오톡으로 연락하기</string>
-    <string name="label_contact_email">메일로 연락하기</string>
-    <string name="label_contact_facebook">Facebook으로 연락하기</string>
     <string name="label_opensource">오픈소스 라이센스</string>
     <string name="label_updatelog">%1$s 변경 사항</string>
 
@@ -116,9 +113,6 @@
         \n개발, 총괄(진짜 무급): 김동언
         \n디자인, 노예(무급): 김현곤
     </string>
-
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="temp_foodinfo_stufood">
         * 운영시간\n\n

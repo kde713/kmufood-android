@@ -12,8 +12,8 @@ import net.sproutlab.kmufood.utils.PrefHelper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    PrefHelper prefHelper;
-    KMUFoodApplication kmuFoodApplication;
+    private PrefHelper prefHelper;
+    private KMUFoodApplication kmuFoodApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
