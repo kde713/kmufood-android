@@ -103,8 +103,8 @@ public class LawListAdapter extends PagerAdapter implements CardAdapter {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(StringUtil.processMenuString(lawMenu[position][i].menu));
-                ((TextView) view.findViewById(priceset[i])).setText(StringUtil.processMenuString(lawMenu[position][i].price));
+                ((TextView) view.findViewById(foodset[i])).setText(lawMenu[position][i].menu);
+                ((TextView) view.findViewById(priceset[i])).setText(lawMenu[position][i].price);
             }
         }
 

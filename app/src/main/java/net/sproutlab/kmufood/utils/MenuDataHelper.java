@@ -51,8 +51,8 @@ public class MenuDataHelper {
             String foodCode, String dayKey, String labelKey,
             Sikdan sikdan
     ) {
-        prefEditor.putString(String.format("%s_%s_%s_menu", foodCode, dayKey, labelKey), sikdan.menu);
-        prefEditor.putString(String.format("%s_%s_%s_price", foodCode, dayKey, labelKey), sikdan.price);
+        prefEditor.putString(String.format("%s_%s_%s_menu", foodCode, dayKey, labelKey), StringUtil.processMenuString(sikdan.menu));
+        prefEditor.putString(String.format("%s_%s_%s_price", foodCode, dayKey, labelKey), StringUtil.processMenuString(sikdan.price));
     }
 
     private Sikdan loadMenuData(String foodCode, String dayKey, String labelKey) {

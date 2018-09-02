@@ -94,8 +94,8 @@ public class StaffListAdapter extends PagerAdapter implements CardAdapter {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(StringUtil.processMenuString(staffMenu[position][i].menu));
-                ((TextView) view.findViewById(priceset[i])).setText(StringUtil.processMenuString(staffMenu[position][i].price));
+                ((TextView) view.findViewById(foodset[i])).setText(staffMenu[position][i].menu);
+                ((TextView) view.findViewById(priceset[i])).setText(staffMenu[position][i].price);
             }
         }
 

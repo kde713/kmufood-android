@@ -113,8 +113,8 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(StringUtil.processMenuString(stuMenu[position][i].menu));
-                ((TextView) view.findViewById(priceset[i])).setText(StringUtil.processMenuString(stuMenu[position][i].price));
+                ((TextView) view.findViewById(foodset[i])).setText(stuMenu[position][i].menu);
+                ((TextView) view.findViewById(priceset[i])).setText(stuMenu[position][i].price);
             }
         }
 
