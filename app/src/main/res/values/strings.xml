@@ -101,6 +101,8 @@
     <string name="chung_section6">메뉴6</string>
     <string name="chung_section7">메뉴7</string>
 
+    <string name="null_title">없음</string>
+
     <string name="setting_title">설정/정보</string>
     <string name="setting_prefer">선호 식당</string>
     <string name="setting_dataver">식단\n데이터</string>

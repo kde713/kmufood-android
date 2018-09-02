@@ -58,6 +58,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case "chung":
                 txt_prefer.setText(getString(R.string.chung_title));
                 break;
+            default:
+                txt_prefer.setText(getString(R.string.null_title));
+                break;
         }
         txt_dataver_date.setText(prefHelper.getLastUpdate());
         if (prefHelper.needUpdate())

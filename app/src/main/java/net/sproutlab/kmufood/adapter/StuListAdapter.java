@@ -15,6 +15,7 @@ import net.sproutlab.kmufood.utils.MenuDataHelper;
 import net.sproutlab.kmufood.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ import java.util.List;
  */
 public class StuListAdapter extends PagerAdapter implements CardAdapter {
 
-    private List<CardView> mViews = new ArrayList<>();
+    private List<CardView> viewList;
     private String[] dayTitles;
     private Sikdan[][] stuMenu;
     private float mBaseElevation;
@@ -37,9 +38,7 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
                 c.getString(R.string.friday), c.getString(R.string.saturday),
                 c.getString(R.string.sunday)
         };
-        for (String ignored : this.dayTitles) {
-            this.mViews.add(null);
-        }
+        this.viewList = new ArrayList<>(Collections.<CardView>nCopies(this.dayTitles.length, null));
     }
 
     @Override
@@ -49,7 +48,7 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
 
     @Override
     public CardView getCardViewAt(int position) {
-        return mViews.get(position);
+        return viewList.get(position);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == object;
+        return view.equals(object);
     }
 
     @Override
@@ -143,7 +142,7 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
         }
 
         cardView.setMaxCardElevation(mBaseElevation * MAX_ELEVATION_FACTOR);
-        mViews.set(position, cardView);
+        viewList.set(position, cardView);
         return view;
     }
 

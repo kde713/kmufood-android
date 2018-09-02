@@ -77,13 +77,16 @@ public class FailMessageActivity extends AppCompatActivity {
     }
 
     private void updateFailImage(int reasonCode) {
-        int failImageId = R.drawable.msg_fail_unknown;
+        int failImageId;
         switch (reasonCode) {
             case REASON_NETWORK:
                 failImageId = R.drawable.msg_fail_network;
                 break;
             case REASON_COOPAPI:
                 failImageId = R.drawable.msg_fail_coopapi;
+                break;
+            default:
+                failImageId = R.drawable.msg_fail_unknown;
                 break;
         }
         ((ImageView) findViewById(R.id.img_failmessage)).setImageResource(failImageId);
