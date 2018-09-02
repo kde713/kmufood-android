@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.adapter.ShadowTransformer;
@@ -23,6 +24,8 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
     private PrefHelper prefHelper;
     private ImageButton btn_favorite;
     private boolean isFavorite = false;
+
+    private long backPressedAt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,20 +88,39 @@ public class StuFoodActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    public void onBackPressed() {
+        if (backPressedAt + 2000 > System.currentTimeMillis()) {
+            this.finishAffinity();
+        } else {
+            Toast.makeText(getBaseContext(), getString(R.string.msg_exit), Toast.LENGTH_SHORT).show();
+        }
+        backPressedAt = System.currentTimeMillis();
+    }
+
+    @Override
     public void switchAction(String foodcode) {
-        switch (foodcode) {
-            case "law":
-                startActivity((new Intent(this, LawFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                break;
-            case "staff":
-                startActivity((new Intent(this, StaffFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                break;
-            case "dorm":
-                startActivity((new Intent(this, DormFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                break;
-            case "chung":
-                startActivity((new Intent(this, ChungFoodActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                break;
+        if (!foodcode.equals(FOOD_CODE)) {
+            Intent newActivity;
+            switch (foodcode) {
+                case "chung":
+                    newActivity = new Intent(this, ChungFoodActivity.class);
+                    break;
+                case "stu":
+                    newActivity = new Intent(this, StuFoodActivity.class);
+                    break;
+                case "law":
+                    newActivity = new Intent(this, LawFoodActivity.class);
+                    break;
+                case "staff":
+                    newActivity = new Intent(this, StuFoodActivity.class);
+                    break;
+                case "dorm":
+                    newActivity = new Intent(this, DormFoodActivity.class);
+                    break;
+                default:
+                    return;
+            }
+            startActivity(newActivity);
         }
     }
 }
