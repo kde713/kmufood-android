@@ -2,14 +2,13 @@ package net.sproutlab.kmufood.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import net.sproutlab.kmufood.KMUFoodApplication;
@@ -27,6 +26,9 @@ import retrofit2.Response;
 
 public class FailMessageActivity extends AppCompatActivity {
 
+    public static final int REASON_NETWORK = 1;
+    public static final int REASON_COOPAPI = 2;
+
     ProgressDialog loadingDiag;
     PrefHelper prefHelper;
 
@@ -42,6 +44,18 @@ public class FailMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fail_message);
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
+
+        int reasonCode = getIntent().getIntExtra("reason", REASON_COOPAPI);
+        int failImageId = R.drawable.msg_fail;
+        switch (reasonCode) {
+            case REASON_NETWORK:
+                failImageId = R.drawable.msg_fail;
+                break;
+            case REASON_COOPAPI:
+                failImageId = R.drawable.msg_fail;
+                break;
+        }
+        ((ImageView) findViewById(R.id.img_failmessage)).setImageResource(failImageId);
 
         prefHelper = new PrefHelper(getApplicationContext());
 

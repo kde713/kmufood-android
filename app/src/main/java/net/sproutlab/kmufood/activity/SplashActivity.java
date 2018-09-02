@@ -71,11 +71,11 @@ public class SplashActivity extends AppCompatActivity {
                     } catch (NullPointerException e) {
                         e.printStackTrace();
                         Log.d("coopApi", "Parse Exception (NullPointerException)");
-                        showFailMessage();
+                        showFailMessage(FailMessageActivity.REASON_COOPAPI);
                     }
                 } else {
                     Log.d("coopApi", "API Failed with STATUS=" + Integer.toString(response.code()));
-                    showFailMessage();
+                    showFailMessage(FailMessageActivity.REASON_COOPAPI);
                 }
             }
 
@@ -83,13 +83,16 @@ public class SplashActivity extends AppCompatActivity {
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 t.printStackTrace();
                 Log.d("coopApi", "Network Error");
-                showFailMessage();
+                showFailMessage(FailMessageActivity.REASON_NETWORK);
             }
         });
     }
 
-    private void showFailMessage() {
-        startActivity((new Intent(SplashActivity.this, FailMessageActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+    private void showFailMessage(int reasonCode) {
+        Intent failActivity = new Intent(SplashActivity.this, FailMessageActivity.class);
+        failActivity.putExtra("reason", reasonCode);
+        failActivity.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(failActivity);
     }
 
     @Override
