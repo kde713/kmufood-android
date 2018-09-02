@@ -307,3 +307,6 @@ $RECYCLE.BIN/
 
 
 # End of https://www.gitignore.io/api/macos,linux,android,windows,jetbrains+all,androidstudio
+
+### Custom ignore
+app/release/output.json
