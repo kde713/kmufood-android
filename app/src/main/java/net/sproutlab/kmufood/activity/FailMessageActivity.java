@@ -15,7 +15,10 @@ import android.widget.Toast;
 import net.sproutlab.kmufood.KMUFoodApplication;
 import net.sproutlab.kmufood.R;
 import net.sproutlab.kmufood.api.APIGlobal;
+import net.sproutlab.kmufood.api.models.ApiResponse;
 import net.sproutlab.kmufood.dialog.FeedbackDialog;
+import net.sproutlab.kmufood.utils.DateUtil;
+import net.sproutlab.kmufood.utils.MenuDataHelper;
 import net.sproutlab.kmufood.utils.PrefHelper;
 
 import retrofit2.Call;
@@ -62,6 +65,11 @@ public class FailMessageActivity extends AppCompatActivity {
         loadingDiag.dismiss();
     }
 
+    private void showFailMessage() {
+        loadingDiag.dismiss();
+        Toast.makeText(FailMessageActivity.this, getString(R.string.msg_refail), Toast.LENGTH_LONG).show();
+    }
+
 
     ImageButton.OnClickListener mListner = new ImageButton.OnClickListener() {
 
@@ -70,66 +78,48 @@ public class FailMessageActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_retry:
                     loadingDiag.show();
-//                    Call<String> call = APIGlobal.callInterface.downloadMenu();
-//                    call.enqueue(new Callback<String>() {
-//                        @Override
-//                        public void onResponse(Call<String> call, Response<String> response) {
-//                            if (response.isSuccessful()) {
-////                                MenuJSONParse jsonparse = new MenuJSONParse(response.body());
-////                                lawFooddata mLawfood = new lawFooddata(FailMessageActivity.this);
-////                                mLawfood.saveData(jsonparse.runParse("lawfood"));
-////                                stuFooddata mStufood = new stuFooddata(FailMessageActivity.this);
-////                                mStufood.saveData(jsonparse.runParse("stufood"));
-////                                staffFooddata mStafffood = new staffFooddata(FailMessageActivity.this);
-////                                mStafffood.saveData(jsonparse.runParse("stafffood"));
-////                                chungFooddata mChungfood = new chungFooddata(FailMessageActivity.this);
-////                                mChungfood.saveData(jsonparse.runParse("chungfood"));
-////                                dormFooddata mDormfood = new dormFooddata(FailMessageActivity.this);
-////                                mDormfood.saveData(jsonparse.runParse("dormfood"));
-//                                prefHelper.updateLastUpdate();
-//                                mHandler.sendEmptyMessage(1);
-//                                Message msg = mHandler.obtainMessage();
-//                                msg.what = 2;
-//                                mHandler.sendMessage(msg);
-//                            } else {
-//                                Log.d("MenuDownload", "HTTP " + response.code());
-//                                mHandler.sendEmptyMessage(1);
-//                                Message msg = mHandler.obtainMessage();
-//                                msg.what = -1;
-//                                mHandler.sendMessage(msg);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<String> call, Throwable t) {
-//                            t.printStackTrace();
-//                            mHandler.sendEmptyMessage(1);
-//                            Message msg = mHandler.obtainMessage();
-//                            msg.what = -1;
-//                            mHandler.sendMessage(msg);
-//                        }
-//                    });
+                    final DateUtil.WeekRange weekRange = new DateUtil.WeekRange();
+                    Call<ApiResponse> call = APIGlobal.callInterface.coopApi(DateUtil.getStringFromDate(weekRange.getStartDate()), DateUtil.getStringFromDate(weekRange.getEndDate()));
+                    call.enqueue(new Callback<ApiResponse>() {
+                        @Override
+                        public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                            if (response.isSuccessful()) {
+                                try {
+                                    MenuDataHelper dataHelper = new MenuDataHelper(getApplicationContext(), weekRange.getStartDate());
+                                    ApiResponse body = response.body();
+                                    dataHelper.saveChungFood(body.chungFood);
+                                    dataHelper.saveDormFood(body.dormFood1, body.dormFood2);
+                                    dataHelper.saveLawFood(body.lawFood);
+                                    dataHelper.saveStaffFood(body.staffFood);
+                                    dataHelper.saveStuFood(body.stuFood);
+                                    Log.d("coopApi", "OK");
+
+                                    loadingDiag.dismiss();
+                                    if (!prefHelper.checkUniqueKey()) prefHelper.updateKey();
+                                    Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
+                                    kmuFoodApplication.setUpdateChecked(true);
+                                    finish();
+                                } catch (NullPointerException e) {
+                                    e.printStackTrace();
+                                    Log.d("coopApi", "Parse Exception (NullPointerException)");
+                                    showFailMessage();
+                                }
+                            } else {
+                                Log.d("coopApi", "API Failed with STATUS=" + Integer.toString(response.code()));
+                                showFailMessage();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApiResponse> call, Throwable t) {
+                            t.printStackTrace();
+                            Log.d("coopApi", "Network Error");
+                            showFailMessage();
+                        }
+                    });
                     break;
                 case R.id.btn_close:
                     finishAffinity();
-                    break;
-            }
-        }
-    };
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case -1:
-                    loadingDiag.dismiss();
-                    Toast.makeText(FailMessageActivity.this, getString(R.string.msg_refail), Toast.LENGTH_LONG).show();
-                    break;
-                case 2:
-                    loadingDiag.dismiss();
-                    if (!prefHelper.checkUniqueKey()) prefHelper.updateKey();
-                    Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
-                    kmuFoodApplication.setUpdateChecked(true);
-                    finish();
                     break;
             }
         }
