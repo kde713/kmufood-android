@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">국민밥</string>
 
-    <string name="msg_loading">식단 정보를 최신 정보로 업데이트 합니다.\n업데이트에는 최대 1분 정도 소요될 수 있습니다.</string>
+    <string name="msg_loading">식단 정보를 최신 정보로 업데이트 합니다.\n최대 1분 정도 소요될 수 있습니다.</string>
     <string name="msg_itsok">이미 최신 정보가 저장되어 있습니다.\n저장된 정보를 불러옵니다.</string>
-    <string name="msg_retry">다시 정보를 불러오는 중입니다</string>
-    <string name="msg_refail">아… 다시 시도 해봤는데도 안돼요.... ㅠㅠ</string>
-    <string name="msg_resuccess">이번엔 정상적으로 불러왔어요!</string>
-    <string name="msg_preferpick">자주가는 식당을 골라주세요</string>
-    <string name="msg_nodata">식단을 보여드려야 하는데… 이 날은 식단이 없다네요…\n저희한테 뭐라 하셔도 어쩔수가 없어요 ㅠㅠ</string>
+    <string name="msg_retry">다시 정보를 불러오는 중입니다.</string>
+    <string name="msg_refail">정보를 불러오지 못했습니다.</string>
+    <string name="msg_resuccess">정상적으로 불러왔습니다.</string>
+    <string name="msg_preferpick">자주가는 식당을 골라주세요.</string>
+    <string name="msg_nodata">식단이 등록되지 않았습니다.\n국민대학교 생활협동조합으로 문의바랍니다.</string>
 
     <string name="label_retry">재시도</string>
     <string name="label_close">닫기</string>
@@ -27,7 +27,7 @@
 
     <string name="dialog_foodinfo_title">%1$s 운영정보</string>
     <string name="dialog_otherfood_title">식당을 골라주세요</string>
-    <string name="dialog_feedback_title">Sprout Lab과 연락하세요</string>
+    <string name="dialog_feedback_title">개발자와 연락하세요</string>
 
     <string name="feedback_c1">카카오톡</string>
     <string name="feedback_c2">페이스북</string>
@@ -111,50 +111,51 @@
     <string name="setting_dataver_msg_ok">식단 데이터가 최신입니다.</string>
     <string name="setting_dataver_msg_old">식단 데이터가 오래되었습니다. 앱을 재시작하여 데이터를 업데이트하세요.</string>
     <string name="setting_appver">국민밥\n버전</string>
-    <string name="setting_credit">개발팀</string>
+    <string name="setting_credit">개발진</string>
     <string name="setting_credit_msg">
-        Sprout Lab 국민밥팀\n
-        \n개발,총괄: 김동언
-        \n디자인: 김현곤
+        개발진\n
+        \n개발, 총괄(진짜 무급): 김동언
+        \n디자인, 노예(무급): 김현곤
     </string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="temp_foodinfo_stufood">
-        * 원산지 일괄 표기사항 - 밥 (쌀:국내산)/ 배추김치(배추:국내산/고춧가루:중국산)\n
-        * 학기중 이용안내\n
-        -조식: 평일 8시부터 / 주말 및 공휴일 8시30분부터\n
-        -중식:\n
-        가마,인터쉐프 코너 10시부터\n
-        누들송, 데일리밥 코너 11시부터\n
-        ->카페테리아(도시락옵션코너) 11:30~ 도시락한정판매!!\n
-        13시 50분부터 ~ 17시까지는 2코너로 운영됩니다. 양해 부탁드립니다.\n
-        -석식 : 학기중 17시~ 19시까지\n
-        -토요일 &amp; 일요일 &amp; 공휴일 8시 30분~ 15시 00분 까지 운영\n
-        * 본 메뉴와 원산지는 당일 수급사정에 따라 달라질 수 있습니다.\n
-        * 예약식문의는 사무실로 방문예약시 가능합니다.(02-910-4959)
+        * 운영시간\n\n
+        - 평일 08:00~19:00\n
+        - 토요일/일요일/공휴일 08:30~15:00만 운영\n\n
+        * 아침\n
+        08:00부터\n\n
+        * 점심\n
+        가마, 인터쉐프 10:00부터\n
+        누들송, 데일리밥 11:00부터\n
+        ->카페테리아(도시락) 11:30부터 한정판매\n
+        13:50부터~17:00까지 2코너로 운영됩니다. 양해 부탁드립니다.\n\n
+        * 저녁\n
+        학기중 17:00~19:00
     </string>
     <string name="temp_foodinfo_lawfood">
-        *한울식당에서는 배추김치(배추,고춧가루:국내산), \n
-        볶음밥∙비빔밥∙국수∙죽 김치(배추:국내산,고춧가루:중국산), 쌀(국내산)을 사용합니다.\n
-        **상기 메뉴는 물류수급 및 식수변동에 따라 변경될 수 있습니다.\n
-        ***운영시간은 학기중 8시30분~19시 입니다.(조식 8시30분~10시30분, 중석식10시30분~19시)
+        * 학기중 운영시간\n\n
+        08:30~19:00
     </string>
     <string name="temp_foodinfo_stafffood">
-        *쌀:국내산/배추김치(배추:국내산,고추가루:중국산)\n
-        *상단의 메뉴 및 원산지는 식재 수급상황에 따라 변경 될 수 있습니다.\n
-        소중한 의견 문의(910-4959)mj7151.kim@ourhome.co.kr\n
-        *운영시간안내 : 중식(11:30~14:00) 석식(17:00~18:30)
+        * 운영시간\n\n
+        점심 - 11:30~14:00\n
+        저녁 - 17:00~18:30
     </string>
     <string name="temp_foodinfo_dormfood">
-        * 쌀:국내산 / 배추김치(배추:국내산,고춧가루:중국산)\n
-        * 상기 메뉴는 식재 수급상황에 따라 변경될 수 있습니다.\n
-        * 운영시간 : 조식 07:30~09:00 중식 11:50~13:00/석식 17:30~19:00
+        * 운영시간\n\n
+        조식 - 08:00~09:00\n
+        중식 - 11:50~13:00\n
+        석식 - 17:30~19:00
     </string>
     <string name="temp_foodinfo_chungfood">
-        쌀:국내산,배추김치:배추-국내산,고춧가루-중국산\n
-        *상기메뉴는 식재수급상황에 따라 변경 될 수 있습니다.
+        * 운영시간\n\n
+        점심 - 11:30~14:00\n
+        저녁 - 17:00~19:30(주문마감 19:00)\n
+        * 토요일 석식 미운영\n
+        * 일요일 미운영
     </string>
 
 </resources>
