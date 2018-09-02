@@ -46,13 +46,13 @@ public class FailMessageActivity extends AppCompatActivity {
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
 
         int reasonCode = getIntent().getIntExtra("reason", REASON_COOPAPI);
-        int failImageId = R.drawable.msg_fail;
+        int failImageId = R.drawable.msg_fail_network;
         switch (reasonCode) {
             case REASON_NETWORK:
-                failImageId = R.drawable.msg_fail;
+                failImageId = R.drawable.msg_fail_network;
                 break;
             case REASON_COOPAPI:
-                failImageId = R.drawable.msg_fail;
+                failImageId = R.drawable.msg_fail_network;
                 break;
         }
         ((ImageView) findViewById(R.id.img_failmessage)).setImageResource(failImageId);
