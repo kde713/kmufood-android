@@ -24,8 +24,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        startActivity((new Intent(this, SplashActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
-
         PrefHelper prefHelper = new PrefHelper(getApplicationContext());
 
         findViewById(R.id.btn_feedback).setOnClickListener(this);

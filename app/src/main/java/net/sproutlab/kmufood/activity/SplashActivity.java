@@ -24,6 +24,8 @@ public class SplashActivity extends AppCompatActivity {
 
     private KMUFoodApplication kmuFoodApplication;
 
+    private PrefHelper prefHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
 
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
 
-        PrefHelper prefHelper = new PrefHelper(getApplicationContext());
+        prefHelper = new PrefHelper(getApplicationContext());
 
         if (!prefHelper.checkUniqueKey()) {
             prefHelper.updateKey();
@@ -66,6 +68,7 @@ public class SplashActivity extends AppCompatActivity {
                         dataHelper.saveStaffFood(body.staffFood);
                         dataHelper.saveStuFood(body.stuFood);
                         Log.d("coopApi", "OK");
+                        prefHelper.updateLastUpdate();
                         kmuFoodApplication.setUpdateChecked(true);
                         finish();
                     } catch (NullPointerException e) {

@@ -119,6 +119,7 @@ public class FailMessageActivity extends AppCompatActivity {
                                     loadingDiag.dismiss();
                                     if (!prefHelper.checkUniqueKey()) prefHelper.updateKey();
                                     Toast.makeText(FailMessageActivity.this, getString(R.string.msg_resuccess), Toast.LENGTH_LONG).show();
+                                    prefHelper.updateLastUpdate();
                                     kmuFoodApplication.setUpdateChecked(true);
                                     finish();
                                 } catch (NullPointerException e) {
