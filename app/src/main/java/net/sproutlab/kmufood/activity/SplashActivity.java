@@ -45,9 +45,10 @@ public class SplashActivity extends AppCompatActivity {
         } else if (prefHelper.needUpdate()) {
             updateFromCoop();
         } else {
-            Toast.makeText(SplashActivity.this, getString(R.string.msg_itsok), Toast.LENGTH_SHORT).show();
-            kmuFoodApplication.setUpdateChecked(true);
-            finish();
+            updateFromCoop();
+//            Toast.makeText(SplashActivity.this, getString(R.string.msg_itsok), Toast.LENGTH_SHORT).show();
+//            kmuFoodApplication.setUpdateChecked(true);
+//            finish();
         }
     }
 

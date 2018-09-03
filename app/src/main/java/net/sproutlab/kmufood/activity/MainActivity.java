@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         kmuFoodApplication = (KMUFoodApplication) getApplicationContext();
         prefHelper = new PrefHelper(getApplicationContext());
 
-        if(prefHelper.needUpdate() || !prefHelper.checkUniqueKey()) startActivity((new Intent(this, SplashActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+        if(true || prefHelper.needUpdate() || !prefHelper.checkUniqueKey()) startActivity((new Intent(this, SplashActivity.class)).setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
         else kmuFoodApplication.setUpdateChecked(true);
 
         findViewById(R.id.btn_feedback).setOnClickListener(this);
