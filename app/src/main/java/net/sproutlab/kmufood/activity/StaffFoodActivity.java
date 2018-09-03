@@ -112,7 +112,7 @@ public class StaffFoodActivity extends AppCompatActivity implements View.OnClick
                     newActivity = new Intent(this, LawFoodActivity.class);
                     break;
                 case "staff":
-                    newActivity = new Intent(this, StuFoodActivity.class);
+                    newActivity = new Intent(this, StaffFoodActivity.class);
                     break;
                 case "dorm":
                     newActivity = new Intent(this, DormFoodActivity.class);
