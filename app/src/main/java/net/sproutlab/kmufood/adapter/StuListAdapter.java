@@ -16,6 +16,8 @@ import net.sproutlab.kmufood.utils.MenuDataHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by kde713 on 2016. 9. 7..
@@ -112,8 +114,23 @@ public class StuListAdapter extends PagerAdapter implements CardAdapter {
                 view.findViewById(containerset[i]).setVisibility(View.GONE);
                 emptyCount++;
             } else {
-                ((TextView) view.findViewById(foodset[i])).setText(stuMenu[position][i].menu);
-                ((TextView) view.findViewById(priceset[i])).setText(stuMenu[position][i].price);
+                final String price = stuMenu[position][i].price;
+                String menu = stuMenu[position][i].menu;
+                if (price.isEmpty()) {
+                    StringBuffer tmpPrice = new StringBuffer();
+                    Pattern pattern = Pattern.compile("₩{1}\\d+/?\\d+");
+                    Matcher m = pattern.matcher(menu);
+                    while (m.find()) {
+                        String temp = m.group();
+                        menu = menu.replace(temp, "");
+                        tmpPrice.append(temp.replace("₩", "") + "\n");
+                    }
+                    ((TextView) view.findViewById(foodset[i])).setText(menu);
+                    ((TextView) view.findViewById(priceset[i])).setText(tmpPrice.toString());
+                } else {
+                    ((TextView) view.findViewById(foodset[i])).setText(menu);
+                    ((TextView) view.findViewById(priceset[i])).setText(price);
+                }
             }
         }
 
