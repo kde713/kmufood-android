@@ -18,7 +18,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Map;
+=======
+>>>>>>> upstream/master
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -122,7 +125,6 @@ public class LawListAdapter extends PagerAdapter implements CardAdapter {
                     StringBuffer tmpPrice = new StringBuffer();
                     Pattern pattern = Pattern.compile("₩{1}\\d+/?\\d+");
                     Matcher m = pattern.matcher(menu);
-
                     while (m.find()) {
                         String temp = m.group();
                         menu = menu.replace("\n" + temp, "");

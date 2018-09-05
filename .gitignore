@@ -310,3 +310,4 @@ $RECYCLE.BIN/
 
 ### Custom ignore
 app/release/output.json
+google-services.json

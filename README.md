@@ -5,6 +5,14 @@
 국민밥 오픈소스 페이지에 오신 것을 환영합니다!
 
 
+
+## To be a beta tester
+
+- https://play.google.com/apps/testing/net.sproutlab.kmufood
+- 위 링크를 통해 국민밥의 베타 테스터로 참여하실 수 있습니다.
+
+
+
 ## Contributing
 
 - 현재 국민밥은 완전히 무료로 서비스되고 있으며, 모든 소스를 공개하고 있습니다.
