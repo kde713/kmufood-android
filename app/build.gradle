@@ -8,8 +8,8 @@ android {
         applicationId "net.sproutlab.kmufood"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 32
-        versionName "3.1.1"
+        versionCode 34
+        versionName "3.1.2"
         multiDexEnabled true
     }
 
@@ -40,7 +40,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.google.firebase:firebase-core:16.0.3'
     implementation 'com.google.firebase:firebase-crash:16.2.0'
-    implementation 'com.google.firebase:firebase-messaging:17.3.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.2'
     implementation 'com.google.firebase:firebase-inappmessaging-display:17.0.1'
     implementation 'de.psdev.licensesdialog:licensesdialog:1.8.3'
 }
