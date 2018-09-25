@@ -3,6 +3,7 @@ package net.sproutlab.kmufood.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import net.sproutlab.kmufood.api.models.ChungFood;
 import net.sproutlab.kmufood.api.models.DormFood1;
@@ -70,13 +71,23 @@ public class MenuDataHelper {
                 String dayKey = dayKeys[d];
                 ChungFood currentFood = chungFoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-                saveMenuData(prefEditor, "chung", dayKey, chungKeys[0], currentFood.menu1);
-                saveMenuData(prefEditor, "chung", dayKey, chungKeys[1], currentFood.menu2);
-                saveMenuData(prefEditor, "chung", dayKey, chungKeys[2], currentFood.menu3);
-                saveMenuData(prefEditor, "chung", dayKey, chungKeys[3], currentFood.menu4);
-                saveMenuData(prefEditor, "chung", dayKey, chungKeys[4], currentFood.menu5);
-                saveMenuData(prefEditor, "chung", dayKey, chungKeys[5], currentFood.menu6);
-                saveMenuData(prefEditor, "chung", dayKey, chungKeys[6], currentFood.menu7);
+                if (currentFood == null) {
+                    Log.d("MenuDataHelper", String.format("saveChungFood.%s failed. isNull.", dayKey));
+                    Sikdan blank = new Sikdan();
+                    blank.menu = "";
+                    blank.price = "";
+                    for (String chungKey : chungKeys) {
+                        saveMenuData(prefEditor, "chung", dayKey, chungKey, blank);
+                    }
+                } else {
+                    saveMenuData(prefEditor, "chung", dayKey, chungKeys[0], currentFood.menu1);
+                    saveMenuData(prefEditor, "chung", dayKey, chungKeys[1], currentFood.menu2);
+                    saveMenuData(prefEditor, "chung", dayKey, chungKeys[2], currentFood.menu3);
+                    saveMenuData(prefEditor, "chung", dayKey, chungKeys[3], currentFood.menu4);
+                    saveMenuData(prefEditor, "chung", dayKey, chungKeys[4], currentFood.menu5);
+                    saveMenuData(prefEditor, "chung", dayKey, chungKeys[5], currentFood.menu6);
+                    saveMenuData(prefEditor, "chung", dayKey, chungKeys[6], currentFood.menu7);
+                }
 
                 loopDate = DateUtil.addDaysToDate(loopDate, 1);
             }
@@ -103,10 +114,29 @@ public class MenuDataHelper {
                 DormFood1 currentFood1 = dormFoodMap1.get(DateUtil.getStringFromDate(loopDate));
                 DormFood2 currentFood2 = dormFoodMap2.get(DateUtil.getStringFromDate(loopDate));
 
-                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[0], currentFood2.morning);
-                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[1], currentFood2.lunch);
-                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[2], currentFood1.lunch);
-                saveMenuData(prefEditor, "dorm", dayKey, dormKeys[3], currentFood2.dinner);
+                if (currentFood1 == null) {
+                    Log.d("MenuDataHelper", String.format("saveDormFood.1.%s failed. isNull.", dayKey));
+                    Sikdan blank = new Sikdan();
+                    blank.menu = "";
+                    blank.price = "";
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[2], blank);
+                } else {
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[2], currentFood1.lunch);
+                }
+
+                if (currentFood2 == null) {
+                    Log.d("MenuDataHelper", String.format("saveDormFood.2.%s failed. isNull.", dayKey));
+                    Sikdan blank = new Sikdan();
+                    blank.menu = "";
+                    blank.price = "";
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[0], blank);
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[1], blank);
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[3], blank);
+                } else {
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[0], currentFood2.morning);
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[1], currentFood2.lunch);
+                    saveMenuData(prefEditor, "dorm", dayKey, dormKeys[3], currentFood2.dinner);
+                }
 
                 loopDate = DateUtil.addDaysToDate(loopDate, 1);
             }
@@ -132,13 +162,23 @@ public class MenuDataHelper {
                 String dayKey = dayKeys[d];
                 Lawfood currentFood = lawfoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-                saveMenuData(prefEditor, "law", dayKey, lawKeys[0], currentFood.baro1);
-                saveMenuData(prefEditor, "law", dayKey, lawKeys[1], currentFood.baro2);
-                saveMenuData(prefEditor, "law", dayKey, lawKeys[2], currentFood.noodle);
-                saveMenuData(prefEditor, "law", dayKey, lawKeys[3], currentFood.bap1);
-                saveMenuData(prefEditor, "law", dayKey, lawKeys[4], currentFood.bap2);
-                saveMenuData(prefEditor, "law", dayKey, lawKeys[5], currentFood.fire1);
-                saveMenuData(prefEditor, "law", dayKey, lawKeys[6], currentFood.fire2);
+                if (currentFood == null) {
+                    Log.d("MenuDataHelper", String.format("saveLawFood.%s failed. isNull.", dayKey));
+                    Sikdan blank = new Sikdan();
+                    blank.menu = "";
+                    blank.price = "";
+                    for (String lawKey : lawKeys) {
+                        saveMenuData(prefEditor, "law", dayKey, lawKey, blank);
+                    }
+                } else {
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[0], currentFood.baro1);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[1], currentFood.baro2);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[2], currentFood.noodle);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[3], currentFood.bap1);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[4], currentFood.bap2);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[5], currentFood.fire1);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[6], currentFood.fire2);
+                }
 
                 loopDate = DateUtil.addDaysToDate(loopDate, 1);
             }
@@ -164,10 +204,20 @@ public class MenuDataHelper {
                 String dayKey = dayKeys[d];
                 StaffFood currentFood = staffFoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-                saveMenuData(prefEditor, "staff", dayKey, staffKeys[0], currentFood.kitchen1);
-                saveMenuData(prefEditor, "staff", dayKey, staffKeys[1], currentFood.kitchen1);
-                saveMenuData(prefEditor, "staff", dayKey, staffKeys[2], currentFood.joomoon);
-                saveMenuData(prefEditor, "staff", dayKey, staffKeys[3], currentFood.dinner);
+                if (currentFood == null) {
+                    Log.d("MenuDataHelper", String.format("saveStaffFood.%s failed. isNull.", dayKey));
+                    Sikdan blank = new Sikdan();
+                    blank.menu = "";
+                    blank.price = "";
+                    for (String staffKey : staffKeys) {
+                        saveMenuData(prefEditor, "staff", dayKey, staffKey, blank);
+                    }
+                } else {
+                    saveMenuData(prefEditor, "staff", dayKey, staffKeys[0], currentFood.kitchen1);
+                    saveMenuData(prefEditor, "staff", dayKey, staffKeys[1], currentFood.kitchen1);
+                    saveMenuData(prefEditor, "staff", dayKey, staffKeys[2], currentFood.joomoon);
+                    saveMenuData(prefEditor, "staff", dayKey, staffKeys[3], currentFood.dinner);
+                }
 
                 loopDate = DateUtil.addDaysToDate(loopDate, 1);
             }
@@ -193,17 +243,27 @@ public class MenuDataHelper {
                 String dayKey = dayKeys[d];
                 StuFood currentFood = stuFoodMap.get(DateUtil.getStringFromDate(loopDate));
 
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[0], currentFood.morning);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[1], currentFood.gamaLunch);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[2], currentFood.noodleLunch);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[3], currentFood.cafeLunch);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[4], currentFood.chefLunch);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[5], currentFood.dailyLunch);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[6], currentFood.gamaDinner);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[7], currentFood.chefDinner);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[8], currentFood.dailyDinner);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[9], currentFood.china);
-                saveMenuData(prefEditor, "stu", dayKey, stuKeys[10], currentFood.chinaSpecial);
+                if (currentFood == null) {
+                    Log.d("MenuDataHelper", String.format("saveStuFood.%s failed. isNull.", dayKey));
+                    Sikdan blank = new Sikdan();
+                    blank.menu = "";
+                    blank.price = "";
+                    for (String stuKey : stuKeys) {
+                        saveMenuData(prefEditor, "stu", dayKey, stuKey, blank);
+                    }
+                } else {
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[0], currentFood.morning);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[1], currentFood.gamaLunch);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[2], currentFood.noodleLunch);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[3], currentFood.cafeLunch);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[4], currentFood.chefLunch);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[5], currentFood.dailyLunch);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[6], currentFood.gamaDinner);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[7], currentFood.chefDinner);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[8], currentFood.dailyDinner);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[9], currentFood.china);
+                    saveMenuData(prefEditor, "stu", dayKey, stuKeys[10], currentFood.chinaSpecial);
+                }
 
                 loopDate = DateUtil.addDaysToDate(loopDate, 1);
             }
