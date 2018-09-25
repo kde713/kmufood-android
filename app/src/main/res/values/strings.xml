@@ -18,9 +18,7 @@
     <string name="label_updatelog">%1$s 변경 사항</string>
 
     <string name="updatelog">
-        - 식단을 불러오는 방식을 변경했습니다.\n
-        - 식단 업데이트 실패 시 나오는 사유를 상황에 따라 다르게 보여지도록 수정했습니다.\n
-        - 선호식당 여부를 알려주던 별이 정상적으로 보이지 않던 문제를 수정했습니다.\n
+        - (긴급) 추석 연휴 기간에 식단 업데이트가 정상적으로 이루어지지 않던 문제를 수정했습니다.\n
     </string>
 
     <string name="dialog_foodinfo_title">%1$s 운영정보</string>
