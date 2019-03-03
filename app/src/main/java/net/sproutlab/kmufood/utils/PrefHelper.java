@@ -14,7 +14,7 @@ import java.util.Date;
 public class PrefHelper {
 
     private final String PREF_NAME = "net.sproutlab.kmufood";
-    private final int uniqueKey = 180925034;
+    private final int uniqueKey = 190304035;
 
     private final String KEY_LASTUPDATE = "last_update";
     private final String KEY_UNIQUEKEY = "key";
