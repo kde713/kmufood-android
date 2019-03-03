@@ -18,7 +18,7 @@
     <string name="label_updatelog">%1$s 변경 사항</string>
 
     <string name="updatelog">
-        - (긴급) 추석 연휴 기간 식단이 정상적으로 업데이트 되지 않던 문제를 수정했습니다.
+        - 식단이 정상적으로 업데이트 되지 않던 문제를 수정했습니다.
     </string>
 
     <string name="dialog_foodinfo_title">%1$s 운영정보</string>
