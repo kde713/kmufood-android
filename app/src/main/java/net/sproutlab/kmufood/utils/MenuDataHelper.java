@@ -214,7 +214,7 @@ public class MenuDataHelper {
                     }
                 } else {
                     saveMenuData(prefEditor, "staff", dayKey, staffKeys[0], currentFood.kitchen1);
-                    saveMenuData(prefEditor, "staff", dayKey, staffKeys[1], currentFood.kitchen1);
+                    saveMenuData(prefEditor, "staff", dayKey, staffKeys[1], currentFood.kitchen2);
                     saveMenuData(prefEditor, "staff", dayKey, staffKeys[2], currentFood.joomoon);
                     saveMenuData(prefEditor, "staff", dayKey, staffKeys[3], currentFood.dinner);
                 }
