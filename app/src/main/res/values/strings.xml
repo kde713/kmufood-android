@@ -80,7 +80,7 @@
 
     <string name="staff_section1">키친1</string>
     <string name="staff_section2">키친2</string>
-    <string name="staff_section3">주문식</string>
+    <string name="staff_section3">오늘의\n샐러드</string>
     <string name="staff_section4">석식</string>
 
     <string name="dorm_title">생활관식당</string>
