@@ -68,13 +68,13 @@
     <string name="law_title">한울식당</string>
     <string name="law_subtitle">(법학관 B1)</string>
 
-    <string name="law_section1">바로바로1</string>
-    <string name="law_section2">바로바로2</string>
-    <string name="law_section3">면이랑</string>
-    <string name="law_section4">밥이랑1</string>
-    <string name="law_section5">밥이랑2</string>
-    <string name="law_section6">석화랑</string>
-    <string name="law_section7">석화랑\n(아침)</string>
+    <string name="law_section1">1코너\nSNACK1</string>
+    <string name="law_section2">1코너\nSNACK2</string>
+    <string name="law_section3">2코너\nNOODLE</string>
+    <string name="law_section4">3코너\nCUTLET</string>
+    <string name="law_section5">4코너\nRICE.Oven</string>
+    <string name="law_section6">5코너\nGUKBAP.Chef</string>
+    <string name="law_section7">5코너\n조식</string>
 
     <string name="staff_title">교직원식당</string>
     <string name="staff_subtitle">(종합복지관 1F)</string>

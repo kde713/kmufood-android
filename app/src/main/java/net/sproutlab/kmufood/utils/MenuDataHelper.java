@@ -26,7 +26,7 @@ public class MenuDataHelper {
     private final int dormDayLength = 7;
     private final String[] dormKeys = {"mor", "lun", "lun2", "din"};
     private final int lawDayLength = 5;
-    private final String[] lawKeys = {"baro1", "baro2", "nood", "bap1", "bap2", "fire1", "fire2"};
+    private final String[] lawKeys = {"snack1", "snack2", "noodle", "cutlet", "riceOven", "gukbapChef", "morning"};
     private final int staffDayLength = 5;
     private final String[] staffKeys = {"k1", "k2", "sp", "din"};
     private final int stuDayLength = 7;
@@ -171,13 +171,13 @@ public class MenuDataHelper {
                         saveMenuData(prefEditor, "law", dayKey, lawKey, blank);
                     }
                 } else {
-                    saveMenuData(prefEditor, "law", dayKey, lawKeys[0], currentFood.baro1);
-                    saveMenuData(prefEditor, "law", dayKey, lawKeys[1], currentFood.baro2);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[0], currentFood.snack1);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[1], currentFood.snack2);
                     saveMenuData(prefEditor, "law", dayKey, lawKeys[2], currentFood.noodle);
-                    saveMenuData(prefEditor, "law", dayKey, lawKeys[3], currentFood.bap1);
-                    saveMenuData(prefEditor, "law", dayKey, lawKeys[4], currentFood.bap2);
-                    saveMenuData(prefEditor, "law", dayKey, lawKeys[5], currentFood.fire1);
-                    saveMenuData(prefEditor, "law", dayKey, lawKeys[6], currentFood.fire2);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[3], currentFood.cutlet);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[4], currentFood.riceOven);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[5], currentFood.gukbapChef);
+                    saveMenuData(prefEditor, "law", dayKey, lawKeys[6], currentFood.morning);
                 }
 
                 loopDate = DateUtil.addDaysToDate(loopDate, 1);
