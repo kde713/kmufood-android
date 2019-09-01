@@ -3,24 +3,24 @@ package net.sproutlab.kmufood.api.models;
 import com.google.gson.annotations.SerializedName;
 
 public class Lawfood {
-    @SerializedName("바로바로1")
-    public Sikdan baro1;
+    @SerializedName("1코너<br>SNACK1")
+    public Sikdan snack1;
 
-    @SerializedName("바로바로2")
-    public Sikdan baro2;
+    @SerializedName("1코너<br>SNACK2")
+    public Sikdan snack2;
 
-    @SerializedName("면이랑")
+    @SerializedName("2코너<BR>NOODLE")
     public Sikdan noodle;
 
-    @SerializedName("밥이랑 하나")
-    public Sikdan bap1;
+    @SerializedName("3코너<br>CUTLET")
+    public Sikdan cutlet;
 
-    @SerializedName("밥이랑 두울")
-    public Sikdan bap2;
+    @SerializedName("4코너<br>RICE.Oven")
+    public Sikdan riceOven;
 
-    @SerializedName("石火랑")
-    public Sikdan fire1;
+    @SerializedName("5코너<br>GUKBAP.Chef")
+    public Sikdan gukbapChef;
 
-    @SerializedName("石火랑 조식")
-    public Sikdan fire2;
+    @SerializedName("5코너<br>(조식)")
+    public Sikdan morning;
 }

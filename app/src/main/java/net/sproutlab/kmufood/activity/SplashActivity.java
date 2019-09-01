@@ -55,6 +55,7 @@ public class SplashActivity extends AppCompatActivity {
         Toast.makeText(SplashActivity.this, getString(R.string.msg_loading), Toast.LENGTH_SHORT).show();
         final DateUtil.WeekRange weekRange = new DateUtil.WeekRange();
         Call<ApiResponse> call = APIGlobal.callInterface.coopApi(DateUtil.getStringFromDate(weekRange.getStartDate()), DateUtil.getStringFromDate(weekRange.getEndDate()));
+        Log.d("coopApi", "URL=" + call.request().url());
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
