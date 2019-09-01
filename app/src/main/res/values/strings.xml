@@ -18,8 +18,7 @@
     <string name="label_updatelog">%1$s 변경 사항</string>
 
     <string name="updatelog">
-        - Android 최신 버전을 대응하도록 업데이트 되었습니다.
-        - 교직원식당의 주문식 명칭이 바뀌어(변경 후 오늘의 샐러드) 정상적으로 불러오지 못하던 문제를 수정했습니다.
+        - 한울식당 개편과 함께 코너명이 변경되어 식단을 정상적으로 불러오지 못하던 문제를 수정했습니다.
     </string>
 
     <string name="dialog_foodinfo_title">%1$s 운영정보</string>
